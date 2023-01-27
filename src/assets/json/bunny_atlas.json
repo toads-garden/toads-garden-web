@@ -1,0 +1,242 @@
+{
+    "frames": [
+        {
+            "filename": "bunny-sheet_0",
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_1",
+            "frame": {
+                "x": 57,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_2",
+            "frame": {
+                "x": 114,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_3",
+            "frame": {
+                "x": 171,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_4",
+            "frame": {
+                "x": 228,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_5",
+            "frame": {
+                "x": 285,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_6",
+            "frame": {
+                "x": 342,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_7",
+            "frame": {
+                "x": 399,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_8",
+            "frame": {
+                "x": 456,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_9",
+            "frame": {
+                "x": 513,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_10",
+            "frame": {
+                "x": 570,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_11",
+            "frame": {
+                "x": 627,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_12",
+            "frame": {
+                "x": 684,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_13",
+            "frame": {
+                "x": 741,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_14",
+            "frame": {
+                "x": 798,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_15",
+            "frame": {
+                "x": 855,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_16",
+            "frame": {
+                "x": 912,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bunny-sheet_17",
+            "frame": {
+                "x": 969,
+                "y": 0,
+                "w": 57,
+                "h": 74
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Phaser3",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
