@@ -7,7 +7,7 @@ class Garden extends Phaser.Scene {
     super("Garden");
   }
   preload() {
-    this.load.image("background", "../assets/img/tilemap.png");
+    this.load.image("background", "../assets/img/map.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.spritesheet("toad", "assets/img/toad.png", {
@@ -18,12 +18,17 @@ class Garden extends Phaser.Scene {
   create() {
     const map = this.make.tilemap({ key: "map" });
     const tileset = map.addTilesetImage("terrain", "tiles");
-    const platforms = map.createLayer("Tile Layer 1", tileset);
-    platforms.setCollisionByExclusion(-1);
+
+const ground = map.createStaticLayer("ground", tileset);
+    const platforms = map.createStaticLayer("platform", tileset);
+    
+    platforms.setCollisionByExclusion(-1); 
+    ground.setCollisionByExclusion(-1);
     player = this.physics.add.sprite(100, 400, "toad");
     player.setBounce(0.2);
     // player.setCollideWorldBounds(true);
     this.physics.add.collider(player, platforms);
+     this.physics.add.collider(player, ground);
     this.anims.create({
       key: "right",
       frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
@@ -65,6 +70,8 @@ class Garden extends Phaser.Scene {
     if (cursors.up.isDown) {
       player.setVelocityY(-200);
     }
+
+  
   }
 }
 
