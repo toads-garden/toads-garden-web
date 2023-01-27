@@ -12,7 +12,8 @@ class Garden extends Phaser.Scene {
   create() {
     const map = this.make.tilemap({ key: "map" });
     const tileset = map.addTilesetImage("terrain", "tiles");
-    map.createStaticLayer("Tile Layer 1", tileset);
+    const platforms = map.createStaticLayer("Tile Layer 1", tileset);
+    platforms.setCollisionByExclusion(-1, true);
   }
   update() {}
 }
