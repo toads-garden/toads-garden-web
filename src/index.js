@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Garden from "./scenes/Garden";
 
 const config = {
-  width: 960,
+  width: 650,
   height: 480,
   parent: "toad",
   backgroundColor: "#BCEDF6",
@@ -10,7 +10,7 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 200 },
     },
   },
   scene: [Garden],
