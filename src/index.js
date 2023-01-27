@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Garden from "./scenes/Garden";
 
 const config = {
-  width: 640,
+  width: 960,
   height: 480,
   parent: "toad",
   backgroundColor: "#BCEDF6",
