@@ -77,12 +77,12 @@ class Garden extends Phaser.Scene {
       bunnies.create(xCoordinate, 2, "bunny");
     }
 
-    const bunnyGenLoop = this.time.addEvent({
-      callback: generateBunnies,
-      delay: 5000,
-      callbackScope: this,
-      loop: true,
-    });
+    // const bunnyGenLoop = this.time.addEvent({
+    //   callback: generateBunnies,
+    //   delay: 5000,
+    //   callbackScope: this,
+    //   loop: true,
+    // });
     this.physics.add.collider(bunnies, [platforms, ground]);
 
     //collectibles
@@ -97,18 +97,17 @@ class Garden extends Phaser.Scene {
     this.physics.add.overlap(player, collectibles, collect, null, this);
 
     //score
-    text = this.add.text(570, 70, `Score: ${score}`, {
+    text = this.add.text(400, 70, `Score: ${score}`, {
       fontSize: "20px",
       fill: "#ffffff",
     });
     text.setScrollFactor(0);
-  }
-
-  collect(player, collectible) {
-    collectible.destroy(collectible.x, collectible.y);
-    score++;
-    text.setText(`Score: ${score}`);
-    return false;
+    function collect(player, collectible) {
+      collectible.destroy(collectible.x, collectible.y);
+      score++;
+      text.setText(`Score: ${score}`);
+      return false;
+    }
   }
 
   update() {
