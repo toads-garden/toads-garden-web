@@ -4,7 +4,6 @@ import { Toad } from "../gameObjects/Toad.js";
 
 var cursors;
 var player;
-var cameras;
 var CollectibleLayer;
 var collectibles;
 var score = 0;
@@ -26,9 +25,11 @@ class Garden extends Phaser.Scene {
       frameWidth: 48,
       frameHeight: 44,
     });
+
     this.load.on("complete", () => {
       generateAnimations(this);
     });
+
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",
@@ -46,36 +47,21 @@ class Garden extends Phaser.Scene {
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
     collectibles = this.physics.add.staticGroup();
+    this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms])
       .overlapWith(collectibles, collect);
+
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
 
     ground.setCollisionByExclusion(-1);
-    this.physics.world.setBounds(0, 0, 1920, 480, true, true, true, false);
-    // this.physics.add.collider(this.player, platforms);
-    // this.physics.add.collider(this.player, ground);
-
-    this.cameras.main.setBounds(0, 0, 1920, 480);
-    this.cameras.main.startFollow(player);
+    // this.physics.world.setBounds(0, 0, 1920, 480);
     this.inputs = this.input.keyboard.createCursorKeys();
-
-    // scene.cameras.main
-    //   .setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels)
-    //   .startFollow(this.sprite);
-
     ground.setCollisionByExclusion(-1);
 
-    // this.physics.add.collider(this.player, platforms);
-    // this.physics.add.collider(this.player, ground);
-    // scene.cameras.main
-    //   .setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels)
-    //   .startFollow(this.sprite);
-    // this.physics.add.collider(this.player, tileset);
-    // this.physics.add.collider(this.player, map);
     cursors = this.input.keyboard.createCursorKeys();
     const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
 
