@@ -136,15 +136,15 @@ class Garden extends Phaser.Scene {
     this.physics.add.overlap(player, collectibles, collect, null, this);
 
     //score
-    text = this.add.text(400, 70, `Score: ${score}`, {
+    text = this.add.text(0, 0, `Herbs Collected: ${score}`, {
       fontSize: "20px",
-      fill: "#ffffff",
+      fill: "#000000",
     });
     text.setScrollFactor(0);
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
       score++;
-      text.setText(`Score: ${score}`);
+      text.setText(`Herbs Collected: ${score}`);
       return false;
     }
   }
