@@ -1,12 +1,13 @@
 import Phaser from "phaser";
 var player;
 var cursors;
-
+var cameras;
 class Garden extends Phaser.Scene {
   constructor() {
     super("Garden");
   }
   preload() {
+    this.load.audio("garden", "../assets/audio/garden.mp3");
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
@@ -21,6 +22,8 @@ class Garden extends Phaser.Scene {
     );
   }
   create() {
+    var music = this.sound.add("garden");
+    //music.play();
     this.add.image(960, 240, "background");
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
@@ -57,9 +60,10 @@ class Garden extends Phaser.Scene {
     // scene.cameras.main
     //   .setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels)
     //   .startFollow(this.sprite);
-    // this.physics.add.collider(player, tileset);
-    // this.physics.add.collider(player, map);
+    this.physics.add.collider(player, tileset);
+    this.physics.add.collider(player, map);
     cursors = this.input.keyboard.createCursorKeys();
+
 
     const bunnies = this.physics.add.group();
     function generateBunnies() {
@@ -74,6 +78,7 @@ class Garden extends Phaser.Scene {
       loop: true,
     });
     this.physics.add.collider(bunnies, [platforms, ground]);
+
   }
   update() {
     if (cursors.left.isDown) {
