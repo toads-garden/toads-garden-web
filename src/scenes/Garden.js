@@ -2,7 +2,6 @@ import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
 
-var player;
 var cursors;
 var cameras;
 var CollectibleLayer;
@@ -11,8 +10,6 @@ var score = 0;
 var text;
 
 class Garden extends Phaser.Scene {
-
-
   platforms;
 
   constructor() {
@@ -47,16 +44,17 @@ class Garden extends Phaser.Scene {
     // const back = map.createLayer("background", backTileSet);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
+    collectibles = this.physics.add.staticGroup();
+
+    this.player = new Toad(this, 100, 400).collideWith([ground, platforms]);
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
 
     ground.setCollisionByExclusion(-1);
     this.physics.world.setBounds(0, 0, 1920, 480, true, true, true, false);
-
-    this.player = new Toad(this, 100, 400).collideWith(ground);
-    this.physics.add.collider(this.player, platforms);
-    this.physics.add.collider(this.player, ground);
+    // this.physics.add.collider(this.player, platforms);
+    // this.physics.add.collider(this.player, ground);
 
     this.cameras.main.setBounds(0, 0, 1920, 480);
     this.cameras.main.startFollow(this.player);
@@ -67,11 +65,9 @@ class Garden extends Phaser.Scene {
     //   .startFollow(this.sprite);
 
     ground.setCollisionByExclusion(-1);
-    player = this.physics.add.sprite(100, 400, "toad");
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
-    this.physics.add.collider(player, platforms);
-    this.physics.add.collider(player, ground);
+
+    // this.physics.add.collider(this.player, platforms);
+    // this.physics.add.collider(this.player, ground);
     this.anims.create({
       key: "right",
       frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
@@ -92,8 +88,8 @@ class Garden extends Phaser.Scene {
     // scene.cameras.main
     //   .setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels)
     //   .startFollow(this.sprite);
-    this.physics.add.collider(player, tileset);
-    this.physics.add.collider(player, map);
+    // this.physics.add.collider(this.player, tileset);
+    // this.physics.add.collider(this.player, map);
     cursors = this.input.keyboard.createCursorKeys();
     const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
 
@@ -122,7 +118,7 @@ class Garden extends Phaser.Scene {
     bunny.anims.play("bunnyIdle");
 
     //collectibles
-    collectibles = this.physics.add.staticGroup();
+    // collectibles = this.physics.add.staticGroup();
     CollectibleLayer.forEach((object) => {
       let obj = collectibles.create(object.x, object.y, "collectible");
       obj.setScale(object.width / 14, object.height / 15);
@@ -130,7 +126,7 @@ class Garden extends Phaser.Scene {
       obj.body.width = object.width;
       obj.body.height = object.height;
     });
-    this.physics.add.overlap(player, collectibles, collect, null, this);
+    // this.physics.add.overlap(this.player, collectibles, collect, null, this);
 
     //score
     text = this.add.text(0, 0, `Herbs Collected: ${score}`, {
@@ -138,18 +134,19 @@ class Garden extends Phaser.Scene {
       fill: "#000000",
     });
     text.setScrollFactor(0);
+
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
       score++;
       text.setText(`Herbs Collected: ${score}`);
       return false;
     }
+    this.physics.add.overlap(this.player, collectibles, collect, null, this);
   }
 
   update() {
     this.player.update(this.inputs);
   }
-  update() {}
 }
 
 export default Garden;
