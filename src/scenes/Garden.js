@@ -1,8 +1,6 @@
-
 import Phaser from "Phaser";
-import { Toad } from "../gameObjects/Toad.js";
 import generateAnimations from "../config/animations";
-
+import { Toad } from "../gameObjects/Toad.js";
 
 var player;
 var cursors;
@@ -11,7 +9,6 @@ var CollectibleLayer;
 var collectibles;
 var score = 0;
 var text;
-
 
 class Garden extends Phaser.Scene {
   player;
@@ -52,7 +49,6 @@ class Garden extends Phaser.Scene {
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
-
 
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
@@ -102,20 +98,31 @@ class Garden extends Phaser.Scene {
     this.physics.add.collider(player, tileset);
     this.physics.add.collider(player, map);
     cursors = this.input.keyboard.createCursorKeys();
+    const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
 
-    const bunnies = this.physics.add.group();
-    function generateBunnies() {
-      const xCoordinate = Math.random() * 650;
-      bunnies.create(xCoordinate, 2, "bunny");
-    }
+    this.anims.create({
+      key: "bunnyIdle",
+      frames: this.anims.generateFrameNames("bunny", {
+        start: 0,
+        end: 5,
+        prefix: "bunny-sheet_",
+      }),
+      repeat: -1,
+      frameRate: 10,
+    });
 
-    // const bunnyGenLoop = this.time.addEvent({
-    //   callback: generateBunnies,
-    //   delay: 5000,
-    //   callbackScope: this,
-    //   loop: true,
-    // });
-    this.physics.add.collider(bunnies, [platforms, ground]);
+    this.anims.create({
+      key: "bunnyRun",
+      frames: this.anims.generateFrameNames("bunny", {
+        start: 6,
+        end: 11,
+        prefix: "bunny-sheet_",
+      }),
+      repeat: -1,
+      frameRate: 10,
+    });
+
+    bunny.anims.play("bunnyIdle");
 
     //collectibles
     collectibles = this.physics.add.staticGroup();
@@ -140,14 +147,12 @@ class Garden extends Phaser.Scene {
       text.setText(`Score: ${score}`);
       return false;
     }
-
   }
 
   update() {
-
     this.player.update(this.inputs);
-
   }
+  update() {}
 }
 
 export default Garden;
