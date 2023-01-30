@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser from "Phaser";
 import Garden from "./scenes/Garden";
 
 const config = {
