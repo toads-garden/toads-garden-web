@@ -3,6 +3,7 @@ import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
 
 var cursors;
+var player;
 var cameras;
 var CollectibleLayer;
 var collectibles;
@@ -23,7 +24,7 @@ class Garden extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
-      frameHeight: 48,
+      frameHeight: 44,
     });
     this.load.on("complete", () => {
       generateAnimations(this);
@@ -46,7 +47,9 @@ class Garden extends Phaser.Scene {
     const platforms = map.createLayer("platform", tileset);
     collectibles = this.physics.add.staticGroup();
 
-    this.player = new Toad(this, 100, 400).collideWith([ground, platforms]);
+    player = new Toad(this, 100, 400)
+      .collideWith([ground, platforms])
+      .overlapWith(collectibles, collect);
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
@@ -57,7 +60,7 @@ class Garden extends Phaser.Scene {
     // this.physics.add.collider(this.player, ground);
 
     this.cameras.main.setBounds(0, 0, 1920, 480);
-    this.cameras.main.startFollow(this.player);
+    this.cameras.main.startFollow(player);
     this.inputs = this.input.keyboard.createCursorKeys();
 
     // scene.cameras.main
@@ -68,23 +71,6 @@ class Garden extends Phaser.Scene {
 
     // this.physics.add.collider(this.player, platforms);
     // this.physics.add.collider(this.player, ground);
-    this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "turn",
-      frames: [{ key: "toad", frame: 0 }],
-      frameRate: 20,
-    });
     // scene.cameras.main
     //   .setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels)
     //   .startFollow(this.sprite);
@@ -141,11 +127,11 @@ class Garden extends Phaser.Scene {
       text.setText(`Herbs Collected: ${score}`);
       return false;
     }
-    this.physics.add.overlap(this.player, collectibles, collect, null, this);
+    this.physics.add.overlap(player, collectibles, collect, null, this);
   }
 
   update() {
-    this.player.update(this.inputs);
+    player.update(this.inputs);
   }
 }
 
