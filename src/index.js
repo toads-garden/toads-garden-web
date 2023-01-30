@@ -2,10 +2,11 @@ import Phaser from "Phaser";
 import Garden from "./scenes/Garden";
 
 const config = {
+  type: Phaser.AUTO,
   width: 650,
   height: 480,
   parent: "toad",
-  backgroundColor: "#BCEDF6",
+  //backgroundColor: "#BCEDF6",
   pixelArt: true,
   physics: {
     default: "arcade",
