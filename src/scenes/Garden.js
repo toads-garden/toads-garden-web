@@ -11,6 +11,10 @@ var score = 0;
 var text;
 
 class Garden extends Phaser.Scene {
+
+
+  platforms;
+
   constructor() {
     super("Garden");
   }
@@ -46,6 +50,7 @@ class Garden extends Phaser.Scene {
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
+
     ground.setCollisionByExclusion(-1);
     this.physics.world.setBounds(0, 0, 1920, 480, true, true, true, false);
 
