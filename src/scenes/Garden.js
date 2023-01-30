@@ -15,6 +15,11 @@ class Garden extends Phaser.Scene {
       frameWidth: 48,
       frameHeight: 48,
     });
+    this.load.atlas(
+      "bunny",
+      "./assets/img/bunny.png",
+      "./assets/json/bunny_atlas.json"
+    );
   }
   create() {
     var music = this.sound.add("garden");
@@ -58,8 +63,20 @@ class Garden extends Phaser.Scene {
     this.physics.add.collider(player, tileset);
     this.physics.add.collider(player, map);
     cursors = this.input.keyboard.createCursorKeys();
-    // this.cameras.main.setBounds(0, 0, 1920, 480);
-    // this.cameras.main.startFollow(this.player);
+
+    const bunnies = this.physics.add.group();
+    function generateBunnies() {
+      const xCoordinate = Math.random() * 650;
+      bunnies.create(xCoordinate, 2, "bunny");
+    }
+
+    const bunnyGenLoop = this.time.addEvent({
+      callback: generateBunnies,
+      delay: 5000,
+      callbackScope: this,
+      loop: true,
+    });
+    this.physics.add.collider(bunnies, [platforms, ground]);
   }
   update() {
     if (cursors.left.isDown) {
