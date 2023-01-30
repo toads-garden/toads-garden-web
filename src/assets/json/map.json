@@ -127,6 +127,53 @@
         }, 
         {
          "draworder":"topdown",
+         "id":8,
+         "name":"EnemyLayer",
+         "objects":[
+                {
+                 "class":"",
+                 "gid":559,
+                 "height":32,
+                 "id":80,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":413,
+                 "y":400
+                }, 
+                {
+                 "class":"",
+                 "gid":559,
+                 "height":32,
+                 "id":81,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":1113,
+                 "y":411
+                }, 
+                {
+                 "class":"",
+                 "gid":559,
+                 "height":32,
+                 "id":82,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":1435,
+                 "y":399
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":4,
          "name":"CollectibleLayer",
          "objects":[
@@ -316,8 +363,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":68,
+ "nextlayerid":9,
+ "nextobjectid":83,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -363,6 +410,20 @@
          "tilecount":1,
          "tileheight":30,
          "tilewidth":28,
+         "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":16,
+         "firstgid":245,
+         "image":"icons.png",
+         "imageheight":867,
+         "imagewidth":512,
+         "margin":0,
+         "name":"enemy",
+         "spacing":0,
+         "tilecount":432,
+         "tileheight":32,
+         "tilewidth":32,
          "transparentcolor":"#ff00ff"
         }],
  "tilewidth":16,
