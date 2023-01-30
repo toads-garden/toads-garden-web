@@ -63,10 +63,6 @@ class Garden extends Phaser.Scene {
     this.physics.add.collider(player, tileset);
     this.physics.add.collider(player, map);
     cursors = this.input.keyboard.createCursorKeys();
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
     const bunnies = this.physics.add.group();
     function generateBunnies() {
@@ -81,10 +77,6 @@ class Garden extends Phaser.Scene {
       loop: true,
     });
     this.physics.add.collider(bunnies, [platforms, ground]);
-<<<<<<< HEAD
-=======
-
->>>>>>> main
   }
   update() {
     if (cursors.left.isDown) {
