@@ -64,7 +64,6 @@ class Garden extends Phaser.Scene {
     this.physics.add.collider(player, map);
     cursors = this.input.keyboard.createCursorKeys();
 
-
     const bunnies = this.physics.add.group();
     function generateBunnies() {
       const xCoordinate = Math.random() * 650;
@@ -78,7 +77,6 @@ class Garden extends Phaser.Scene {
       loop: true,
     });
     this.physics.add.collider(bunnies, [platforms, ground]);
-
   }
   update() {
     if (cursors.left.isDown) {
