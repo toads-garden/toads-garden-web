@@ -47,7 +47,7 @@ class Garden extends Phaser.Scene {
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
     collectibles = this.physics.add.staticGroup();
-    this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
+    // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms])
