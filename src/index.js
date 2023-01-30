@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser from "Phaser";
 import Garden from "./scenes/Garden";
 
 const config = {
@@ -11,6 +11,7 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 200 },
+      debug: false,
     },
   },
   scene: [Garden],

@@ -1,8 +1,11 @@
-import Phaser from "phaser";
-var player;
-var cursors;
+import Phaser from "Phaser";
+import { Toad } from "../gameObjects/Toad.js";
+import generateAnimations from "../config/animations";
 
 class Garden extends Phaser.Scene {
+  player;
+  cameras;
+  platforms;
   constructor() {
     super("Garden");
   }
@@ -12,66 +15,37 @@ class Garden extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
-      frameHeight: 48,
+      frameHeight: 43,
+    });
+    this.load.on("complete", () => {
+      generateAnimations(this);
     });
   }
   create() {
     const map = this.make.tilemap({ key: "map" });
     const tileset = map.addTilesetImage("terrain", "tiles");
 
-const ground = map.createStaticLayer("ground", tileset);
-    const platforms = map.createStaticLayer("platform", tileset);
-    
-    platforms.setCollisionByExclusion(-1); 
+    const ground = map.createLayer("ground", tileset);
+    const platforms = map.createLayer("platform", tileset);
+
+    platforms.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
-    player = this.physics.add.sprite(100, 400, "toad");
-    player.setBounce(0.2);
-    // player.setCollideWorldBounds(true);
-    this.physics.add.collider(player, platforms);
-     this.physics.add.collider(player, ground);
-    this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "turn",
-      frames: [{ key: "toad", frame: 0 }],
-      frameRate: 20,
-    });
+    this.physics.world.setBounds(0, 0, 1920, 480, true, true, true, false);
+
+    this.player = new Toad(this, 100, 400).collideWith(ground);
+    this.physics.add.collider(this.player, platforms);
+    this.physics.add.collider(this.player, ground);
+
+    this.cameras.main.setBounds(0, 0, 1920, 480);
+    this.cameras.main.startFollow(this.player);
+    this.inputs = this.input.keyboard.createCursorKeys();
+
     // scene.cameras.main
     //   .setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels)
     //   .startFollow(this.sprite);
-    // this.physics.add.collider(player, tileset);
-    // this.physics.add.collider(player, map);
-    cursors = this.input.keyboard.createCursorKeys();
   }
   update() {
-    if (cursors.left.isDown) {
-      player.setVelocityX(-160).setFlipX(true);
-
-      player.anims.play("left", true);
-    } else if (cursors.right.isDown) {
-      player.setVelocityX(160).setFlipX(false);
-
-      player.anims.play("right", true);
-    } else {
-      player.setVelocityX(0);
-      player.anims.play("turn");
-    }
-
-    if (cursors.up.isDown) {
-      player.setVelocityY(-200);
-    }
-
-  
+    this.player.update(this.inputs);
   }
 }
 
