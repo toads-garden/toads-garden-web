@@ -1,7 +1,6 @@
 import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
-
 var player;
 var cursors;
 var cameras;
@@ -11,8 +10,6 @@ var score = 0;
 var text;
 
 class Garden extends Phaser.Scene {
-
-
   platforms;
 
   constructor() {
