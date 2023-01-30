@@ -2,6 +2,11 @@ import Phaser from "phaser";
 var player;
 var cursors;
 var cameras;
+var CollectibleLayer;
+var collectibles;
+var score = 0;
+var text;
+
 class Garden extends Phaser.Scene {
   constructor() {
     super("Garden");
@@ -10,6 +15,7 @@ class Garden extends Phaser.Scene {
     this.load.audio("garden", "../assets/audio/garden.mp3");
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
+    this.load.image("collectible", "../assets/img/icons.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
@@ -31,6 +37,7 @@ class Garden extends Phaser.Scene {
     // const back = map.createLayer("background", backTileSet);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
+    CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
 
@@ -77,7 +84,33 @@ class Garden extends Phaser.Scene {
       loop: true,
     });
     this.physics.add.collider(bunnies, [platforms, ground]);
+
+    //collectibles
+    collectibles = this.physics.add.staticGroup();
+    CollectibleLayer.forEach((object) => {
+      let obj = collectibles.create(object.x, object.y, "collectible");
+      obj.setScale(object.width / 16, object.height / 16);
+      obj.setOrigin(0);
+      obj.body.width = object.width;
+      obj.body.height = object.height;
+    });
+    this.physics.add.overlap(player, collectibles, collect, null, this);
+
+    //score
+    text = this.add.text(570, 70, `Score: ${score}`, {
+      fontSize: "20px",
+      fill: "#ffffff",
+    });
+    text.setScrollFactor(0);
   }
+
+  collect(player, collectible) {
+    collectible.destroy(collectible.x, collectible.y);
+    score++;
+    text.setText(`Score: ${score}`);
+    return false;
+  }
+
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
