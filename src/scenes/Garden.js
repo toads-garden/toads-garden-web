@@ -125,7 +125,7 @@ class Garden extends Phaser.Scene {
     collectibles = this.physics.add.staticGroup();
     CollectibleLayer.forEach((object) => {
       let obj = collectibles.create(object.x, object.y, "collectible");
-      obj.setScale(object.width / 14, object.height / 15);
+      obj.setScale(object.width / 16, object.height / 16);
       obj.setOrigin(0);
       obj.body.width = object.width;
       obj.body.height = object.height;
