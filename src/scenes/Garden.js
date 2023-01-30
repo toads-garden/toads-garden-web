@@ -1,5 +1,6 @@
 import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
+import Bunny from "../gameObjects/Bunny";
 import { Toad } from "../gameObjects/Toad.js";
 
 var cursors;
@@ -63,31 +64,44 @@ class Garden extends Phaser.Scene {
     ground.setCollisionByExclusion(-1);
 
     cursors = this.input.keyboard.createCursorKeys();
-    const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
-
-    this.anims.create({
-      key: "bunnyIdle",
-      frames: this.anims.generateFrameNames("bunny", {
-        start: 0,
-        end: 5,
-        prefix: "bunny-sheet_",
-      }),
-      repeat: -1,
-      frameRate: 10,
+    //bunny
+    this.bunnies = this.physics.add.group({
+      classType: Bunny,
     });
-
-    this.anims.create({
-      key: "bunnyRun",
-      frames: this.anims.generateFrameNames("bunny", {
-        start: 6,
-        end: 11,
-        prefix: "bunny-sheet_",
-      }),
-      repeat: -1,
-      frameRate: 10,
+    const bunniesLayer = map.getObjectLayer("EnemyLayer");
+    bunniesLayer.objects.forEach((bunnyObj) => {
+      this.bunnies.get(
+        bunnyObj.x + bunnyObj.width * 0.5,
+        bunnyObj.y - bunnyObj.height * 0.5,
+        "bunny"
+      );
     });
+    this.physics.add.collider(this.bunnies, [platforms, ground]);
+    // const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
 
-    bunny.anims.play("bunnyIdle");
+    // this.anims.create({
+    //   key: "bunnyIdle",
+    //   frames: this.anims.generateFrameNames("bunny", {
+    //     start: 0,
+    //     end: 5,
+    //     prefix: "bunny-sheet_",
+    //   }),
+    //   repeat: -1,
+    //   frameRate: 10,
+    // });
+
+    // this.anims.create({
+    //   key: "bunnyRun",
+    //   frames: this.anims.generateFrameNames("bunny", {
+    //     start: 6,
+    //     end: 11,
+    //     prefix: "bunny-sheet_",
+    //   }),
+    //   repeat: -1,
+    //   frameRate: 10,
+    // });
+
+    // bunny.anims.play("bunnyIdle");
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
