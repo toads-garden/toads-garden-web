@@ -11,8 +11,6 @@ var score = 0;
 var text;
 
 class Garden extends Phaser.Scene {
-  player;
-  cameras;
   platforms;
   constructor() {
     super("Garden");
@@ -50,10 +48,6 @@ class Garden extends Phaser.Scene {
 
     platforms.setCollisionByExclusion(-1);
 
-    const ground = map.createLayer("ground", tileset);
-    const platforms = map.createLayer("platform", tileset);
-
-    platforms.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
     this.physics.world.setBounds(0, 0, 1920, 480, true, true, true, false);
 
