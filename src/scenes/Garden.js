@@ -11,9 +11,6 @@ var score = 0;
 var text;
 
 class Garden extends Phaser.Scene {
-  player;
-  cameras;
-  platforms;
   constructor() {
     super("Garden");
   }
@@ -25,7 +22,7 @@ class Garden extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
-      frameHeight: 43,
+      frameHeight: 48,
     });
     this.load.on("complete", () => {
       generateAnimations(this);
@@ -47,11 +44,6 @@ class Garden extends Phaser.Scene {
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
-
-    platforms.setCollisionByExclusion(-1);
-
-    const ground = map.createLayer("ground", tileset);
-    const platforms = map.createLayer("platform", tileset);
 
     platforms.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
@@ -128,7 +120,7 @@ class Garden extends Phaser.Scene {
     collectibles = this.physics.add.staticGroup();
     CollectibleLayer.forEach((object) => {
       let obj = collectibles.create(object.x, object.y, "collectible");
-      obj.setScale(object.width / 16, object.height / 16);
+      obj.setScale(object.width / 14, object.height / 15);
       obj.setOrigin(0);
       obj.body.width = object.width;
       obj.body.height = object.height;
