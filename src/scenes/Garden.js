@@ -58,10 +58,6 @@ class Garden extends Phaser.Scene {
     collectibles = this.physics.add.staticGroup();
     // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
-    player = new Toad(this, 100, 400)
-      .collideWith([ground, platforms])
-      .overlapWith(collectibles, collect);
-
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
@@ -86,6 +82,11 @@ class Garden extends Phaser.Scene {
     for (const bunny of this.bunnies.children.entries) {
       bunny.direction = "RIGHT";
     }
+
+    player = new Toad(this, 100, 400)
+      .collideWith([ground, platforms, this.bunnies])
+      .overlapWith(collectibles, collect)
+      .hitEnemy(this.bunnies, hitBunny);
 
     this.physics.add.collider(this.bunnies, [platforms, ground, invisible]);
 
@@ -112,6 +113,9 @@ class Garden extends Phaser.Scene {
       score++;
       text.setText(`Herbs Collected: ${score}`);
       return false;
+    }
+    function hitBunny(player, bunnies) {
+      player.setTint(0xff0000);
     }
     this.physics.add.overlap(player, collectibles, collect, null, this);
   }
