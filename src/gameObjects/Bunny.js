@@ -17,6 +17,7 @@ class Bunny {
   constructor(scene) {
     this.scene = scene;
     let map = this.scene.map;
+    this.scene.physics.world.enable(this);
     console.log(map);
     this.bunnies = this.scene.physics.add.group();
     this.collider = this.scene.physics.add.collider(
@@ -26,6 +27,7 @@ class Bunny {
       null,
       this
     );
+    this.body.setCollideWorldBounds(true);
 
     const bunnyObjects = map.getObjectLayer("EnemyLayer").objects;
 
