@@ -10,4 +10,6 @@ https://pixelfrog-assets.itch.io/pixel-adventure-1
 
 https://pixerat.itch.io/game-icons-heart-diamond-star-and-lightning-bolt
 
-Icons by icons8.com
+https://lornn.itch.io/fantasy-forest-backgrounds
+
+
