@@ -1,6 +1,7 @@
 import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
+import Hearts from "./hearts";
 
 var cursors;
 var player;
@@ -20,6 +21,8 @@ class Garden extends Phaser.Scene {
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
+    this.load.image("heartFull", "../assets/img/heartFull.png");
+    this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
@@ -37,8 +40,9 @@ class Garden extends Phaser.Scene {
     );
   }
   create() {
+    this.scene.run("hearts");
     var music = this.sound.add("garden");
-    //music.play();
+    // music.play();
     this.add.image(960, 240, "background");
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
