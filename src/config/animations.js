@@ -26,13 +26,24 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
-  // scene.anims.create({
-  //   key: "bunnyRun",
-  //   frames: scene.anims.generateFrameNames("bunny", {
-  //     start: 6,
-  //     end: 11,
-  //     prefix: "bunny-sheet_",
-  //   }),
-  //   repeat: -1,
-  //   frameRate:10,
+  scene.anims.create({
+    key: "bunnyRunLeft",
+    frames: scene.anims.generateFrameNames("bunny", {
+      start: 6,
+      end: 10,
+      prefix: "bunny-sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
+  scene.anims.create({
+    key: "bunnyRunRight",
+    frames: scene.anims.generateFrameNames("bunny", {
+      start: 6,
+      end: 10,
+      prefix: "bunny-sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
 };
