@@ -24,7 +24,7 @@ export default (scene) => {
       prefix: "bunny-sheet_",
     }),
     repeat: -1,
-    frameRate: 50,
+    frameRate: 10,
   });
   // scene.anims.create({
   //   key: "bunnyRun",

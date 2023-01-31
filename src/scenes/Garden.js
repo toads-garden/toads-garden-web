@@ -24,6 +24,7 @@ class Garden extends Phaser.Scene {
     this.load.image("heartFull", "../assets/img/heartFull.png");
     this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
+    this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -47,9 +48,11 @@ class Garden extends Phaser.Scene {
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
+    const plantTileset = map.addTilesetImage("plants", "plantTiles");
     // const back = map.createLayer("background", backTileSet);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
+    const plants = map.createLayer("mushroom", plantTileset);
     collectibles = this.physics.add.staticGroup();
     // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
@@ -68,6 +71,7 @@ class Garden extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
+
     this.bunnies = this.physics.add.group({ key: "bunny", repeat: 3 });
     const bunnyObjects = map.getObjectLayer("EnemyLayer").objects;
     for (const bunny of bunnyObjects) {
@@ -80,6 +84,7 @@ class Garden extends Phaser.Scene {
     for (const bunny of this.bunnies.children.entries) {
       bunny.direction = "RIGHT";
     }
+
     this.physics.add.collider(this.bunnies, [platforms, ground]);
 
     //collectibles
