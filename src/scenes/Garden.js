@@ -2,7 +2,6 @@ import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
 
-import Hearts from "./hearts";
 var cursors;
 var player;
 var CollectibleLayer;
@@ -11,7 +10,6 @@ var score = 0;
 var text;
 
 var bunnies;
-
 
 class Garden extends Phaser.Scene {
   platforms;
@@ -68,7 +66,6 @@ class Garden extends Phaser.Scene {
     ground.setCollisionByExclusion(-1);
     // this.physics.world.setBounds(0, 0, 1920, 480);
     this.inputs = this.input.keyboard.createCursorKeys();
-    ground.setCollisionByExclusion(-1);
 
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
@@ -94,8 +91,6 @@ class Garden extends Phaser.Scene {
       .collideWith([ground, platforms, bunnies])
       .overlapWith(collectibles, collect)
       .hitEnemy(bunnies, hitBunny);
-
-    this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
