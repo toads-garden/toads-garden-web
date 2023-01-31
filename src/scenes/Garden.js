@@ -52,7 +52,9 @@ class Garden extends Phaser.Scene {
     // const back = map.createLayer("background", backTileSet);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
+    const invisible = map.createLayer("invisible", tileset).setVisible(false);
     const plants = map.createLayer("mushroom", plantTileset);
+
     collectibles = this.physics.add.staticGroup();
     // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
@@ -63,7 +65,7 @@ class Garden extends Phaser.Scene {
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
-
+    invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
     // this.physics.world.setBounds(0, 0, 1920, 480);
     this.inputs = this.input.keyboard.createCursorKeys();
@@ -85,7 +87,7 @@ class Garden extends Phaser.Scene {
       bunny.direction = "RIGHT";
     }
 
-    this.physics.add.collider(this.bunnies, [platforms, ground]);
+    this.physics.add.collider(this.bunnies, [platforms, ground, invisible]);
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
