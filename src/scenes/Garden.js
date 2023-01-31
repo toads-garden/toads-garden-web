@@ -2,13 +2,16 @@ import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
 
+import Hearts from "./hearts";
 var cursors;
 var player;
 var CollectibleLayer;
 var collectibles;
 var score = 0;
 var text;
+
 var bunnies;
+
 
 class Garden extends Phaser.Scene {
   platforms;
@@ -114,6 +117,7 @@ class Garden extends Phaser.Scene {
 
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
+
       score++;
       text.setText(`Herbs Collected: ${score}`);
       return false;
@@ -121,6 +125,7 @@ class Garden extends Phaser.Scene {
     function hitBunny(player, bunnies) {
       player.setTint(0xff0000);
     }
+
     this.physics.add.overlap(player, collectibles, collect, null, this);
   }
 
