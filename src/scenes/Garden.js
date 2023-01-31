@@ -76,6 +76,13 @@ class Garden extends Phaser.Scene {
         "bunny"
       );
     });
+    bunnyObjects.forEach((bunnyObj) => {
+      bunnyObj.direction = "RIGHT";
+      bunnyObj.body = true;
+      bunnyObj.body.blocked = true;
+      // bunnyObj.body.blocked = false;
+      console.log(Object.keys(bunnyObj));
+    });
     this.physics.add.collider(this.bunnies, [platforms, ground]);
     // const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
 
