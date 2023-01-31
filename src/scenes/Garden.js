@@ -129,16 +129,20 @@ class Garden extends Phaser.Scene {
     for (const bunny of bunnies.children.entries) {
       if (bunny.body.blocked.right) {
         bunny.direction = "LEFT";
+        bunny.play("bunnyRunLeft", true);
+        // bunny.setFlipX("true");
       }
 
       if (bunny.body.blocked.left) {
         bunny.direction = "RIGHT";
+        bunny.play("bunnyRunRight", true);
+        // bunny.setFlipX("true");
       }
 
       if (bunny.direction === "RIGHT") {
-        bunny.setVelocityX(100);
+        bunny.setVelocityX(100).setFlipX(true);
       } else {
-        bunny.setVelocityX(-100);
+        bunny.setVelocityX(-100).setFlipX(false);
       }
     }
   }
