@@ -1,6 +1,5 @@
 import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
-import Bunny from "../gameObjects/Bunny";
 import { Toad } from "../gameObjects/Toad.js";
 
 var cursors;
@@ -65,50 +64,19 @@ class Garden extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
-    this.bunnies = this.physics.add.group({
-      classType: Bunny,
-    });
-    const bunniesLayer = map.getObjectLayer("EnemyLayer");
-    bunniesLayer.objects.forEach((bunnyObj) => {
-      this.bunnies.get(
-        bunnyObj.x + bunnyObj.width * 0.5,
-        bunnyObj.y - bunnyObj.height * 0.5,
-        "bunny"
-      );
-    });
-    bunnyObjects.forEach((bunnyObj) => {
-      bunnyObj.direction = "RIGHT";
-      bunnyObj.body = true;
-      bunnyObj.body.blocked = true;
-      // bunnyObj.body.blocked = false;
-      console.log(Object.keys(bunnyObj));
-    });
+    this.bunnies = this.physics.add.group({ key: "bunny", repeat: 3 });
+    const bunnyObjects = map.getObjectLayer("EnemyLayer").objects;
+    for (const bunny of bunnyObjects) {
+      this.bunnies
+        .create(bunny.x, bunny.y - bunny.height, "bunny")
+        .setScale(1.5)
+        .setOrigin(0)
+        .setDepth(-1);
+    }
+    for (const bunny of this.bunnies.children.entries) {
+      bunny.direction = "RIGHT";
+    }
     this.physics.add.collider(this.bunnies, [platforms, ground]);
-    // const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
-
-    // this.anims.create({
-    //   key: "bunnyIdle",
-    //   frames: this.anims.generateFrameNames("bunny", {
-    //     start: 0,
-    //     end: 5,
-    //     prefix: "bunny-sheet_",
-    //   }),
-    //   repeat: -1,
-    //   frameRate: 10,
-    // });
-
-    // this.anims.create({
-    //   key: "bunnyRun",
-    //   frames: this.anims.generateFrameNames("bunny", {
-    //     start: 6,
-    //     end: 11,
-    //     prefix: "bunny-sheet_",
-    //   }),
-    //   repeat: -1,
-    //   frameRate: 10,
-    // });
-
-    // bunny.anims.play("bunnyIdle");
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
@@ -139,6 +107,21 @@ class Garden extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
+    for (const bunny of this.bunnies.children.entries) {
+      if (bunny.body.blocked.right) {
+        bunny.direction = "LEFT";
+      }
+
+      if (bunny.body.blocked.left) {
+        bunny.direction = "RIGHT";
+      }
+
+      if (bunny.direction === "RIGHT") {
+        bunny.setVelocityX(100);
+      } else {
+        bunny.setVelocityX(-100);
+      }
+    }
   }
 }
 
