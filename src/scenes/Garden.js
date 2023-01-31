@@ -1,7 +1,6 @@
 import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
-import Hearts from "./hearts";
 
 var cursors;
 var player;
@@ -9,6 +8,7 @@ var CollectibleLayer;
 var collectibles;
 var score = 0;
 var text;
+var bunnies;
 
 class Garden extends Phaser.Scene {
   platforms;
@@ -42,7 +42,7 @@ class Garden extends Phaser.Scene {
   }
   create() {
     this.scene.run("hearts");
-    var music = this.sound.add("garden");
+    var music = this.sound.add("garden", { loop: true, volume: 0.1 });
     // music.play();
     this.add.image(960, 240, "background");
     const map = this.make.tilemap({ key: "map" });
@@ -69,26 +69,30 @@ class Garden extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
-
-    this.bunnies = this.physics.add.group({ key: "bunny", repeat: 3 });
-    const bunnyObjects = map.getObjectLayer("EnemyLayer").objects;
-    for (const bunny of bunnyObjects) {
-      this.bunnies
-        .create(bunny.x, bunny.y - bunny.height, "bunny")
-        .setScale(1.5)
-        .setOrigin(0)
-        .setDepth(-1);
+    bunnies = this.physics.add.group({
+      key: "bunny",
+    });
+    function createBunnies() {
+      bunnies.create(
+        900 + Math.random() * 300,
+        100 + Math.random() * 200,
+        "bunny"
+      );
     }
-    for (const bunny of this.bunnies.children.entries) {
+    for (let i = 0; i < 10; i++) {
+      createBunnies();
+    }
+    for (const bunny of bunnies.children.entries) {
       bunny.direction = "RIGHT";
     }
+    this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     player = new Toad(this, 100, 400)
-      .collideWith([ground, platforms, this.bunnies])
+      .collideWith([ground, platforms, bunnies])
       .overlapWith(collectibles, collect)
-      .hitEnemy(this.bunnies, hitBunny);
+      .hitEnemy(bunnies, hitBunny);
 
-    this.physics.add.collider(this.bunnies, [platforms, ground, invisible]);
+    this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
@@ -122,7 +126,7 @@ class Garden extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
-    for (const bunny of this.bunnies.children.entries) {
+    for (const bunny of bunnies.children.entries) {
       if (bunny.body.blocked.right) {
         bunny.direction = "LEFT";
       }
