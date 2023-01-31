@@ -8,4 +8,8 @@ https://caz-creates-games.itch.io/cute-mushroom-character-sprite
 
 https://pixelfrog-assets.itch.io/pixel-adventure-1
 
-Icons by icons8.com
+https://pixerat.itch.io/game-icons-heart-diamond-star-and-lightning-bolt
+
+https://lornn.itch.io/fantasy-forest-backgrounds
+
+
