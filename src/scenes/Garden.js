@@ -22,6 +22,7 @@ class Garden extends Phaser.Scene {
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
+    this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -44,9 +45,11 @@ class Garden extends Phaser.Scene {
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
+    const plantTileset = map.addTilesetImage("plants", "plantTiles");
     // const back = map.createLayer("background", backTileSet);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
+    const plants = map.createLayer("mushroom", plantTileset);
     collectibles = this.physics.add.staticGroup();
     // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
@@ -76,6 +79,7 @@ class Garden extends Phaser.Scene {
         "bunny"
       );
     });
+
     this.physics.add.collider(this.bunnies, [platforms, ground]);
     // const bunny = this.add.sprite(200, 415, "bunny", "bunny-sheet_0");
 
