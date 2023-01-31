@@ -36,6 +36,16 @@ export class Toad extends Phaser.GameObjects.Sprite {
     );
     return this;
   }
+
+  hitEnemy(gameObject, func) {
+    this.collider = this.scene.physics.add.overlap(
+      this.sprite,
+      gameObject,
+      func
+    );
+    return this;
+  }
+
   reFollowPlayer() {
     this.scene.physics.world.bounds.setPosition(
       this.scene.cameras.main.worldView.x,
