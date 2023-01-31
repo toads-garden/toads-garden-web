@@ -69,18 +69,31 @@ class Garden extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
-    bunnies = this.physics.add.group({
-      key: "bunny",
-    });
-    function createBunnies() {
-      bunnies.create(
-        900 + Math.random() * 300,
-        100 + Math.random() * 200,
-        "bunny"
+    // bunnies = this.physics.add.group({
+    //   key: "bunny",
+    // });
+    // function createBunnies() {
+    //   bunnies.create(
+    //     900 * 300,
+    //     10 * 400,
+    //     // 900 + Math.random() * 300,
+    //     // 100 + Math.random() * 200,
+    //     "bunny"
+    //   );
+    // }
+    // for (let i = 0; i < 3; i++) {
+    //   createBunnies();
+    // }
+
+    bunnies = this.add.group();
+    for (let i = 0; i < 5; i++) {
+      const bunnies = this.physics.add.sprite(
+        900,
+        300,
+        `bunny-${i}`,
+        `bunnyRunLeft`
       );
-    }
-    for (let i = 0; i < 10; i++) {
-      createBunnies();
+      bunnies.anims.play(`bunnyRunLeft`);
     }
     for (const bunny of bunnies.children.entries) {
       bunny.direction = "RIGHT";
