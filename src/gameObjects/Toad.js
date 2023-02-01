@@ -42,7 +42,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
   }
 
   hitEnemy(gameObject, func) {
-    this.collider = this.scene.physics.add.overlap(
+    this.collider = this.scene.physics.add.collider(
       this.sprite,
       gameObject,
       func
@@ -75,11 +75,13 @@ export class Toad extends Phaser.GameObjects.Sprite {
       this.sprite.setVelocityX(-200).setFlipX(true);
       this.sprite.play("left", true);
       this.reFollowPlayer();
+      this.sprite.setTint(0xffffff);
       // this.scene.cameras.main.stopFollow(this.sprite);
     } else if (input.right.isDown) {
       this.sprite.setVelocityX(200).setFlipX(false);
       this.sprite.play("right", true);
       this.reFollowPlayer();
+      this.sprite.setTint(0xffffff);
     } else {
       this.sprite.setVelocityX(0);
       this.sprite.play("turn", true);
@@ -88,6 +90,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
     if (input.up.isDown && this.sprite.body.onFloor()) {
       this.sprite.setVelocityY(-250);
       this.sprite.play("turn", true);
+      this.sprite.setTint(0xffffff);
     }
   }
   // gameOver() {

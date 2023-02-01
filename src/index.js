@@ -1,4 +1,5 @@
 import Phaser from "Phaser";
+import Forest from "./scenes/Forest";
 import Garden from "./scenes/Garden";
 import Hearts from "./scenes/hearts";
 
@@ -16,7 +17,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Garden, Hearts],
+  scene: [Garden, Hearts, Forest],
 };
 
 new Phaser.Game(config);

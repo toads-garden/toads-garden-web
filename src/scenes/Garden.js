@@ -8,6 +8,7 @@ var CollectibleLayer;
 var collectibles;
 var score = 0;
 var text;
+
 var bunnies;
 // var scene;
 var gameOver = false;
@@ -28,7 +29,9 @@ class Garden extends Phaser.Scene {
     this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
-    this.load.spritesheet("toad", "../assets/img/toad.png", {
+
+    this.load.image("pipe", "../assets/img/mariopipe.png");
+    this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
     });
@@ -49,6 +52,7 @@ class Garden extends Phaser.Scene {
     // music.play();
 
     this.add.image(960, 240, "background");
+    this.add.image(1850, 410, "pipe");
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
@@ -66,7 +70,6 @@ class Garden extends Phaser.Scene {
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
     this.inputs = this.input.keyboard.createCursorKeys();
-    ground.setCollisionByExclusion(-1);
 
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
@@ -93,7 +96,6 @@ class Garden extends Phaser.Scene {
       .overlapWith(collectibles, collect)
       .hitEnemy(bunnies, hitBunny);
 
-    // this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
@@ -115,6 +117,7 @@ class Garden extends Phaser.Scene {
 
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
+
       score++;
       text.setText(`Herbs Collected: ${score}`);
       return false;
@@ -122,41 +125,12 @@ class Garden extends Phaser.Scene {
     function hitBunny(player, bunnies) {
       gameIsOver();
     }
+
     function gameIsOver() {
       gameOver = true;
       // this.physics.pause();
       player.die();
-      // this.input.on("pointerDown", () => this.scene.start("garden"));
-      // var playbtn = this.physics.add.staticGroup(240, 300, "play-btn");
-
-      // playbtn.setPerspective(600);
-
-      // playbtn.addListener("click");
-      // playbtn.on("click", (event) => {
-      //   this.scene.restart();
-      // });
-      // this.tweens.add({
-      //   targets: playbtn,
-      //   y: 300,
-      //   duration: 3000,
-      //   ease: "Power3",
-      // });
-      // this.scene.cameras.main.on("camerafadeoutcomplete", (camera, effect) =>
-      //   this.scene.restart()
-      // );
-      // this.scene.cameras.main.on(
-      //   "camerashakecomplete",
-      //   (camera, effect) => camera.fade(500)
-      // );
-      // this.scene.cameras.main.on("camerafadeoutcomplete", (camera, effect) =>
-      //   scene.restart()
-      // );
-      // this.scene.cameras.main.on(
-      //   Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
-      //   () => {
-      //     this.scene.restart();
-      //   }
-      // );
+      
     }
 
     this.physics.add.overlap(player, collectibles, collect, null, this);
@@ -169,16 +143,20 @@ class Garden extends Phaser.Scene {
     for (const bunny of bunnies.children.entries) {
       if (bunny.body.blocked.right) {
         bunny.direction = "LEFT";
+        bunny.play("bunnyRunLeft", true);
+        // bunny.setFlipX("true");
       }
 
       if (bunny.body.blocked.left) {
         bunny.direction = "RIGHT";
+        bunny.play("bunnyRunRight", true);
+        // bunny.setFlipX("true");
       }
 
       if (bunny.direction === "RIGHT") {
-        bunny.setVelocityX(100);
+        bunny.setVelocityX(100).setFlipX(true);
       } else {
-        bunny.setVelocityX(-100);
+        bunny.setVelocityX(-100).setFlipX(false);
       }
     }
   }
