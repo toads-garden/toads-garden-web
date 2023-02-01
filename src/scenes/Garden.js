@@ -10,6 +10,8 @@ var score = 0;
 var text;
 
 var bunnies;
+// var scene;
+var gameOver = false;
 
 class Garden extends Phaser.Scene {
   platforms;
@@ -22,11 +24,17 @@ class Garden extends Phaser.Scene {
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
+    this.load.image("play-btn", "../assets/img/playButton.png");
     this.load.image("heartFull", "../assets/img/heartFull.png");
     this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
+
     this.load.image("pipeTiles", "../assets/img/mariopipe.png");
+
+
+ 
+
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -43,9 +51,10 @@ class Garden extends Phaser.Scene {
     );
   }
   create() {
-    this.scene.run("hearts");
+    // this.scene.run("hearts");
     var music = this.sound.add("garden", { loop: true, volume: 0.1 });
     // music.play();
+
     this.add.image(960, 240, "background");
 
     const map = this.make.tilemap({ key: "map" });
@@ -61,16 +70,13 @@ class Garden extends Phaser.Scene {
 
     const invisible = map.createLayer("invisible", tileset).setVisible(false);
     const plants = map.createLayer("mushroom", plantTileset);
-
     collectibles = this.physics.add.staticGroup();
-    // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
     pipe.setCollisionByExclusion(-1);
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
-    // this.physics.world.setBounds(0, 0, 1920, 480);
     this.inputs = this.input.keyboard.createCursorKeys();
     // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
     cursors = this.input.keyboard.createCursorKeys();
@@ -94,9 +100,10 @@ class Garden extends Phaser.Scene {
     this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     player = new Toad(this, 100, 400)
-      .collideWith([ground, platforms, bunnies])
+      .collideWith([ground, platforms])
       .overlapWith(collectibles, collect)
       .hitEnemy(bunnies, hitBunny);
+
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
@@ -125,12 +132,21 @@ class Garden extends Phaser.Scene {
       return false;
     }
     function hitBunny(player, bunnies) {
-      player.setTint(0xff0000);
+      gameIsOver();
+    }
+
+    function gameIsOver() {
+      gameOver = true;
+      // this.physics.pause();
+      player.die();
+      
     }
 
     this.physics.add.overlap(player, collectibles, collect, null, this);
   }
-
+  // restart() {
+  //   this.scene.create;
+  // }
   update() {
     player.update(this.inputs);
     for (const bunny of bunnies.children.entries) {
