@@ -32,9 +32,6 @@ class Garden extends Phaser.Scene {
 
     this.load.image("pipeTiles", "../assets/img/mariopipe.png");
 
-
- 
-
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -104,7 +101,6 @@ class Garden extends Phaser.Scene {
       .overlapWith(collectibles, collect)
       .hitEnemy(bunnies, hitBunny);
 
-
     //collectibles
     // collectibles = this.physics.add.staticGroup();
     CollectibleLayer.forEach((object) => {
@@ -139,7 +135,7 @@ class Garden extends Phaser.Scene {
       gameOver = true;
       // this.physics.pause();
       player.die();
-      
+      score = 0;
     }
 
     this.physics.add.overlap(player, collectibles, collect, null, this);
