@@ -5,6 +5,7 @@ import { Toad } from "../gameObjects/Toad.js";
 var cursors;
 var player;
 var CollectibleLayer;
+var EnemyLayer;
 var collectibles;
 var score = 0;
 var text;
@@ -60,8 +61,8 @@ class Garden extends Phaser.Scene {
     const plantTileset = map.addTilesetImage("plants", "plantTiles");
     const pipeTileset = map.addTilesetImage("pipe", "pipeTiles");
     // const back = map.createLayer("background", backTileSet);
-    var pipe = map.createLayer("pipe", pipeTileset).setVisible(false);
-    console.log(pipe);
+    // var pipe = map.createLayer("pipe", pipeTileset).setVisible(false);
+    // console.log(pipe);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
 
@@ -70,7 +71,10 @@ class Garden extends Phaser.Scene {
     collectibles = this.physics.add.staticGroup();
 
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
-    pipe.setCollisionByExclusion(-1);
+
+    EnemyLayer = map.getObjectLayer("EnemyLayer")["objects"];
+
+    // pipe.setCollisionByExclusion(-1);
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
@@ -81,19 +85,28 @@ class Garden extends Phaser.Scene {
     bunnies = this.physics.add.group({
       key: "bunny",
     });
-    function createBunnies() {
-      bunnies.create(
-        900 + Math.random() * 300,
-        100 + Math.random() * 200,
-        "bunny"
-      );
-    }
-    for (let i = 0; i < 2; i++) {
-      createBunnies();
-    }
-    for (const bunny of bunnies.children.entries) {
-      bunny.direction = "RIGHT";
-    }
+    // function createBunnies() {
+    //   bunnies.create(
+    //     900 + Math.random() * 300,
+    //     100 + Math.random() * 200,
+    //     "bunny"
+    //   );
+    // }
+    // for (let i = 0; i < 2; i++) {
+    //   createBunnies();
+    // }
+    // for (const bunny of bunnies.children.entries) {
+    //   bunny.direction = "RIGHT";
+    // }
+
+    EnemyLayer.forEach((object) => {
+      let bunnyObj = bunnies.create(object.x, object.y, "bunny");
+      // bunnyObj.setScale(object.width / 16, object.height / 16);
+      bunnyObj.setOrigin(0);
+      bunnyObj.body.width = object.width;
+      bunnyObj.body.height = object.height;
+    });
+
     this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     player = new Toad(this, 100, 400)
