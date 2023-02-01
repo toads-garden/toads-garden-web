@@ -104,6 +104,7 @@ class Garden extends Phaser.Scene {
       bunnyObj.setScale(object.width / 28.5, object.height / 37);
       bunnyObj.setOrigin(0);
       bunnyObj.body.width = object.width;
+      bunnyObj.direction = "RIGHT";
       bunnyObj.body.height = object.height;
     });
 
