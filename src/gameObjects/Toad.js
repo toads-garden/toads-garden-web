@@ -41,8 +41,18 @@ export class Toad extends Phaser.GameObjects.Sprite {
     return this;
   }
 
+  // overlapPipe(gameObject, func) {
+  //   this.collider = this.scene.physics.add.overlap(
+  //     this.sprite,
+  //     gameObject,
+  //     func
+  //   );
+  //   return this;
+  //   // this.scene.scene.start("Forest");
+  // }
+
   hitEnemy(gameObject, func) {
-    this.collider = this.scene.physics.add.collider(
+    this.collider = this.scene.physics.add.overlap(
       this.sprite,
       gameObject,
       func
@@ -113,7 +123,6 @@ export class Toad extends Phaser.GameObjects.Sprite {
   //   // );
   // }
   die() {
-    console.log(this.scene);
     this.sprite.setTint(0xff0000);
     this.sprite.isDed = true;
     this.sprite.setVelocity(0, -350);

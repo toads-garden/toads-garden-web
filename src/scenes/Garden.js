@@ -8,6 +8,8 @@ var CollectibleLayer;
 var collectibles;
 var score = 0;
 var text;
+var scene;
+var pipe;
 
 var bunnies;
 // var scene;
@@ -48,6 +50,10 @@ class Garden extends Phaser.Scene {
     );
   }
   create() {
+    // this.scene = scene;
+    // console.log(this.scene);
+    scene = this.scene;
+    console.log(scene);
     // this.scene.run("hearts");
     var music = this.sound.add("garden", { loop: true, volume: 0.1 });
     // music.play();
@@ -60,8 +66,8 @@ class Garden extends Phaser.Scene {
     const plantTileset = map.addTilesetImage("plants", "plantTiles");
     const pipeTileset = map.addTilesetImage("pipe", "pipeTiles");
     // const back = map.createLayer("background", backTileSet);
-    var pipe = map.createLayer("pipe", pipeTileset).setVisible(false);
-    console.log(pipe);
+    pipe = map.createLayer("pipe", pipeTileset).setVisible(false);
+    // console.log(pipe);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
 
@@ -75,7 +81,7 @@ class Garden extends Phaser.Scene {
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
     this.inputs = this.input.keyboard.createCursorKeys();
-    // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
+    // const pipe = this.add.image(1850, 410, "pipe").setVisible(false);
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
     bunnies = this.physics.add.group({
@@ -99,7 +105,8 @@ class Garden extends Phaser.Scene {
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms])
       .overlapWith(collectibles, collect)
-      .hitEnemy(bunnies, hitBunny);
+      .hitEnemy(bunnies, hitBunny)
+      .overlapWith(pipe, hitPipe);
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
@@ -127,22 +134,33 @@ class Garden extends Phaser.Scene {
 
       return false;
     }
+    function hitPipe(player, pipe) {
+      if (score >= 2) {
+        scene.start("Forest");
+        return false;
+      }
+    }
+    // function hitPipe(player, pipe) {
+    //   // if (score >= 3) {
+    //   //   scene.start("Forest");
+    //   //   return false;
+    //   // }
+    // }
+
     function hitBunny(player, bunnies) {
       gameIsOver();
     }
 
     function gameIsOver() {
       gameOver = true;
-      // this.physics.pause();
       player.die();
       score = 0;
     }
 
     this.physics.add.overlap(player, collectibles, collect, null, this);
+    // this.physics.add.overlap(player, pipe, hitPipe, null, this);
   }
-  // restart() {
-  //   this.scene.create;
-  // }
+
   update() {
     player.update(this.inputs);
     for (const bunny of bunnies.children.entries) {
@@ -164,10 +182,11 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    if (score > 2) {
-      this.scene.start("Forest");
+    if (score > 5) {
+      pipe.setVisible(true);
+      // this.physics.add.collider(player, this.pipe);
+      // this.scene.start("Forest");
     }
-    //
   }
 }
 
