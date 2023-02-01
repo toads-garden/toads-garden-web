@@ -5,6 +5,7 @@ import { Toad } from "../gameObjects/Toad.js";
 var cursors;
 var player;
 var CollectibleLayer;
+var EnemyLayer;
 var collectibles;
 var score = 0;
 var text;
@@ -59,6 +60,7 @@ class Garden extends Phaser.Scene {
     // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
+    EnemyLayer = map.getObjectLayer("EnemyLayer")["objects"];
 
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
@@ -68,16 +70,18 @@ class Garden extends Phaser.Scene {
     ground.setCollisionByExclusion(-1);
 
     cursors = this.input.keyboard.createCursorKeys();
+
     //bunny
-    // bunnies = this.physics.add.group({
-    //   key: "bunny",
-    // });
+    bunnies = this.physics.add.group({
+      key: "bunny",
+    });
     // function createBunnies() {
     //   bunnies.create(
-    //     900 * 300,
-    //     10 * 400,
-    //     // 900 + Math.random() * 300,
-    //     // 100 + Math.random() * 200,
+    //     // 900 * 300,
+    //     // 10 * 400,
+    //     900 + Math.random() * 300,
+    //     100 + Math.random() * 400,
+    //     // 700 + Math.random() * 400,
     //     "bunny"
     //   );
     // }
@@ -85,27 +89,47 @@ class Garden extends Phaser.Scene {
     //   createBunnies();
     // }
 
-    bunnies = this.add.group();
-    for (let i = 0; i < 5; i++) {
-      const bunnies = this.physics.add.sprite(
-        900,
-        300,
-        `bunny-${i}`,
-        `bunnyRunLeft`
-      );
-      bunnies.anims.play(`bunnyRunLeft`);
-    }
-    for (const bunny of bunnies.children.entries) {
-      bunny.direction = "RIGHT";
-    }
+    // this.bunnies = this.add.group();
+    // for (let i = 0; i < 5; i++) {
+    //   const bunnies = this.physics.add.sprite(
+    //     900,
+    //     300,
+    //     `bunny-${i}`,
+    //     `bunnyRunLeft`
+    //   );
+    //   bunnies.anims.play(`bunnyRunLeft`);
+    // }
+
+    // this.bunnies = this.add.group({
+    //   key: "bunny",
+    // });
+
+    // this.bunnies.get(
+    //   Phaser.Math.Between(100, 700),
+    //   Phaser.Math.Between(900, 300),
+    //   "bunny"
+    // );
+
+    EnemyLayer.forEach((object) => {
+      let bunnyObj = bunnies.create(object.x, object.y, "bunny");
+      // bunnyObj.setScale(object.width / 16, object.height / 16);
+      bunnyObj.setOrigin(0);
+      bunnyObj.body.width = object.width;
+      bunnyObj.body.height = object.height;
+    });
+
+    // for (const bunny of bunnies.children.entries) {
+    //   bunny.direction = "RIGHT";
+    // }
     this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
+    //Toad
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms, bunnies])
       .overlapWith(collectibles, collect)
       .hitEnemy(bunnies, hitBunny);
 
-    this.physics.add.collider(bunnies, [platforms, ground, invisible]);
+    // this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
@@ -143,13 +167,11 @@ class Garden extends Phaser.Scene {
       if (bunny.body.blocked.right) {
         bunny.direction = "LEFT";
         bunny.play("bunnyRunLeft", true);
-        // bunny.setFlipX("true");
       }
 
       if (bunny.body.blocked.left) {
         bunny.direction = "RIGHT";
         bunny.play("bunnyRunRight", true);
-        // bunny.setFlipX("true");
       }
 
       if (bunny.direction === "RIGHT") {
