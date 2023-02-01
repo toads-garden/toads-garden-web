@@ -26,7 +26,7 @@ class Garden extends Phaser.Scene {
     this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
-    this.load.image("pipe", "../assets/img/mariopipe.png");
+    this.load.image("pipeTiles", "../assets/img/mariopipe.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -47,14 +47,18 @@ class Garden extends Phaser.Scene {
     var music = this.sound.add("garden", { loop: true, volume: 0.1 });
     // music.play();
     this.add.image(960, 240, "background");
-    this.add.image(1850, 410, "pipe");
+
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
     const plantTileset = map.addTilesetImage("plants", "plantTiles");
+    const pipeTileset = map.addTilesetImage("pipe", "pipeTiles");
     // const back = map.createLayer("background", backTileSet);
+    var pipe = map.createLayer("pipe", pipeTileset).setVisible(false);
+    console.log(pipe);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
+
     const invisible = map.createLayer("invisible", tileset).setVisible(false);
     const plants = map.createLayer("mushroom", plantTileset);
 
@@ -62,13 +66,13 @@ class Garden extends Phaser.Scene {
     // this.physics.world.setBounds(0, 0, 1920, 480, 64, true, true, true, true);
 
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
-
+    pipe.setCollisionByExclusion(-1);
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
     // this.physics.world.setBounds(0, 0, 1920, 480);
     this.inputs = this.input.keyboard.createCursorKeys();
-
+    // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
     bunnies = this.physics.add.group({
@@ -81,7 +85,7 @@ class Garden extends Phaser.Scene {
         "bunny"
       );
     }
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 2; i++) {
       createBunnies();
     }
     for (const bunny of bunnies.children.entries) {
@@ -117,6 +121,7 @@ class Garden extends Phaser.Scene {
 
       score++;
       text.setText(`Herbs Collected: ${score}`);
+
       return false;
     }
     function hitBunny(player, bunnies) {
@@ -147,6 +152,10 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
+    if (score > 2) {
+      this.scene.start("Forest");
+    }
+    //
   }
 }
 

@@ -17,12 +17,12 @@ class Forest extends Phaser.Scene {
     super("Forest");
   }
   preload() {
-    this.load.audio("forest"); //forest audio
-    this.load.image("background"); //background
-    this.load.image("tiles"); //terrain
-    this.load.image("collectible"); //icons
+    //this.load.audio("forest"); //forest audio
+    this.load.image("forest", "../assets/img/forest.png"); //background
+    this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
+    //this.load.image("collectible"); //icons
     this.load.image("heartFull", "../assets/img/heartEmpty.png");
-    this.load.tilemapTiledJSON("map"); //map.json
+    this.load.tilemapTiledJSON("forestMap", "../assets/json/forest.json"); //map.json
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -41,23 +41,23 @@ class Forest extends Phaser.Scene {
 
   create() {
     this.scene.run("hearts");
-    var music = this.sound.add("forest", { loop: true, volume: 0.1 });
+    //var music = this.sound.add("forest", { loop: true, volume: 0.1 });
     //music.play();
 
     //cursors
-    this.inputs = this.inputs.keyboard.createCursorKeys();
-    cursors = this.inputs.keyboard.createCursorKeys();
+    // this.inputs = this.inputs.keyboard.createCursorKeys();
+    // cursors = this.inputs.keyboard.createCursorKeys();
 
     //platforms and ground
-    //this.add.image(960, 240, 'background');
-    //const map = this.make.tilemap({key: 'map'});
-    //const tileset = map.addTilesetImage('terrain', 'tiles');
-    //const ground = map.createLayer('ground', tileset);
+    this.add.image(960, 240, "forest");
+    const forestMap = this.make.tilemap({ key: "forestMap" });
+    const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
+    const ground = forestMap.createLayer("forest-ground", newtile);
     //const platforms = map.createLayer('platform', tileset);
     //const invisible = map.createLayer('invisible',tileset).setVisible(false);
     //platforms.setCollisionByExclusion(-1);
     //invisible.setCollisionByExclusion(-1);
-    //ground.setCollisionByExclusion(-1);
+    ground.setCollisionByExclusion(-1);
 
     //collectibles
     //collectibles = this.physics.add.staticGroup();
@@ -71,12 +71,18 @@ class Forest extends Phaser.Scene {
     // });
 
     //TOAD
-    player = new Toad(this, 100, 400).collideWith().overlapWith().hitEnemy();
+    player = new Toad(this, 100, 400)
+      .collideWith([ground])
+      .overlapWith()
+      .hitEnemy();
 
+    this.inputs = this.input.keyboard.createCursorKeys();
+
+    cursors = this.input.keyboard.createCursorKeys();
     //score
     text = this.add.text(0, 0, `Wood Collected: ${score}`, {
       fontSize: "20px",
-      fill: "#000000",
+      fill: "#ffffff",
     });
     text.setScrollFactor(0);
   }
