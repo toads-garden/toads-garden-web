@@ -81,6 +81,7 @@ class Garden extends Phaser.Scene {
     this.inputs = this.input.keyboard.createCursorKeys();
     // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
     cursors = this.input.keyboard.createCursorKeys();
+
     //bunny
     bunnies = this.physics.add.group({
       key: "bunny",
@@ -101,7 +102,7 @@ class Garden extends Phaser.Scene {
 
     EnemyLayer.forEach((object) => {
       let bunnyObj = bunnies.create(object.x, object.y, "bunny");
-      // bunnyObj.setScale(object.width / 16, object.height / 16);
+      bunnyObj.setScale(object.width / 28.5, object.height / 37);
       bunnyObj.setOrigin(0);
       bunnyObj.body.width = object.width;
       bunnyObj.body.height = object.height;
@@ -162,13 +163,11 @@ class Garden extends Phaser.Scene {
       if (bunny.body.blocked.right) {
         bunny.direction = "LEFT";
         bunny.play("bunnyRunLeft", true);
-        // bunny.setFlipX("true");
       }
 
       if (bunny.body.blocked.left) {
         bunny.direction = "RIGHT";
         bunny.play("bunnyRunRight", true);
-        // bunny.setFlipX("true");
       }
 
       if (bunny.direction === "RIGHT") {
@@ -180,7 +179,6 @@ class Garden extends Phaser.Scene {
     if (score > 2) {
       this.scene.start("Forest");
     }
-    //
   }
 }
 
