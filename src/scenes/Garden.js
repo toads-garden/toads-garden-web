@@ -47,7 +47,7 @@ class Garden extends Phaser.Scene {
     var music = this.sound.add("garden", { loop: true, volume: 0.1 });
     // music.play();
     this.add.image(960, 240, "background");
-    this.add.image(200, 410, "pipe");
+    this.add.image(1850, 410, "pipe");
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
