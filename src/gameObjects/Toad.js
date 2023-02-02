@@ -113,18 +113,18 @@ export class Toad extends Phaser.GameObjects.Sprite {
   //   // );
   // }
   die() {
-    console.log(this.scene);
     this.sprite.setTint(0xff0000);
     this.sprite.isDed = true;
-    this.sprite.setVelocity(0, -350);
-    this.scene.cameras.main.shake(500);
+    this.sprite.setVelocity(0, -500);
+    this.scene.cameras.main.fade(500);
     this.sprite.setCollideWorldBounds("false");
-    this.scene.cameras.main.on("camerashakecomplete", (camera, effect) =>
-      camera.fade(500)
-    );
-    this.scene.cameras.main.on("camerafadeoutcomplete", (camera, effect) =>
-      this.scene.scene.restart()
-    );
+
+    function restart() {
+      this.scene.scene.restart();
+    }
+    this.scene.time.delayedCall(300, restart, [], this);
+    // this.scene.scene.stop();
+    // this.scene.scene.start();
     // this.input.on("up", () => this.scene.start("garden"));
     // this.scene.restart;
     // this.scene.cameras.main.on(

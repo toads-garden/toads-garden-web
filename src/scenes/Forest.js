@@ -51,12 +51,12 @@ class Forest extends Phaser.Scene {
     this.add.image(960, 240, "forest");
     const forestMap = this.make.tilemap({ key: "forestMap" });
     const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
-    const ground = forestMap.createLayer("forest-ground", newtile);
+    const forestGround = forestMap.createLayer("forest-terrain", newtile);
     //const platforms = map.createLayer('platform', tileset);
     //const invisible = map.createLayer('invisible',tileset).setVisible(false);
     //platforms.setCollisionByExclusion(-1);
     //invisible.setCollisionByExclusion(-1);
-    ground.setCollisionByExclusion(-1);
+    forestGround.setCollisionByExclusion(-1);
 
     //collectibles
     //collectibles = this.physics.add.staticGroup();
@@ -71,7 +71,7 @@ class Forest extends Phaser.Scene {
 
     //TOAD
     player = new Toad(this, 100, 400)
-      .collideWith([ground])
+      .collideWith([forestGround])
       .overlapWith()
       .hitEnemy(foxes, hitFox);
     //this.physics.add.overlap(player, collectibles, collect, null, this);
