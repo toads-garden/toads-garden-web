@@ -181,7 +181,6 @@ class Garden extends Phaser.Scene {
     }
 
     if (score >= 15) {
-
       this.scene.start("Forest");
     }
     //
