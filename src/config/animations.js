@@ -46,4 +46,34 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
+  scene.anims.create({
+    key: "foxIdle",
+    frames: scene.anims.generateFrameNames("fox", {
+      start: 56,
+      end: 60,
+      prefix: "fox_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
+  scene.anims.create({
+    key: "foxRunRight",
+    frames: scene.anims.generateFrameNames("fox", {
+      start: 28,
+      end: 35,
+      prefix: "fox_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
+  scene.anims.create({
+    key: "foxRunLeft",
+    frames: scene.anims.generateFrameNames("fox", {
+      start: 28,
+      end: 35,
+      prefix: "fox_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
 };
