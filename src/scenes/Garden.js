@@ -179,7 +179,9 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    if (score > 2) {
+
+    if (score >= 15) {
+
       this.scene.start("Forest");
     }
     //
