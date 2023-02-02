@@ -148,7 +148,6 @@ class Garden extends Phaser.Scene {
 
     function gameIsOver() {
       gameOver = true;
-
       // this.physics.pause();
       player.die();
       score = 0;
@@ -179,7 +178,7 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    if (score >= 15) {
+    if (score > 15) {
       this.scene.start("Forest");
     }
     //
