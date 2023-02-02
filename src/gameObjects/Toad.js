@@ -1,5 +1,6 @@
 // import { Sprite } from "Phaser";
 // var cursors;
+var count = 0;
 export class Toad extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, hp = null, heartCount = null) {
     super(scene, x, y, "toad");
@@ -112,17 +113,22 @@ export class Toad extends Phaser.GameObjects.Sprite {
   //   //   }
   //   // );
   // }
+
   die() {
+    count++;
     this.sprite.setTint(0xff0000);
     this.sprite.isDed = true;
     this.sprite.setVelocity(0, -500);
-    this.scene.cameras.main.fade(500);
+    this.scene.cameras.main.fade(800);
     this.sprite.setCollideWorldBounds("false");
+    this.scene.physics.world.removeCollider(this.scene.collider);
 
+    console.log(count);
     function restart() {
       this.scene.scene.restart();
+      console.log("restart");
     }
-    this.scene.time.delayedCall(300, restart, [], this);
+    this.scene.time.delayedCall(800, restart, [], this);
     // this.scene.scene.stop();
     // this.scene.scene.start();
     // this.input.on("up", () => this.scene.start("garden"));
