@@ -58,7 +58,7 @@ class Forest extends Phaser.Scene {
     //const invisible = map.createLayer('invisible',tileset).setVisible(false);
     //platforms.setCollisionByExclusion(-1);
     //invisible.setCollisionByExclusion(-1);
-    forestGround.setCollisionByExclusion(-1);
+    ground.setCollisionByExclusion(-1);
 
     //collectibles
     //collectibles = this.physics.add.staticGroup();
@@ -73,7 +73,7 @@ class Forest extends Phaser.Scene {
 
     //TOAD
     player = new Toad(this, 100, 400)
-      .collideWith([forestGround])
+      .collideWith([ground])
       .overlapWith()
       .hitEnemy();
 
