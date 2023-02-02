@@ -53,6 +53,7 @@ class Forest extends Phaser.Scene {
     const forestMap = this.make.tilemap({ key: "forestMap" });
     const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
     const forestGround = forestMap.createLayer("forest-terrain", newtile);
+    const grassTexture = forestMap.createLayer("grass", newtile);
     //const platforms = map.createLayer('platform', tileset);
     //const invisible = map.createLayer('invisible',tileset).setVisible(false);
     //platforms.setCollisionByExclusion(-1);
