@@ -121,7 +121,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
     this.sprite.setVelocity(0, -500);
     this.scene.cameras.main.fade(800);
     this.sprite.setCollideWorldBounds("false");
-    this.scene.physics.world.removeCollider(this.scene.sprite.collider);
+
 
     console.log(count);
     function restart() {
