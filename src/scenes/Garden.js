@@ -148,6 +148,7 @@ class Garden extends Phaser.Scene {
 
     function gameIsOver() {
       gameOver = true;
+
       // this.physics.pause();
       player.die();
       score = 0;
