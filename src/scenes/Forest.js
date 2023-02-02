@@ -44,8 +44,8 @@ class Forest extends Phaser.Scene {
     //music.play();
 
     //cursors
-    this.inputs = this.inputs.keyboard.createCursorKeys();
-    cursors = this.inputs.keyboard.createCursorKeys();
+    this.inputs = this.input.keyboard.createCursorKeys();
+    cursors = this.input.keyboard.createCursorKeys();
 
     //platforms and ground
     this.add.image(960, 240, "forest");
@@ -77,17 +77,17 @@ class Forest extends Phaser.Scene {
     //this.physics.add.overlap(player, collectibles, collect, null, this);
 
     //foxes
-    EnemyLayer = forestMap.getObjectLayer("EnemyLayerFox")["objects"];
-    foxes = this.physics.add.group({ key: "fox" });
-    EnemyLayer.forEach((object) => {
-      let foxObj = foxes.create(object.x, object.y, "fox");
-      foxObj.setScale(object.width / 2, object.height / 2);
-      foxObj.setOrigin(0);
-      foxObj.body.width = object.width;
-      foxObj.direction = "RIGHT";
-      foxObj.body.height = object.height;
-    });
-    this.physics.add.collider(foxes, ground);
+    // EnemyLayer = forestMap.getObjectLayer("EnemyLayerFox")["objects"];
+    // foxes = this.physics.add.group({ key: "fox" });
+    // EnemyLayer.forEach((object) => {
+    //   let foxObj = foxes.create(object.x, object.y, "fox");
+    //   foxObj.setScale(object.width / 2, object.height / 2);
+    //   foxObj.setOrigin(0);
+    //   foxObj.body.width = object.width;
+    //   foxObj.direction = "RIGHT";
+    //   foxObj.body.height = object.height;
+    // });
+    // this.physics.add.collider(foxes, ground);
     // this.physics.add.collider(foxes, invisible);
 
     //score
@@ -116,21 +116,21 @@ class Forest extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
-    for (const fox of foxes.children.entries) {
-      if (fox.body.blocked.left) {
-        fox.direction = "RIGHT";
-        fox.play("foxRunLeft", true);
-      }
-      if (fox.body.blocked.right) {
-        fox.direction = "LEFT";
-        fox.play("foxRunRight", true);
-      }
-      if (fox.direction === "RIGHT") {
-        fox.setVelocityX(100).setFlipX(true);
-      } else {
-        fox.setVelocityX(-100).setFlipX(false);
-      }
-    }
+    // for (const fox of foxes.children.entries) {
+    //   if (fox.body.blocked.left) {
+    //     fox.direction = "RIGHT";
+    //     fox.play("foxRunLeft", true);
+    //   }
+    //   if (fox.body.blocked.right) {
+    //     fox.direction = "LEFT";
+    //     fox.play("foxRunRight", true);
+    //   }
+    //   if (fox.direction === "RIGHT") {
+    //     fox.setVelocityX(100).setFlipX(true);
+    //   } else {
+    //     fox.setVelocityX(-100).setFlipX(false);
+    //   }
+    // }
   }
 }
 
