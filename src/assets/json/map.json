@@ -493,15 +493,15 @@
          "objects":[
                 {
                  "class":"",
-                 "gid":925,
+                 "gid":1945,
                  "height":128,
-                 "id":83,
+                 "id":86,
                  "name":"",
                  "rotation":0,
                  "visible":true,
                  "width":128,
-                 "x":1776,
-                 "y":475
+                 "x":1773,
+                 "y":414
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -510,7 +510,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":85,
+ "nextobjectid":87,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -601,8 +601,22 @@
          "transparentcolor":"#ff00ff"
         }, 
         {
-         "columns":1,
+         "columns":34,
          "firstgid":925,
+         "image":"forest-terrain.png",
+         "imageheight":480,
+         "imagewidth":544,
+         "margin":0,
+         "name":"forest-terrain",
+         "spacing":0,
+         "tilecount":1020,
+         "tileheight":16,
+         "tilewidth":16,
+         "transparentcolor":"#ff00ff"
+        }, 
+        {
+         "columns":1,
+         "firstgid":1945,
          "image":"pipe.png",
          "imageheight":128,
          "imagewidth":128,
