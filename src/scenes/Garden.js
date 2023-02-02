@@ -6,7 +6,6 @@ var cursors;
 var player;
 var CollectibleLayer;
 var EnemyLayer;
-var EnemyLayer;
 var collectibles;
 var score = 0;
 var text;
@@ -72,41 +71,50 @@ class Garden extends Phaser.Scene {
     collectibles = this.physics.add.staticGroup();
 
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
+
     EnemyLayer = map.getObjectLayer("EnemyLayer")["objects"];
 
+    // pipe.setCollisionByExclusion(-1);
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
     this.inputs = this.input.keyboard.createCursorKeys();
     // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
     cursors = this.input.keyboard.createCursorKeys();
-
     //bunny
     bunnies = this.physics.add.group({
       key: "bunny",
     });
-    function createBunnies() {
-      bunnies.create(
-        900 + Math.random() * 300,
-        100 + Math.random() * 200,
-        "bunny"
-      );
-    }
-    for (let i = 0; i < 10; i++) {
-      createBunnies();
-    }
-    for (const bunny of bunnies.children.entries) {
-      bunny.direction = "RIGHT";
-    }
-    this.physics.add.collider(bunnies, [platforms, ground, invisible]);
+    // function createBunnies() {
+    //   bunnies.create(
+    //     900 + Math.random() * 300,
+    //     100 + Math.random() * 200,
+    //     "bunny"
+    //   );
+    // }
+    // for (let i = 0; i < 2; i++) {
+    //   createBunnies();
+    // }
+    // for (const bunny of bunnies.children.entries) {
+    //   bunny.direction = "RIGHT";
+    // }
+    // 57 x 74
+    EnemyLayer.forEach((object) => {
+      let bunnyObj = bunnies.create(object.x, object.y, "bunny");
+      bunnyObj.setScale(object.width / 28.5, object.height / 37);
+      bunnyObj.setOrigin(0);
+      bunnyObj.body.width = object.width;
+      bunnyObj.direction = "RIGHT";
+      bunnyObj.body.height = object.height;
+    });
 
-    //Toad
+    this.physics.add.collider(bunnies, ground);
+    this.physics.add.collider(bunnies, invisible);
+
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms])
       .overlapWith(collectibles, collect)
       .hitEnemy(bunnies, hitBunny);
-
-    this.physics.add.collider(bunnies, [platforms, ground, invisible]);
 
     //collectibles
     // collectibles = this.physics.add.staticGroup();
@@ -140,6 +148,7 @@ class Garden extends Phaser.Scene {
 
     function gameIsOver() {
       gameOver = true;
+
       // this.physics.pause();
       player.die();
       score = 0;
@@ -161,11 +170,6 @@ class Garden extends Phaser.Scene {
       if (bunny.body.blocked.right) {
         bunny.direction = "LEFT";
         bunny.play("bunnyRunLeft", true);
-      }
-
-      if (bunny.body.blocked.left) {
-        bunny.direction = "RIGHT";
-        bunny.play("bunnyRunRight", true);
         // bunny.setFlipX("true");
       }
 
@@ -175,7 +179,7 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    if (score > 15) {
+    if (score >= 15) {
       this.scene.start("Forest");
     }
     //
