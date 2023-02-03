@@ -172,9 +172,11 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    var difference = Math.abs(Math.floor(player.sprite.x) - 1853);
+    //362
+    var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
+    var yDifference = Math.abs(Math.floor(player.sprite.y) - 362);
     var threshhold = 5;
-    if (difference <= threshhold && score > 0) {
+    if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Forest");
     }
     //
