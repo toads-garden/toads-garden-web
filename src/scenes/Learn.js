@@ -107,15 +107,15 @@ class Learn extends Phaser.Scene {
     this.physics.add.overlap(player, wood, collect, null, this);
 
     this.story = this.add
-      .text(325, 140 / 1.2, "", {
+      .text(325, 155 / 1.2, "", {
         fill: "#29465B",
         align: "center",
       })
       .setOrigin(0.5)
-      .setScale(x * 0.003);
+      .setScale(x * 0.0018);
 
     this.typewriteText(
-      "                \nToad uses the left, right, and up \nbuttons to move around. \n                \nJumping into items collects them for the town.\n                 \nToad can jump onto platforms to help get around.\n                \nThe pipes at the end of the stage transport  \nyou to the next world once you've collected 15 items. \n                \nThere aren't any enemies here but \nwatch out on your journey!"
+      "                \nToad uses the left, right, and up \nbuttons to move around.\n                 \nJumping into items collects them for the town.\nToad can jump onto platforms to help get around.\n                \nThe pipes at the end of the stage transport  \nyou to the next world once you've \ncollected 15 items. \n                \nThere aren't any enemies here but \nwatch out on your journey!"
     );
 
     // // Let's go button
