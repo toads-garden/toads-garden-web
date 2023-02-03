@@ -53,10 +53,13 @@ class Forest extends Phaser.Scene {
     const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
     const forestGround = forestMap.createLayer("forest-terrain", newtile);
     const grass = forestMap.createLayer("grass", newtile);
+    const forestInvis = forestMap
+      .createLayer("forestInvis", newtile)
+      .setVisible(false);
     //const platforms = map.createLayer('platform', tileset);
     //const invisible = map.createLayer('invisible',tileset).setVisible(false);
     //platforms.setCollisionByExclusion(-1);
-    //invisible.setCollisionByExclusion(-1);
+    forestInvis.setCollisionByExclusion(-1);
     forestGround.setCollisionByExclusion(-1);
 
     //collectibles
@@ -90,7 +93,7 @@ class Forest extends Phaser.Scene {
       foxObj.body.height = object.height;
     });
     this.physics.add.collider(foxes, forestGround);
-    // this.physics.add.collider(foxes, invisible);
+    this.physics.add.collider(foxes, forestInvis);
 
     //score
     text = this.add.text(0, 0, `Wood Collected: ${score}`, {
@@ -118,21 +121,21 @@ class Forest extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
-    // for (const fox of foxes.children.entries) {
-    //   if (fox.body.blocked.left) {
-    //     fox.direction = "RIGHT";
-    //     fox.play("foxRunLeft", true);
-    //   }
-    //   if (fox.body.blocked.right) {
-    //     fox.direction = "LEFT";
-    //     fox.play("foxRunRight", true);
-    //   }
-    //   if (fox.direction === "RIGHT") {
-    //     fox.setVelocityX(100).setFlipX(true);
-    //   } else {
-    //     fox.setVelocityX(-100).setFlipX(false);
-    //   }
-    // }
+    for (const fox of foxes.children.entries) {
+      if (fox.body.blocked.left) {
+        fox.direction = "RIGHT";
+        fox.play("foxRunLeft", true);
+      }
+      if (fox.body.blocked.right) {
+        fox.direction = "LEFT";
+        fox.play("foxRunRight", true);
+      }
+      if (fox.direction === "RIGHT") {
+        fox.setVelocityX(100).setFlipX(false);
+      } else {
+        fox.setVelocityX(-100).setFlipX(true);
+      }
+    }
   }
 }
 

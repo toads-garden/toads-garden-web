@@ -28,7 +28,7 @@ class Garden extends Phaser.Scene {
     this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
-    this.load.image("pipeTiles", "../assets/img/pipe.png");
+    this.load.image("pipe", "../assets/img/pipe.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -41,12 +41,18 @@ class Garden extends Phaser.Scene {
       "./assets/img/bunny.png",
       "./assets/json/bunny_atlas.json"
     );
+    this.load.atlas(
+      "fox",
+      "./assets/img/fox.png",
+      "./assets/json/fox_atlas.json"
+    );
   }
   create() {
     // this.scene.run("hearts");
     var music = this.sound.add("garden", { loop: true, volume: 0.1 });
     // music.play();
     this.add.image(960, 240, "background");
+    let pipe = this.add.image(1850, 420, "pipe");
     const map = this.make.tilemap({ key: "map" });
     // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
@@ -62,7 +68,7 @@ class Garden extends Phaser.Scene {
     collectibles = this.physics.add.staticGroup();
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
     EnemyLayer = map.getObjectLayer("EnemyLayer")["objects"];
-    PipeLayer = map.getObjectLayer("PipeLayer")["objects"];
+
     // pipe.setCollisionByExclusion(-1);
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
@@ -71,10 +77,11 @@ class Garden extends Phaser.Scene {
     // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
-    pipe = this.physics.add.staticGroup();
+
     bunnies = this.physics.add.group({
       key: "bunny",
     });
+
     // function createBunnies() {
     //   bunnies.create(
     //     900 + Math.random() * 300,
@@ -97,18 +104,14 @@ class Garden extends Phaser.Scene {
       bunnyObj.direction = "RIGHT";
       bunnyObj.body.height = object.height;
     });
-    PipeLayer.forEach((object) => {
-      let pipeObj = pipe.create(object.x, object.y, "pipe");
-      pipeObj.body.width = object.width;
-      pipeObj.body.height = object.height;
-    });
+
     this.physics.add.collider(bunnies, ground);
     this.physics.add.collider(bunnies, invisible);
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms])
       .overlapWith(collectibles, collect)
-      .hitEnemy(bunnies, hitBunny)
-      .overlapWith(pipe, hitPipe);
+      .hitEnemy(bunnies, hitBunny);
+
     //collectibles
     // collectibles = this.physics.add.staticGroup();
     CollectibleLayer.forEach((object) => {
@@ -131,13 +134,7 @@ class Garden extends Phaser.Scene {
       text.setText(`Herbs Collected: ${score}`);
       return false;
     }
-    function hitPipe(player, pipe) {
-      if (score >= 2) {
-        console.log(this);
-        //scene.start("Forest");
-        return false;
-      }
-    }
+
     function hitBunny(player, bunnies) {
       gameIsOver();
     }
@@ -172,7 +169,8 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    if (Math.floor(player.sprite.x) === 300 && score > 15) {
+
+    if (Math.floor(player.sprite.x) === 300 && score > 0) {
       this.scene.start("Forest");
     }
     //
