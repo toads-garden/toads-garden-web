@@ -57,10 +57,13 @@ class Garden extends Phaser.Scene {
     // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
     const plantTileset = map.addTilesetImage("plants", "plantTiles");
-    const pipeTileset = map.addTilesetImage("pipe", "pipeTiles");
+
     // const back = map.createLayer("background", backTileSet);
     // var pipe = map.createLayer("pipe", pipeTileset).setVisible(false);
     // console.log(pipe);
+    const invisiblePlayer = map
+      .createLayer("pipeInvisible", tileset)
+      .setVisible(false);
     const ground = map.createLayer("ground", tileset);
     const platforms = map.createLayer("platform", tileset);
     const invisible = map.createLayer("invisible", tileset).setVisible(false);
@@ -77,7 +80,7 @@ class Garden extends Phaser.Scene {
     // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
-
+    invisiblePlayer.setCollisionByExclusion(-1);
     bunnies = this.physics.add.group({
       key: "bunny",
     });
@@ -108,7 +111,7 @@ class Garden extends Phaser.Scene {
     this.physics.add.collider(bunnies, ground);
     this.physics.add.collider(bunnies, invisible);
     player = new Toad(this, 100, 400)
-      .collideWith([ground, platforms])
+      .collideWith([ground, platforms, invisiblePlayer])
       .overlapWith(collectibles, collect)
       .hitEnemy(bunnies, hitBunny);
 
@@ -169,8 +172,9 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-
-    if (Math.floor(player.sprite.x) === 300 && score > 0) {
+    var difference = Math.abs(Math.floor(player.sprite.x) - 1853);
+    var threshhold = 5;
+    if (difference <= threshhold && score > 0) {
       this.scene.start("Forest");
     }
     //
