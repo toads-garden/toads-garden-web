@@ -23,6 +23,7 @@ class Forest extends Phaser.Scene {
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
     this.load.image("wood", "../assets/img/wood.png"); //icons
     this.load.tilemapTiledJSON("forestMap", "../assets/json/forest.json"); //map.json
+    this.load.image("pipe", "../assets/img/pipe.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -49,6 +50,7 @@ class Forest extends Phaser.Scene {
 
     //platforms and ground
     this.add.image(960, 240, "forest");
+    let pipe = this.add.image(1850, 410, "pipe");
     const forestMap = this.make.tilemap({ key: "forestMap" });
     const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
     const forestGround = forestMap.createLayer("forest-terrain", newtile);
@@ -134,6 +136,11 @@ class Forest extends Phaser.Scene {
       } else {
         fox.setVelocityX(-100).setFlipX(true);
       }
+    }
+    var difference = Math.abs(Math.floor(player.sprite.x) - 1853);
+    var threshhold = 5;
+    if (difference <= threshhold && score > 0) {
+      this.scene.start("Forest");
     }
   }
 }
