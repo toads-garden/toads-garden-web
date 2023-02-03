@@ -38,19 +38,19 @@ class Intro extends Scene {
 
     //Text
     this.story = this.add
-      .text(325, 240 / 1.2, "", {
+      .text(325, 220 / 1.2, "", {
         fill: "#29465B",
         align: "center",
       })
       .setOrigin(0.5)
-      .setScale(x * 0.003);
+      .setScale(x * 0.0018);
 
     this.typewriteText(
-      "                \nToad's village is suffering. \n                \nThe toadspeople are victims of a capitalist society.\n                 \nPlease help Toad collect \nmedicine, wood, and water to  \nprovide basic necessities.\n                \nYour mission is to collect 15 items in \neach stage to help build houses, \n provide medicine and establish access to clean water.\n                \nThe fate of this village depends on you."
+      "                \nToad's village is suffering. \n                \nThe toadspeople are victims of\na capitalist society.\n                 \nPlease help Toad collect \nmedicine, wood, and water to  \nprovide basic necessities.\n                \nYour mission is to collect 15 items in \neach stage to help build houses, \n provide medicine, and\n establish access to clean water.\n                \nThe fate of this village depends on you."
     );
 
     // Let's go button
-    let gameButton = this.add.image(325, y + 45, "playButton").setScale(0.3);
+    let gameButton = this.add.image(325, y + 15, "playButton").setScale(0.3);
 
     gameButton.setInteractive();
 
