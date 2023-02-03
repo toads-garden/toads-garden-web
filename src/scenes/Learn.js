@@ -64,9 +64,9 @@ class Learn extends Phaser.Scene {
 
     ground.setCollisionByExclusion(-1);
     singlePlat = this.physics.add.staticGroup();
-    singlePlat.create(100, 350, "singlePlatform").setScale(2);
-    singlePlat.create(300, 300, "singlePlatform").setScale(2);
-    singlePlat.create(550, 250, "singlePlatform").setScale(2);
+    singlePlat.create(100, 350, "singlePlatform").setScale(2).refreshBody();
+    singlePlat.create(300, 300, "singlePlatform").setScale(2).refreshBody();
+    singlePlat.create(550, 250, "singlePlatform").setScale(2).refreshBody();
     singlePlat.create(500, 384, "singlePlatform").setScale(2).setVisible(false);
     plant = this.physics.add.staticGroup();
     plant.create(100, 200, "plant").setScale(1.5);
@@ -111,8 +111,7 @@ class Learn extends Phaser.Scene {
         fill: "#29465B",
         align: "center",
       })
-      .setOrigin(0.5)
-      .setScale(x * 0.0018);
+      .setOrigin(0.5);
 
     this.typewriteText(
       "                \nToad uses the left, right, and up \nbuttons to move around.\n                 \nJumping into items collects them for the town.\nToad can jump onto platforms to help get around.\n                \nThe pipes at the end of the stage transport  \nyou to the next world once you've \ncollected 15 items. \n                \nThere aren't any enemies here but \nwatch out on your journey!"
@@ -156,7 +155,7 @@ class Learn extends Phaser.Scene {
     }
 
     if (cursors.up.isDown && player.body.onFloor()) {
-      player.setVelocityY(-200);
+      player.setVelocityY(-250);
     }
 
     var xDifference = Math.abs(Math.floor(player.body.x) - 479);
