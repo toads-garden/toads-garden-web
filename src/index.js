@@ -2,6 +2,7 @@ import Phaser from "Phaser";
 import Forest from "./scenes/Forest";
 import Garden from "./scenes/Garden";
 import Hearts from "./scenes/hearts";
+import Underwater from "./scenes/Underwater";
 
 const config = {
   type: Phaser.AUTO,
@@ -17,7 +18,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [Garden, Hearts, Forest],
+  scene: [Garden, Hearts, Forest, Underwater],
 };
 
 new Phaser.Game(config);
