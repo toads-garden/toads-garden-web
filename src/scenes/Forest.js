@@ -74,13 +74,6 @@ class Forest extends Phaser.Scene {
       obj.body.height = object.height;
     });
 
-    //TOAD
-    player = new Toad(this, 100, 400)
-      .collideWith([forestGround])
-      .overlapWith(collectibleWood, collect)
-      .hitEnemy(foxes, hitFox);
-    //this.physics.add.overlap(player, collectibles, collect, null, this);
-
     //foxes
     EnemyLayerFox = forestMap.getObjectLayer("EnemyLayerFox")["objects"];
     foxes = this.physics.add.group({ key: "fox" });
@@ -117,6 +110,12 @@ class Forest extends Phaser.Scene {
       player.die();
       score = 0;
     }
+    //TOAD
+    player = new Toad(this, 100, 400)
+      .collideWith([forestGround])
+      .overlapWith(collectibleWood, collect)
+      .hitEnemy(foxes, hitFox);
+    //this.physics.add.overlap(player, collectibles, collect, null, this);
   }
 
   update() {
