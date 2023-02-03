@@ -6,9 +6,9 @@ var cursors;
 var player;
 var score = 0;
 var text;
-//var CollectibleLayer;
-//var collectibles;
-var EnemyLayer;
+var woodLayer;
+var collectibleWood;
+var EnemyLayerFox;
 var foxes;
 var gameOver = false;
 
@@ -21,7 +21,7 @@ class Forest extends Phaser.Scene {
     //this.load.audio("forest"); //forest audio
     this.load.image("forest", "../assets/img/forest.png"); //background
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
-    //this.load.image("collectible"); //icons
+    this.load.image("wood", "../assets/img/wood.png"); //icons
     this.load.tilemapTiledJSON("forestMap", "../assets/json/forest.json"); //map.json
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
@@ -52,43 +52,48 @@ class Forest extends Phaser.Scene {
     const forestMap = this.make.tilemap({ key: "forestMap" });
     const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
     const forestGround = forestMap.createLayer("forest-terrain", newtile);
+    const grass = forestMap.createLayer("grass", newtile);
+    const forestInvis = forestMap
+      .createLayer("forestInvis", newtile)
+      .setVisible(false);
     //const platforms = map.createLayer('platform', tileset);
     //const invisible = map.createLayer('invisible',tileset).setVisible(false);
     //platforms.setCollisionByExclusion(-1);
-    //invisible.setCollisionByExclusion(-1);
+    forestInvis.setCollisionByExclusion(-1);
     forestGround.setCollisionByExclusion(-1);
 
     //collectibles
+    collectibleWood = this.physics.add.staticGroup();
     //collectibles = this.physics.add.staticGroup();
-    //CollectibleLayer = map.getObjectLayer('CollectibleLayer')['objects];
-    // CollectibleLayer.forEach((object) => {
-    //   let obj = collectibles.create(object.x, object.y, "collectible");
-    //   obj.setScale(object.width / 16, object.height / 16);
-    //   obj.setOrigin(0);
-    //   obj.body.width = object.width;
-    //   obj.body.height = object.height;
-    // });
+    woodLayer = forestMap.getObjectLayer("woodLayer")["objects"];
+    woodLayer.forEach((object) => {
+      let obj = collectibleWood.create(object.x, object.y, "wood");
+      obj.setScale(object.width / 20, object.height / 20);
+      obj.setOrigin(0);
+      obj.body.width = object.width;
+      obj.body.height = object.height;
+    });
 
     //TOAD
     player = new Toad(this, 100, 400)
       .collideWith([forestGround])
-      .overlapWith()
+      .overlapWith(collectibleWood, collect)
       .hitEnemy(foxes, hitFox);
     //this.physics.add.overlap(player, collectibles, collect, null, this);
 
     //foxes
-    // EnemyLayer = forestMap.getObjectLayer("EnemyLayerFox")["objects"];
-    // foxes = this.physics.add.group({ key: "fox" });
-    // EnemyLayer.forEach((object) => {
-    //   let foxObj = foxes.create(object.x, object.y, "fox");
-    //   foxObj.setScale(object.width / 2, object.height / 2);
-    //   foxObj.setOrigin(0);
-    //   foxObj.body.width = object.width;
-    //   foxObj.direction = "RIGHT";
-    //   foxObj.body.height = object.height;
-    // });
-    // this.physics.add.collider(foxes, ground);
-    // this.physics.add.collider(foxes, invisible);
+    EnemyLayerFox = forestMap.getObjectLayer("EnemyLayerFox")["objects"];
+    foxes = this.physics.add.group({ key: "fox" });
+    EnemyLayerFox.forEach((object) => {
+      let foxObj = foxes.create(object.x, object.y, "fox");
+      foxObj.setScale(object.width / 16, object.height / 16);
+      foxObj.setOrigin(0);
+      foxObj.body.width = object.width;
+      foxObj.direction = "RIGHT";
+      foxObj.body.height = object.height;
+    });
+    this.physics.add.collider(foxes, forestGround);
+    this.physics.add.collider(foxes, forestInvis);
 
     //score
     text = this.add.text(0, 0, `Wood Collected: ${score}`, {
@@ -97,13 +102,13 @@ class Forest extends Phaser.Scene {
     });
     text.setScrollFactor(0);
 
-    // function collect(player, collectible) {
-    //   collectible.destroy(collectible.x, collectible.y);
+    function collect(player, collectibleWood) {
+      collectibleWood.destroy(collectibleWood.x, collectibleWood.y);
 
-    //   score++;
-    //   text.setText(`Wood Collected: ${score}`);
-    //   return false;
-    // }
+      score++;
+      text.setText(`Wood Collected: ${score}`);
+      return false;
+    }
     function hitFox(player, foxes) {
       gameIsOver();
     }
@@ -116,21 +121,21 @@ class Forest extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
-    // for (const fox of foxes.children.entries) {
-    //   if (fox.body.blocked.left) {
-    //     fox.direction = "RIGHT";
-    //     fox.play("foxRunLeft", true);
-    //   }
-    //   if (fox.body.blocked.right) {
-    //     fox.direction = "LEFT";
-    //     fox.play("foxRunRight", true);
-    //   }
-    //   if (fox.direction === "RIGHT") {
-    //     fox.setVelocityX(100).setFlipX(true);
-    //   } else {
-    //     fox.setVelocityX(-100).setFlipX(false);
-    //   }
-    // }
+    for (const fox of foxes.children.entries) {
+      if (fox.body.blocked.left) {
+        fox.direction = "RIGHT";
+        fox.play("foxRunLeft", true);
+      }
+      if (fox.body.blocked.right) {
+        fox.direction = "LEFT";
+        fox.play("foxRunRight", true);
+      }
+      if (fox.direction === "RIGHT") {
+        fox.setVelocityX(100).setFlipX(false);
+      } else {
+        fox.setVelocityX(-100).setFlipX(true);
+      }
+    }
   }
 }
 
