@@ -12,4 +12,6 @@ https://pixerat.itch.io/game-icons-heart-diamond-star-and-lightning-bolt
 
 https://lornn.itch.io/fantasy-forest-backgrounds
 
+https://szadiart.itch.io/platformer-fantasy-set1
 
+https://clockworkraven.itch.io/rpg-icon-pack-crafting-materials

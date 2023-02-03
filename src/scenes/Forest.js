@@ -54,6 +54,9 @@ class Forest extends Phaser.Scene {
     const forestMap = this.make.tilemap({ key: "forestMap" });
     const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
     const forestGround = forestMap.createLayer("forest-terrain", newtile);
+    const forestPipe = forestMap
+      .createLayer("forestPipe", newtile)
+      .setVisible(false);
     const grass = forestMap.createLayer("grass", newtile);
     const forestInvis = forestMap
       .createLayer("forestInvis", newtile)
@@ -63,7 +66,7 @@ class Forest extends Phaser.Scene {
     //platforms.setCollisionByExclusion(-1);
     forestInvis.setCollisionByExclusion(-1);
     forestGround.setCollisionByExclusion(-1);
-
+    forestPipe.setCollisionByExclusion(-1);
     //collectibles
     collectibleWood = this.physics.add.staticGroup();
     //collectibles = this.physics.add.staticGroup();
@@ -114,7 +117,7 @@ class Forest extends Phaser.Scene {
     }
     //TOAD
     player = new Toad(this, 100, 400)
-      .collideWith([forestGround])
+      .collideWith([forestGround, forestPipe])
       .overlapWith(collectibleWood, collect)
       .hitEnemy(foxes, hitFox);
     //this.physics.add.overlap(player, collectibles, collect, null, this);
@@ -137,10 +140,14 @@ class Forest extends Phaser.Scene {
         fox.setVelocityX(-100).setFlipX(true);
       }
     }
-    var difference = Math.abs(Math.floor(player.sprite.x) - 1853);
+    //346
+    console.log(player.sprite.y);
+    var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
+    var yDifference = Math.abs(Math.floor(player.sprite.y) - 346);
     var threshhold = 5;
-    if (difference <= threshhold && score > 0) {
+    if (xDifference <= threshhold && yDifference <= threshhold && score >= 15) {
       this.scene.start("Forest");
+      score = 0;
     }
   }
 }
