@@ -4,12 +4,19 @@ import Garden from "./scenes/Garden";
 import Hearts from "./scenes/hearts";
 import SettingsMenu from "./scenes/SettingsMenu";
 import UIScene from "./scenes/UIScene";
+import Intro from "./scenes/Intro";
+import Learn from "./scenes/Learn";
+import Underwater from "./scenes/Underwater";
 
 const config = {
   type: Phaser.AUTO,
-  width: 650,
-  height: 480,
-  parent: "toad",
+
+  scale: {
+    parent: "toad",
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 650,
+    height: 480,
+  },
   //backgroundColor: "#BCEDF6",
   pixelArt: true,
   physics: {
@@ -19,7 +26,16 @@ const config = {
       debug: true,
     },
   },
-  scene: [Garden, Hearts, Forest, UIScene, SettingsMenu],
+  scene: [
+    Intro,
+    Learn,
+    Garden,
+    Hearts,
+    Forest,
+    Underwater,
+    UIScene,
+    SettingsMenu,
+  ],
 };
 
 new Phaser.Game(config);

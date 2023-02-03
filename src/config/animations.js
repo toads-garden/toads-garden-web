@@ -76,4 +76,24 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
+  scene.anims.create({
+    key: "octSwimUp",
+    frames: scene.anims.generateFrameNames("octopus", {
+      start: 0,
+      end: 3,
+      prefix: "octopus_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
+  scene.anims.create({
+    key: "octSwimDown",
+    frames: scene.anims.generateFrameNames("octopus", {
+      start: 0,
+      end: 3,
+      prefix: "octopus_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
 };

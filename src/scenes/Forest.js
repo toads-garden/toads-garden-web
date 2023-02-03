@@ -23,6 +23,7 @@ class Forest extends Phaser.Scene {
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
     this.load.image("wood", "../assets/img/wood.png"); //icons
     this.load.tilemapTiledJSON("forestMap", "../assets/json/forest.json"); //map.json
+    this.load.image("pipe", "../assets/img/pipe.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -37,6 +38,11 @@ class Forest extends Phaser.Scene {
       "./assets/img/fox.png",
       "./assets/json/fox_atlas.json"
     );
+    this.load.atlas(
+      "octopus",
+      "./assets/img/oct.png",
+      "./assets/json/oct_atlas.json"
+    );
   }
 
   create() {
@@ -49,9 +55,13 @@ class Forest extends Phaser.Scene {
 
     //platforms and ground
     this.add.image(960, 240, "forest");
+    let pipe = this.add.image(1850, 410, "pipe");
     const forestMap = this.make.tilemap({ key: "forestMap" });
     const newtile = forestMap.addTilesetImage("forest-terrain", "forestTiles");
     const forestGround = forestMap.createLayer("forest-terrain", newtile);
+    const forestPipe = forestMap
+      .createLayer("forestPipe", newtile)
+      .setVisible(false);
     const grass = forestMap.createLayer("grass", newtile);
     const forestInvis = forestMap
       .createLayer("forestInvis", newtile)
@@ -61,7 +71,7 @@ class Forest extends Phaser.Scene {
     //platforms.setCollisionByExclusion(-1);
     forestInvis.setCollisionByExclusion(-1);
     forestGround.setCollisionByExclusion(-1);
-
+    forestPipe.setCollisionByExclusion(-1);
     //collectibles
     collectibleWood = this.physics.add.staticGroup();
     //collectibles = this.physics.add.staticGroup();
@@ -73,13 +83,6 @@ class Forest extends Phaser.Scene {
       obj.body.width = object.width;
       obj.body.height = object.height;
     });
-
-    //TOAD
-    player = new Toad(this, 100, 400)
-      .collideWith([forestGround])
-      .overlapWith(collectibleWood, collect)
-      .hitEnemy(foxes, hitFox);
-    //this.physics.add.overlap(player, collectibles, collect, null, this);
 
     //foxes
     EnemyLayerFox = forestMap.getObjectLayer("EnemyLayerFox")["objects"];
@@ -117,6 +120,12 @@ class Forest extends Phaser.Scene {
       player.die();
       score = 0;
     }
+    //TOAD
+    player = new Toad(this, 100, 400)
+      .collideWith([forestGround, forestPipe])
+      .overlapWith(collectibleWood, collect)
+      .hitEnemy(foxes, hitFox);
+    //this.physics.add.overlap(player, collectibles, collect, null, this);
   }
 
   update() {
@@ -135,6 +144,15 @@ class Forest extends Phaser.Scene {
       } else {
         fox.setVelocityX(-100).setFlipX(true);
       }
+    }
+    //346
+    //console.log(player.sprite.y);
+    var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
+    var yDifference = Math.abs(Math.floor(player.sprite.y) - 346);
+    var threshhold = 5;
+    if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
+      this.scene.start("Underwater");
+      score = 0;
     }
   }
 }
