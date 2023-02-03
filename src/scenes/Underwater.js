@@ -19,10 +19,10 @@ class Underwater extends Phaser.Scene {
   }
   preload() {
     //this.load.audio('underwater'); //underwater audio
-    this.load.image(""); //background
-    this.load.image(""); //terrain
-    this.load.image("bubbles"); //icons
-    this.load.tilemapTiledJSON(""); //map.json
+    this.load.image("water", "../assets/img/water2.png"); //background
+    // this.load.image(""); //terrain
+    // this.load.image("bubbles", "../assets/img/map_97.png"); //icons
+    // this.load.tilemapTiledJSON(""); //map.json
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -43,12 +43,12 @@ class Underwater extends Phaser.Scene {
     //music.play();
 
     //cursors
-    this.inputs = this.inputs.keyboard.createCursorKeys();
-    cursors = this.inputs.keyboard.createCursorKeys();
+    this.inputs = this.input.keyboard.createCursorKeys();
+    cursors = this.input.keyboard.createCursorKeys();
 
     //platforms and ground
-    // this.add.image(960, 240, 'underwater');
-    const waterMap = this.make.tilemap({ key: "waterMap" });
+    this.add.image(960, 240, "water");
+    // const waterMap = this.make.tilemap({ key: "waterMap" });
     // const waterTile = waterMap.addTilesetImage('');
     //const waterGround = waterMap.createLayer('');
     //const waterInvis = waterMap.createLayer('waterInvis', waterTile).setVisible(false);
@@ -56,27 +56,27 @@ class Underwater extends Phaser.Scene {
     //waterGround.setCollisionByExclusion(-1);
 
     //collectibles
-    collectibleBubble = this.physics.add.staticGroup();
-    bubbleLayer = waterMap.getObjectLayer("bubbleLayer")["objects"];
-    bubbleLayer.forest((object) => {
-      let obj = collectibleBubble.create(object.x, object.y, "bubbles");
-      obj.setScale(object.width, object.height);
-      obj.setOrigin(0);
-      obj.body.width = object.width;
-      obj.body.height = object.height;
-    });
+    // collectibleBubble = this.physics.add.staticGroup();
+    // bubbleLayer = waterMap.getObjectLayer("bubbleLayer")["objects"];
+    // bubbleLayer.forest((object) => {
+    //   let obj = collectibleBubble.create(object.x, object.y, "bubbles");
+    //   obj.setScale(object.width, object.height);
+    //   obj.setOrigin(0);
+    //   obj.body.width = object.width;
+    //   obj.body.height = object.height;
+    // });
 
     //octopuses
-    EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
-    octupuses = this.physics.add.group({ key: "octopus" });
-    EnemyLayerOct.forEach((object) => {
-      let octObj = octupuses.create(object.x, object.y, "octopus");
-      octObj.setScale(object.width / 16, object.height / 16);
-      octObj.setOrigin(0);
-      octObj.body.width = object.width;
-      octObj.body.height = object.height;
-      octObj.direction = "UP";
-    });
+    // EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
+    // octupuses = this.physics.add.group({ key: "octopus" });
+    // EnemyLayerOct.forEach((object) => {
+    //   let octObj = octupuses.create(object.x, object.y, "octopus");
+    //   octObj.setScale(object.width / 16, object.height / 16);
+    //   octObj.setOrigin(0);
+    //   octObj.body.width = object.width;
+    //   octObj.body.height = object.height;
+    //   octObj.direction = "UP";
+    // });
     // this.physics.add.collider(octupuses, waterGround);with the ground
     // this.physics.add.collider(octupuses, waterInvis);with the invisible
 
@@ -94,39 +94,39 @@ class Underwater extends Phaser.Scene {
       return false;
     }
 
-    function hitOct(player, octupuses) {
-      gameIsOver();
-    }
+    // function hitOct(player, octupuses) {
+    //   gameIsOver();
+    // }
 
-    function gameIsOver() {
-      gameOver = true;
-      player.die();
-      score = 0;
-    }
+    // function gameIsOver() {
+    //   gameOver = true;
+    //   player.die();
+    //   score = 0;
+    // }
 
     //TOAD
     player = new Toad(this, 100, 400)
       .collideWith()
       .overlapWith(collectibleBubble, collect)
-      .hitEnemy(octupuses, hitOct);
+      .hitEnemy(octupuses); //hitOct);
   }
   update() {
     player.update(this.inputs);
-    for (const oct of octupuses.children.entries) {
-      if (oct.body.blocked.up) {
-        oct.direction = "DOWN";
-        oct.play("octSwimUp", true);
-      }
-      if (oct.body.blocked.down) {
-        oct.direction = "UP";
-        oct.play("octSwimDown", true);
-      }
-      if (oct.direction === "UP") {
-        oct.setVelocityY(100);
-      } else {
-        oct.setVelocityY(-100);
-      }
-    }
+    // for (const oct of octupuses.children.entries) {
+    //   if (oct.body.blocked.up) {
+    //     oct.direction = "DOWN";
+    //     oct.play("octSwimUp", true);
+    //   }
+    //   if (oct.body.blocked.down) {
+    //     oct.direction = "UP";
+    //     oct.play("octSwimDown", true);
+    //   }
+    //   if (oct.direction === "UP") {
+    //     oct.setVelocityY(100);
+    //   } else {
+    //     oct.setVelocityY(-100);
+    //   }
+    // }
   }
 }
 
