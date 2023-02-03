@@ -29,6 +29,9 @@ class Garden extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.image("pipe", "../assets/img/pipe.png");
+    this.load.image("grey-box", "../assets/img/grey_box.png");
+    this.load.image("gear", "../assets/img/gear.png");
+    this.load.image("checkmark", "../assets/img/checkmark.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -49,6 +52,7 @@ class Garden extends Phaser.Scene {
   }
   create() {
     // this.scene.run("hearts");
+    this.scene.run("settingsMenu");
     var music = this.sound.add("garden", { loop: true, volume: 0.1 });
     // music.play();
     this.add.image(960, 240, "background");

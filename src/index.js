@@ -3,6 +3,7 @@ import Forest from "./scenes/Forest";
 import Garden from "./scenes/Garden";
 import Hearts from "./scenes/hearts";
 import SettingsMenu from "./scenes/SettingsMenu";
+import UIScene from "./scenes/UIScene";
 
 const config = {
   type: Phaser.AUTO,
@@ -18,7 +19,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [Garden, Hearts, Forest, SettingsMenu],
+  scene: [Garden, Hearts, Forest, UIScene, SettingsMenu],
 };
 
 new Phaser.Game(config);
