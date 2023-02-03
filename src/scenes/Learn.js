@@ -41,6 +41,11 @@ class Learn extends Phaser.Scene {
       "./assets/img/fox.png",
       "./assets/json/fox_atlas.json"
     );
+    this.load.atlas(
+      "octopus",
+      "./assets/img/oct.png",
+      "./assets/json/oct_atlas.json"
+    );
 
     this.load.on("complete", () => {
       generateAnimations(this);
