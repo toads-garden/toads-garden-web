@@ -10,6 +10,8 @@ var EnemyLayerOct;
 var octupuses;
 var gameOver = false;
 var cameras;
+var pipe;
+
 class Underwater extends Phaser.Scene {
   //platforms;
   constructor() {
@@ -29,6 +31,7 @@ class Underwater extends Phaser.Scene {
     this.load.image("water", "../assets/img/water.png"); //terrain
     this.load.image("bubbles", "../assets/img/bubble_1.png"); //icons
     this.load.tilemapTiledJSON("waterMap", "../assets/json/watermap.json"); //map.json
+    this.load.image("pipe", "../assets/img/pipe.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -52,7 +55,6 @@ class Underwater extends Phaser.Scene {
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
-
     //platforms and ground
     this.add.image(960, 240, "waterbg");
     const waterMap = this.make.tilemap({ key: "waterMap" });
@@ -63,7 +65,7 @@ class Underwater extends Phaser.Scene {
     //const waterInvis = waterMap.createLayer('waterInvis', waterTile).setVisible(false);
     //waterInvis.setCollisionByExclusion(-1);
     waterGround.setCollisionByExclusion(-1);
-
+    let pipe = this.add.image(1850, 420, "pipe");
     //collectibles
     bubbles = this.physics.add.group({
       key: "bubbles",
@@ -144,6 +146,7 @@ class Underwater extends Phaser.Scene {
       frameRate: 20,
     });
     this.physics.add.collider(player, waterGround);
+    this.physics.add.collider(player, bubbles, collect, null, this);
     cursors = this.input.keyboard.createCursorKeys();
     // player = new Toad(this, 100, 400)
     //   .collideWith(waterGround)
@@ -168,6 +171,13 @@ class Underwater extends Phaser.Scene {
 
     if (cursors.up.isDown) {
       player.setVelocityY(-75);
+    }
+
+    var xDifference = Math.abs(Math.floor(player.body.x) - 1853);
+    var yDifference = Math.abs(Math.floor(player.body.y) - 362);
+    var threshhold = 5;
+    if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
+      this.scene.start("Underwater");
     }
     // for (const oct of octupuses.children.entries) {
     //   if (oct.body.blocked.up) {
