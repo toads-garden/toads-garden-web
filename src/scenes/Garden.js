@@ -54,6 +54,11 @@ class Garden extends Phaser.Scene {
       "./assets/img/oct.png",
       "./assets/json/oct_atlas.json"
     );
+    this.load.atlas(
+      "crab",
+      "./assets/img/crab.png",
+      "./assets/json/crab_atlas.json"
+    );
   }
   create() {
     // this.scene.run("hearts");
@@ -86,7 +91,7 @@ class Garden extends Phaser.Scene {
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
     this.inputs = this.input.keyboard.createCursorKeys();
-    // pipe = this.add.image(1850, 410, "pipe").setVisible(false);
+
     cursors = this.input.keyboard.createCursorKeys();
     //bunny
     invisiblePlayer.setCollisionByExclusion(-1);

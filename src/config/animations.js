@@ -96,4 +96,24 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
+  scene.anims.create({
+    key: "crabWalkRight",
+    frames: scene.anims.generateFrameNames("crab", {
+      start: 4,
+      end: 7,
+      prefix: "crab_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
+  scene.anims.create({
+    key: "crabWalkLeft",
+    frames: scene.anims.generateFrameNames("crab", {
+      start: 4,
+      end: 7,
+      prefix: "crab_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
 };
