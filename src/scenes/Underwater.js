@@ -102,7 +102,9 @@ class Underwater extends Phaser.Scene {
       octObj.setScale(object.width / 16, object.height / 16);
       octObj.setOrigin(0);
       octObj.body.width = object.width;
+
       octObj.direction = "DOWN";
+
       octObj.body.height = object.height;
     });
     this.physics.add.collider(octopuses, waterGround);
