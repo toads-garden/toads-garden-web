@@ -56,7 +56,7 @@ class Learn extends Phaser.Scene {
     const y = innerHeight / 2;
     this.add.image(960, 240, "background");
     this.physics.world.setBounds(0, 0, 650, 480);
-    pipe = this.add.image(500, 420, "pipe");
+    pipe = this.add.image(575, 420, "pipe");
     const learnmap = this.make.tilemap({ key: "learnmap" });
     const tileset = learnmap.addTilesetImage("terrain", "tiles");
     const ground = learnmap.createLayer("learn-terrain", tileset);
@@ -67,7 +67,7 @@ class Learn extends Phaser.Scene {
     singlePlat.create(100, 350, "singlePlatform").setScale(2).refreshBody();
     singlePlat.create(300, 300, "singlePlatform").setScale(2).refreshBody();
     singlePlat.create(550, 250, "singlePlatform").setScale(2).refreshBody();
-    singlePlat.create(500, 384, "singlePlatform").setScale(2).setVisible(false);
+    singlePlat.create(575, 384, "singlePlatform").setScale(2).setVisible(false);
     plant = this.physics.add.staticGroup();
     plant.create(100, 200, "plant").setScale(1.5);
     wood = this.physics.add.staticGroup();
