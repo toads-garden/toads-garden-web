@@ -51,6 +51,11 @@ class Garden extends Phaser.Scene {
       "./assets/img/oct.png",
       "./assets/json/oct_atlas.json"
     );
+    this.load.atlas(
+      "crab",
+      "./assets/img/crab.png",
+      "./assets/json/crab_atlas.json"
+    );
   }
   create() {
     // this.scene.run("hearts");
