@@ -177,6 +177,7 @@ class Underwater extends Phaser.Scene {
     this.physics.add.collider(player, waterGround);
     this.physics.add.collider(player, waterPipe);
     this.physics.add.collider(player, bubbles, collect, null, this);
+    this.physics.add.collider(player, octopuses, die, null, this);
     cursors = this.input.keyboard.createCursorKeys();
     // player = new Toad(this, 100, 400)
     //   .collideWith(waterGround)
