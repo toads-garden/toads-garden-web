@@ -8,6 +8,7 @@ var plant;
 var cursors;
 var pipe;
 var singlePlat;
+var introMusic;
 
 class Learn extends Phaser.Scene {
   constructor(data) {
@@ -15,6 +16,8 @@ class Learn extends Phaser.Scene {
   }
   preload() {
     this.load.audio("intro", "../assets/audio/intro.mp3");
+    this.load.image("audioOn", "../assets/img/audioOn.png");
+    this.load.image("audioOff", "../assets/img/audioOff.png");
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("plant", "../assets/img/icons.png");
@@ -59,9 +62,42 @@ class Learn extends Phaser.Scene {
   create(data) {
     const x = innerWidth / 2;
     const y = innerHeight / 2;
+    let click = 0;
     this.add.image(960, 240, "background");
-    var music = this.sound.add("intro", { loop: true, volume: 0.1 });
-    music.play();
+
+    //music
+    var introMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
+    introMusic.play();
+    // let audioOff = this.add.image(600, 75, "audioOff").setScale(0.3);
+    let audioOn = this.add.image(600, 75, "audioOn").setScale(0.3);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        introMusic.stop();
+        audioOn = this.add.image(600, 75, "audioOff");
+        click++;
+      } else {
+        introMusic.play();
+        audioOn = this.add.image(600, 75, "audioOn");
+        click++;
+      }
+      return click;
+    });
+    let audioOff = this.add
+      .image(x + 200, y * 1.85, "audioOff")
+      .setScale(x * 0.0018);
+    audioOff.setInteractive();
+    audioOff.on("pointerup", () => {
+      audioOff = this.add
+        .image(x + 200, y * 1.85, "audioOff")
+        .setScale(x * 0.0018);
+    });
+    audioOff.on("pointerout", () => {
+      audioOff = this.add
+        .image(x + 200, y * 1.85, "audioOff")
+        .setScale(x * 0.0018);
+    });
+
     this.physics.world.setBounds(0, 0, 650, 480);
     pipe = this.add.image(575, 420, "pipe");
     const learnmap = this.make.tilemap({ key: "learnmap" });
@@ -169,7 +205,8 @@ class Learn extends Phaser.Scene {
     var yDifference = Math.abs(Math.floor(player.body.y) - 336);
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold) {
-      this.scene.start("Underwater");
+      this.scene.start("Garden");
+      this.sound.removeByKey("intro");
     }
   }
 
