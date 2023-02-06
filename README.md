@@ -29,7 +29,7 @@ And extra credits to our awesome GHP instructors:
 
 2023 Toads Garden TM -- All Rights Reserved
 
-###Additional Credits:
+## Credits
 
 -Plant Icon: https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack
 
