@@ -5,7 +5,7 @@ class Intro extends Scene {
     super("Intro");
   }
   preload() {
-    this.load.audio("garden", "../assets/audio/garden.mp3");
+    // this.load.audio("intro", "../assets/audio/intro.mp3");
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
@@ -35,6 +35,8 @@ class Intro extends Scene {
     const x = innerWidth / 2;
     const y = innerHeight / 2;
     this.add.image(960, 240, "background");
+    // var music = this.sound.add("intro", { loop: true, volume: 0.1 });
+    // music.play();
 
     //Text
     this.story = this.add
