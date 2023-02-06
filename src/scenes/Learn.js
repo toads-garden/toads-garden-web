@@ -162,7 +162,7 @@ class Learn extends Phaser.Scene {
     var yDifference = Math.abs(Math.floor(player.body.y) - 336);
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold) {
-      this.scene.start("Garden");
+      this.scene.start("Underwater");
     }
   }
 
