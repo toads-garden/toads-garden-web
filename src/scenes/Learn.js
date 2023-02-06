@@ -19,7 +19,7 @@ class Learn extends Phaser.Scene {
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("plant", "../assets/img/icons.png");
     this.load.image("play-btn", "../assets/img/playButton.png");
-    this.load.tilemapTiledJSON("map", "../assets/json/map.json");
+    this.load.tilemapTiledJSON("learnmap", "../assets/json/learnmap.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.image("wood", "../assets/img/wood.png");
     this.load.image("pipe", "../assets/img/pipe.png");
@@ -56,10 +56,10 @@ class Learn extends Phaser.Scene {
     const y = innerHeight / 2;
     this.add.image(960, 240, "background");
     this.physics.world.setBounds(0, 0, 650, 480);
-    pipe = this.add.image(500, 420, "pipe");
-    const map = this.make.tilemap({ key: "map" });
-    const tileset = map.addTilesetImage("terrain", "tiles");
-    const ground = map.createLayer("ground", tileset);
+    pipe = this.add.image(575, 420, "pipe");
+    const learnmap = this.make.tilemap({ key: "learnmap" });
+    const tileset = learnmap.addTilesetImage("terrain", "tiles");
+    const ground = learnmap.createLayer("learn-terrain", tileset);
     // platforms.setCollisionByExclusion(-1);
 
     ground.setCollisionByExclusion(-1);
@@ -67,7 +67,7 @@ class Learn extends Phaser.Scene {
     singlePlat.create(100, 350, "singlePlatform").setScale(2).refreshBody();
     singlePlat.create(300, 300, "singlePlatform").setScale(2).refreshBody();
     singlePlat.create(550, 250, "singlePlatform").setScale(2).refreshBody();
-    singlePlat.create(500, 384, "singlePlatform").setScale(2).setVisible(false);
+    singlePlat.create(575, 384, "singlePlatform").setScale(2).setVisible(false);
     plant = this.physics.add.staticGroup();
     plant.create(100, 200, "plant").setScale(1.5);
     wood = this.physics.add.staticGroup();
