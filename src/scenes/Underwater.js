@@ -102,8 +102,8 @@ class Underwater extends Phaser.Scene {
       octObj.setScale(object.width / 16, object.height / 16);
       octObj.setOrigin(0);
       octObj.body.width = object.width;
-      octObj.body.height = object.height;
       octObj.direction = "UP";
+      octObj.body.height = object.height;
     });
     this.physics.add.collider(octupuses, waterGround);
     this.physics.add.collider(octupuses, invisEnemyBlock);
@@ -113,11 +113,11 @@ class Underwater extends Phaser.Scene {
     crabs = this.physics.add.group({ key: "crab" });
     EnemyLayerCrab.forEach((object) => {
       let crabObj = crabs.create(object.x, object.y, "crab");
-      crabObj.setScale(object.width, object.height);
+      crabObj.setScale(object.width / 16, object.height / 16);
       crabObj.setOrigin(0);
       crabObj.body.width = object.width;
-      crabObj.body.height = object.height;
       crabObj.direction = "RIGHT";
+      crabObj.body.height = object.height;
     });
     this.physics.add.collider(crabs, waterGround);
     this.physics.add.collider(crabs, invisEnemyBlock);
@@ -198,11 +198,11 @@ class Underwater extends Phaser.Scene {
         crab.direction = "RIGHT";
         crab.play("crabWalkLeft", true);
       }
-      if (crab.body.blocked.down) {
+      if (crab.body.blocked.right) {
         crab.direction = "LEFT";
         crab.play("crabWalkRight", true);
       }
-      if (crab.direction === "UP") {
+      if (crab.direction === "RIGHT") {
         crab.setVelocityX(100).setFlipX(false);
       } else {
         crab.setVelocityX(-100).setFlipX(true);
