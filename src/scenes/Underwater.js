@@ -66,6 +66,9 @@ class Underwater extends Phaser.Scene {
     this.add.image(960, 240, "waterbg");
     const waterMap = this.make.tilemap({ key: "waterMap" });
     const waterTile = waterMap.addTilesetImage("water", "water");
+    const waterPipe = waterMap
+      .createLayer("water-pipe", waterTile)
+      .setVisible(false);
     const waterGround = waterMap
       .createLayer("water-ground", waterTile)
       .setVisible(false);
@@ -73,6 +76,7 @@ class Underwater extends Phaser.Scene {
       .createLayer("invisEnemyBlock", waterTile)
       .setVisible(false);
     invisEnemyBlock.setCollisionByExclusion(-1);
+    waterPipe.setCollisionByExclusion(-1);
     waterGround.setCollisionByExclusion(-1);
     let pipe = this.add.image(1850, 420, "pipe");
     //collectibles
@@ -93,7 +97,7 @@ class Underwater extends Phaser.Scene {
       child.setBounceY(Phaser.Math.FloatBetween(0.9, 1));
     });
     this.physics.add.collider(bubbles, waterGround);
-
+    this.physics.add.collider(bubbles, waterPipe);
     //octopuses
     EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
     octopuses = this.physics.add.group({ key: "octopus" });
@@ -171,6 +175,7 @@ class Underwater extends Phaser.Scene {
       frameRate: 20,
     });
     this.physics.add.collider(player, waterGround);
+    this.physics.add.collider(player, waterPipe);
     this.physics.add.collider(player, bubbles, collect, null, this);
     cursors = this.input.keyboard.createCursorKeys();
     // player = new Toad(this, 100, 400)
