@@ -182,6 +182,15 @@ class Underwater extends Phaser.Scene {
     //   .collideWith(waterGround)
     //   .overlapWith(collectibleBubble, collect)
     //   .hitEnemy(octopuses); //hitOct);
+    function die(player) {
+      player.setTint(0xff0000);
+      this.cameras.main.fade(800);
+      player.setVelocity(0, -500);
+      function restart() {
+        this.scene.restart();
+      }
+      this.time.delayedCall(800, restart, [], this);
+    }
   }
   update() {
     // player.update(this.inputs);
