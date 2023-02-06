@@ -102,11 +102,25 @@ class Underwater extends Phaser.Scene {
       octObj.setScale(object.width / 16, object.height / 16);
       octObj.setOrigin(0);
       octObj.body.width = object.width;
-      octObj.body.height = object.height;
       octObj.direction = "UP";
+      octObj.body.height = object.height;
     });
     this.physics.add.collider(octupuses, waterGround);
     this.physics.add.collider(octupuses, invisEnemyBlock);
+
+    //crabs
+    EnemyLayerCrab = waterMap.getObjectLayer("EnemyLayerCrab")["objects"];
+    crabs = this.physics.add.group({ key: "crab" });
+    EnemyLayerCrab.forEach((object) => {
+      let crabObj = crabs.create(object.x, object.y, "crab");
+      crabObj.setScale(object.width / 16, object.height / 16);
+      crabObj.setOrigin(0);
+      crabObj.body.width = object.width;
+      crabObj.direction = "RIGHT";
+      crabObj.body.height = object.height;
+    });
+    this.physics.add.collider(crabs, waterGround);
+    this.physics.add.collider(crabs, invisEnemyBlock);
 
     //score
     text = this.add.text(0, 0, `Bubbles Collected: ${score}`, {
@@ -164,6 +178,36 @@ class Underwater extends Phaser.Scene {
   }
   update() {
     // player.update(this.inputs);
+    for (const oct of octupuses.children.entries) {
+      if (oct.body.blocked.up) {
+        oct.direction = "DOWN";
+        oct.play("octSwimUp", true);
+      }
+      if (oct.body.blocked.down) {
+        oct.direction = "UP";
+        oct.play("octSwimDown", true);
+      }
+      if (oct.direction === "UP") {
+        oct.setVelocityY(100);
+      } else {
+        oct.setVelocityY(-100);
+      }
+    }
+    for (const crab of crabs.children.entries) {
+      if (crab.body.blocked.left) {
+        crab.direction = "RIGHT";
+        crab.play("crabWalkLeft", true);
+      }
+      if (crab.body.blocked.right) {
+        crab.direction = "LEFT";
+        crab.play("crabWalkRight", true);
+      }
+      if (crab.direction === "RIGHT") {
+        crab.setVelocityX(100).setFlipX(false);
+      } else {
+        crab.setVelocityX(-100).setFlipX(true);
+      }
+    }
     if (cursors.left.isDown) {
       player.setVelocityX(-100).setFlipX(true);
 
@@ -181,27 +225,15 @@ class Underwater extends Phaser.Scene {
     if (cursors.up.isDown) {
       player.setVelocityY(-75);
     }
+    if (cursors.down.isDown) {
+      player.setVelocityY(75);
+    }
 
     var xDifference = Math.abs(Math.floor(player.body.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.body.y) - 362);
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Underwater");
-    }
-    for (const oct of octupuses.children.entries) {
-      if (oct.body.blocked.up) {
-        oct.direction = "DOWN";
-        oct.play("octSwimUp", true);
-      }
-      if (oct.body.blocked.down) {
-        oct.direction = "UP";
-        oct.play("octSwimDown", true);
-      }
-      if (oct.direction === "UP") {
-        oct.setVelocityY(100);
-      } else {
-        oct.setVelocityY(-100);
-      }
     }
   }
 }
