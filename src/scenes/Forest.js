@@ -11,6 +11,7 @@ var collectibleWood;
 var EnemyLayerFox;
 var foxes;
 var gameOver = false;
+var forestMusic;
 
 class Forest extends Phaser.Scene {
   //platforms;
@@ -18,7 +19,7 @@ class Forest extends Phaser.Scene {
     super("Forest");
   }
   preload() {
-    //this.load.audio("forest"); //forest audio
+    this.load.audio("forest", "../assets/audio/forest.mp3"); //forest audio
     this.load.image("forest", "../assets/img/forest.png"); //background
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
     this.load.image("wood", "../assets/img/wood.png"); //icons
@@ -51,8 +52,9 @@ class Forest extends Phaser.Scene {
   }
 
   create() {
-    //var music = this.sound.add("forest", { loop: true, volume: 0.1 });
-    //music.play();
+    //music
+    var forestMusic = this.sound.add("forest", { loop: true, volume: 0.1 });
+    forestMusic.play();
 
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
@@ -158,6 +160,7 @@ class Forest extends Phaser.Scene {
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Underwater");
       score = 0;
+      this.sound.removeByKey("forest");
     }
   }
 }

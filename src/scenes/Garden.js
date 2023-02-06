@@ -11,6 +11,8 @@ var collectibles;
 var score = 0;
 var text;
 var bunnies;
+var gardenMusic;
+
 // var scene;
 var gameOver = false;
 class Garden extends Phaser.Scene {
@@ -63,8 +65,8 @@ class Garden extends Phaser.Scene {
   create() {
     // this.scene.run("hearts");
     this.scene.run("settingsMenu");
-    var music = this.sound.add("garden", { loop: true, volume: 0.1 });
-    // music.play();
+    var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
+    gardenMusic.play();
     this.add.image(960, 240, "background");
     let pipe = this.add.image(1850, 420, "pipe");
     const map = this.make.tilemap({ key: "map" });
@@ -193,6 +195,7 @@ class Garden extends Phaser.Scene {
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Forest");
+      this.sound.removeByKey("garden");
     }
     //
   }

@@ -8,6 +8,7 @@ var plant;
 var cursors;
 var pipe;
 var singlePlat;
+var introMusic;
 
 class Learn extends Phaser.Scene {
   constructor(data) {
@@ -60,8 +61,8 @@ class Learn extends Phaser.Scene {
     const x = innerWidth / 2;
     const y = innerHeight / 2;
     this.add.image(960, 240, "background");
-    var music = this.sound.add("intro", { loop: true, volume: 0.1 });
-    music.play();
+    var introMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
+    introMusic.play();
     this.physics.world.setBounds(0, 0, 650, 480);
     pipe = this.add.image(575, 420, "pipe");
     const learnmap = this.make.tilemap({ key: "learnmap" });
@@ -169,7 +170,8 @@ class Learn extends Phaser.Scene {
     var yDifference = Math.abs(Math.floor(player.body.y) - 336);
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold) {
-      this.scene.start("Underwater");
+      this.scene.start("Garden");
+      this.sound.removeByKey("intro");
     }
   }
 
