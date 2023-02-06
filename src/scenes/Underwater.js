@@ -15,14 +15,22 @@ var gameOver = false;
 class Underwater extends Phaser.Scene {
   //platforms;
   constructor() {
-    super("Underwater");
+    super({
+      key: "Underwater",
+      physics: {
+        default: "arcade",
+        arcade: {
+          gravity: { y: 50 },
+        },
+      },
+    });
   }
   preload() {
     //this.load.audio('underwater'); //underwater audio
-    this.load.image("water", "../assets/img/water2.png"); //background
-    // this.load.image(""); //terrain
+    this.load.image("waterbg", "../assets/img/waterbg.png"); //background
+    this.load.image("water", "../assets/img/water.png"); //terrain
     // this.load.image("bubbles", "../assets/img/map_97.png"); //icons
-    // this.load.tilemapTiledJSON(""); //map.json
+    this.load.tilemapTiledJSON("waterMap", "../assets/json/watermap.json"); //map.json
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -47,13 +55,15 @@ class Underwater extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     //platforms and ground
-    this.add.image(960, 240, "water");
-    // const waterMap = this.make.tilemap({ key: "waterMap" });
-    // const waterTile = waterMap.addTilesetImage('');
-    //const waterGround = waterMap.createLayer('');
+    this.add.image(960, 240, "waterbg");
+    const waterMap = this.make.tilemap({ key: "waterMap" });
+    const waterTile = waterMap.addTilesetImage("water", "water");
+    const waterGround = waterMap
+      .createLayer("water-ground", waterTile)
+      .setVisible(false);
     //const waterInvis = waterMap.createLayer('waterInvis', waterTile).setVisible(false);
     //waterInvis.setCollisionByExclusion(-1);
-    //waterGround.setCollisionByExclusion(-1);
+    waterGround.setCollisionByExclusion(-1);
 
     //collectibles
     // collectibleBubble = this.physics.add.staticGroup();
@@ -106,7 +116,7 @@ class Underwater extends Phaser.Scene {
 
     //TOAD
     player = new Toad(this, 100, 400)
-      .collideWith()
+      .collideWith(waterGround)
       .overlapWith(collectibleBubble, collect)
       .hitEnemy(octupuses); //hitOct);
   }
