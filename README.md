@@ -24,7 +24,7 @@ Huge thanks to our awesome developers:
 And extra credits to our awesome GHP instructors:
 
 - Kara Cavanaugh
-- Sara Lozier
+- Sarah Lozier
 - Maxiel Mrvaljevic
 
 2023 Toads Garden TM -- All Rights Reserved
