@@ -6,8 +6,10 @@ var player;
 var score = 0;
 var text;
 var bubbles;
+var EnemyLayerCrab;
 var EnemyLayerOct;
 var octupuses;
+var crabs;
 var gameOver = false;
 var cameras;
 var pipe;
@@ -46,6 +48,11 @@ class Underwater extends Phaser.Scene {
       "./assets/img/oct.png",
       "./assets/json/oct_atlas.json"
     ); //octupus
+    this.load.atlas(
+      "crab",
+      "./assets/img/crab.png",
+      "./assets/json/crab_atlas.json"
+    );
   }
   create() {
     //var music = this.sound.add('underwater', {loop: true, volume:0.1});
@@ -62,8 +69,10 @@ class Underwater extends Phaser.Scene {
     const waterGround = waterMap
       .createLayer("water-ground", waterTile)
       .setVisible(false);
-    //const waterInvis = waterMap.createLayer('waterInvis', waterTile).setVisible(false);
-    //waterInvis.setCollisionByExclusion(-1);
+    const invisEnemyBlock = waterMap
+      .createLayer("invisEnemyBlock", waterTile)
+      .setVisible(false);
+    invisEnemyBlock.setCollisionByExclusion(-1);
     waterGround.setCollisionByExclusion(-1);
     let pipe = this.add.image(1850, 420, "pipe");
     //collectibles
@@ -86,18 +95,18 @@ class Underwater extends Phaser.Scene {
     this.physics.add.collider(bubbles, waterGround);
 
     //octopuses
-    // EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
-    // octupuses = this.physics.add.group({ key: "octopus" });
-    // EnemyLayerOct.forEach((object) => {
-    //   let octObj = octupuses.create(object.x, object.y, "octopus");
-    //   octObj.setScale(object.width / 16, object.height / 16);
-    //   octObj.setOrigin(0);
-    //   octObj.body.width = object.width;
-    //   octObj.body.height = object.height;
-    //   octObj.direction = "UP";
-    // });
-    // this.physics.add.collider(octupuses, waterGround);with the ground
-    // this.physics.add.collider(octupuses, waterInvis);with the invisible
+    EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
+    octupuses = this.physics.add.group({ key: "octopus" });
+    EnemyLayerOct.forEach((object) => {
+      let octObj = octupuses.create(object.x, object.y, "octopus");
+      octObj.setScale(object.width / 16, object.height / 16);
+      octObj.setOrigin(0);
+      octObj.body.width = object.width;
+      octObj.body.height = object.height;
+      octObj.direction = "UP";
+    });
+    this.physics.add.collider(octupuses, waterGround);
+    this.physics.add.collider(octupuses, invisEnemyBlock);
 
     //score
     text = this.add.text(0, 0, `Bubbles Collected: ${score}`, {
@@ -179,21 +188,21 @@ class Underwater extends Phaser.Scene {
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Underwater");
     }
-    // for (const oct of octupuses.children.entries) {
-    //   if (oct.body.blocked.up) {
-    //     oct.direction = "DOWN";
-    //     oct.play("octSwimUp", true);
-    //   }
-    //   if (oct.body.blocked.down) {
-    //     oct.direction = "UP";
-    //     oct.play("octSwimDown", true);
-    //   }
-    //   if (oct.direction === "UP") {
-    //     oct.setVelocityY(100);
-    //   } else {
-    //     oct.setVelocityY(-100);
-    //   }
-    // }
+    for (const oct of octupuses.children.entries) {
+      if (oct.body.blocked.up) {
+        oct.direction = "DOWN";
+        oct.play("octSwimUp", true);
+      }
+      if (oct.body.blocked.down) {
+        oct.direction = "UP";
+        oct.play("octSwimDown", true);
+      }
+      if (oct.direction === "UP") {
+        oct.setVelocityY(100);
+      } else {
+        oct.setVelocityY(-100);
+      }
+    }
   }
 }
 
