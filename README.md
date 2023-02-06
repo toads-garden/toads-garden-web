@@ -6,7 +6,7 @@
 
 Toadette is a modern-day heroine - she wants her village to have access to affordable housing, free healthcare, and a clean water.
 
-Follow them through 3 mystical worlds: a secret garden, underwater oasis, and Enchanted Forest. On each unique world, they will collect magic tokens to help their village friends, and avoid weary enemies - corporate greed in animated form - along the way.
+Follow them through 3 mystical worlds: a Secret Garden, Enchanted Forest, and an Underwater Oasis. On each unique world, they will collect magic tokens to help their village friends, and avoid weary enemies - corporate greed in animated form - along the way.
 
 ## How to play
 
