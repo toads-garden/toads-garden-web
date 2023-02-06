@@ -225,6 +225,9 @@ class Underwater extends Phaser.Scene {
     if (cursors.up.isDown) {
       player.setVelocityY(-75);
     }
+    if (cursors.down.isDown) {
+      player.setVelocityY(75);
+    }
 
     var xDifference = Math.abs(Math.floor(player.body.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.body.y) - 362);
