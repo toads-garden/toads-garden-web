@@ -71,7 +71,7 @@ class Learn extends Phaser.Scene {
     plant = this.physics.add.staticGroup();
     plant.create(100, 200, "plant").setScale(1.5);
     wood = this.physics.add.staticGroup();
-    wood.create(400, 300, "wood").setScale(1.5);
+    wood.create(300, 400, "wood").setScale(1.5);
 
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
@@ -158,7 +158,7 @@ class Learn extends Phaser.Scene {
       player.setVelocityY(-250);
     }
 
-    var xDifference = Math.abs(Math.floor(player.body.x) - 479);
+    var xDifference = Math.abs(Math.floor(player.body.x) - 548);
     var yDifference = Math.abs(Math.floor(player.body.y) - 336);
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold) {
