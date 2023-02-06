@@ -29,24 +29,24 @@ And extra credits to our awesome GHP instructors:
 
 2023 Toads Garden TM -- All Rights Reserved
 
-###Additional Credits:
+## Additional Credits
 
--Plant Icon: https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack
+- Plant Icon: https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack
 
--Character Sprite: https://caz-creates-games.itch.io/cute-mushroom-character-sprite
+- Character Sprite: https://caz-creates-games.itch.io/cute-mushroom-character-sprite
 
--Tileset: https://pixelfrog-assets.itch.io/pixel-adventure-1
+- Tileset: https://pixelfrog-assets.itch.io/pixel-adventure-1
 
--Forest Background: https://lornn.itch.io/fantasy-forest-backgrounds
+- Forest Background: https://lornn.itch.io/fantasy-forest-backgrounds
 
--Forest Tileset: https://szadiart.itch.io/platformer-fantasy-set1
+- Forest Tileset: https://szadiart.itch.io/platformer-fantasy-set1
 
--Wood Icon: https://clockworkraven.itch.io/rpg-icon-pack-crafting-materials
+- Wood Icon: https://clockworkraven.itch.io/rpg-icon-pack-crafting-materials
 
--Underwater Background: https://ansimuz.itch.io/underwater-fantasy-pixel-art-environment
+- Underwater Background: https://ansimuz.itch.io/underwater-fantasy-pixel-art-environment
 
--Water Tileset: https://ninjikin.itch.io/water
+- Water Tileset: https://ninjikin.itch.io/water
 
--Fox Sprite: https://elthen.itch.io/2d-pixel-art-fox-sprites
+- Fox Sprite: https://elthen.itch.io/2d-pixel-art-fox-sprites
 
--Mushroom Tiles: https://dreamgryphon.itch.io/landscapes
+- Mushroom Tiles: https://dreamgryphon.itch.io/landscapes

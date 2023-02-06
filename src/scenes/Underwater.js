@@ -1,13 +1,11 @@
 import Phaser from "Phaser";
 import generateAnimations from "../config/animations";
-import { Toad } from "../gameObjects/Toad";
 
 var cursors;
 var player;
 var score = 0;
 var text;
-var bubbleLayer;
-var collectibleBubble;
+var bubbles;
 var EnemyLayerOct;
 var octupuses;
 var gameOver = false;
@@ -29,7 +27,7 @@ class Underwater extends Phaser.Scene {
     //this.load.audio('underwater'); //underwater audio
     this.load.image("waterbg", "../assets/img/waterbg.png"); //background
     this.load.image("water", "../assets/img/water.png"); //terrain
-    // this.load.image("bubbles", "../assets/img/map_97.png"); //icons
+    this.load.image("bubbles", "../assets/img/bubble_1.png"); //icons
     this.load.tilemapTiledJSON("waterMap", "../assets/json/watermap.json"); //map.json
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
@@ -67,15 +65,23 @@ class Underwater extends Phaser.Scene {
     waterGround.setCollisionByExclusion(-1);
 
     //collectibles
-    // collectibleBubble = this.physics.add.staticGroup();
-    // bubbleLayer = waterMap.getObjectLayer("bubbleLayer")["objects"];
-    // bubbleLayer.forest((object) => {
-    //   let obj = collectibleBubble.create(object.x, object.y, "bubbles");
-    //   obj.setScale(object.width, object.height);
-    //   obj.setOrigin(0);
-    //   obj.body.width = object.width;
-    //   obj.body.height = object.height;
-    // });
+    bubbles = this.physics.add.group({
+      key: "bubbles",
+    });
+    function createBubbles() {
+      bubbles.create(
+        100 + Math.random() * 1920,
+        100 + Math.random() * 300,
+        "bubbles"
+      );
+    }
+    for (let i = 0; i < 15; i++) {
+      createBubbles();
+    }
+    bubbles.children.iterate(function (child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.9, 1));
+    });
+    this.physics.add.collider(bubbles, waterGround);
 
     //octopuses
     // EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
