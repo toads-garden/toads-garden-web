@@ -115,13 +115,52 @@ class Underwater extends Phaser.Scene {
     // }
 
     //TOAD
-    player = new Toad(this, 100, 400)
-      .collideWith(waterGround)
-      .overlapWith(collectibleBubble, collect)
-      .hitEnemy(octupuses); //hitOct);
+    player = this.physics.add.sprite(100, 400, "toad");
+    player.setCollideWorldBounds("true");
+    player.setBounce(0.2);
+    this.anims.create({
+      key: "right",
+      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "left",
+      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "turn",
+      frames: [{ key: "toad", frame: 0 }],
+      frameRate: 20,
+    });
+    this.physics.add.collider(player, waterGround);
+    cursors = this.input.keyboard.createCursorKeys();
+    // player = new Toad(this, 100, 400)
+    //   .collideWith(waterGround)
+    //   .overlapWith(collectibleBubble, collect)
+    //   .hitEnemy(octupuses); //hitOct);
   }
   update() {
-    player.update(this.inputs);
+    // player.update(this.inputs);
+    if (cursors.left.isDown) {
+      player.setVelocityX(-100).setFlipX(true);
+
+      player.anims.play("left", true);
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(100).setFlipX(false);
+
+      player.anims.play("right", true);
+    } else {
+      player.setVelocityX(0);
+
+      player.anims.play("turn");
+    }
+
+    if (cursors.up.isDown) {
+      player.setVelocityY(-75);
+    }
     // for (const oct of octupuses.children.entries) {
     //   if (oct.body.blocked.up) {
     //     oct.direction = "DOWN";
