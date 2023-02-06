@@ -9,7 +9,7 @@ var bubbles;
 var EnemyLayerOct;
 var octupuses;
 var gameOver = false;
-
+var cameras;
 class Underwater extends Phaser.Scene {
   //platforms;
   constructor() {
@@ -47,7 +47,8 @@ class Underwater extends Phaser.Scene {
   create() {
     //var music = this.sound.add('underwater', {loop: true, volume:0.1});
     //music.play();
-
+    this.cameras.main.setBounds(0, 0, 1920, 480);
+    this.physics.world.setBounds(0, 0, 1920, 480);
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
@@ -124,6 +125,7 @@ class Underwater extends Phaser.Scene {
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
+    this.cameras.main.startFollow(player, true, 0.08, 0.08);
     this.anims.create({
       key: "right",
       frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
