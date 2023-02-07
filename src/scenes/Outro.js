@@ -35,7 +35,6 @@ class Outro extends Phaser.Scene {
     //   frameWidth: 48,
     //   frameHeight: 44,
     // });
-
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",

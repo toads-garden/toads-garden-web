@@ -19,10 +19,15 @@ class Town extends Phaser.Scene {
     this.load.tilemapTiledJSON("townBeta", "../assets/json/townBeta.json");
     this.load.image("townTiles", "../assets/img/townTiles.png");
     // this.load.image("pipe", "../assets/img/pipe.png");
-    this.load.spritesheet("toad", "assets/img/toad.png", {
-      frameWidth: 48,
-      frameHeight: 44,
-    });
+    this.load.spritesheet(
+      "townMushroomSprite",
+      "assets/img/townMushroomSprite.png",
+      {
+        frameWidth: 48,
+        frameHeight: 49,
+      }
+    );
+    // this.load.atlas("toad", "./assets/img/toad.png", "./assets/json/toad.json");
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",
@@ -93,25 +98,53 @@ class Town extends Phaser.Scene {
     const bridges = townMap.createLayer("Bridges", tileset);
     const houses = townMap.createLayer("Houses", tileset);
 
-    player = this.physics.add.sprite(100, 400, "toad");
+    player = this.physics.add.sprite(100, 400, "townMushroomSprite");
     player.setCollideWorldBounds("true");
     // player.setBounce(0.2);
     this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
+      key: "idle",
+      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+        start: 1,
+        end: 1,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "down",
+      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+        start: 0,
+        end: 2,
+      }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: "left",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
+      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+        start: 3,
+        end: 5,
+      }),
+      frameRate: 20,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "right",
+      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+        start: 6,
+        end: 8,
+      }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
-      key: "turn",
-      frames: [{ key: "toad", frame: 0 }],
-      frameRate: 20,
+      key: "up",
+      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+        start: 9,
+        end: 11,
+      }),
+      frameRate: 10,
+      repeat: -1,
     });
 
     cursors = this.input.keyboard.createCursorKeys();
