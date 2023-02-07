@@ -1,6 +1,3 @@
-// import { Sprite } from "Phaser";
-// var cursors;
-var count = 0;
 export class Toad extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, hp = null, heartCount = null) {
     super(scene, x, y, "toad");
@@ -8,7 +5,6 @@ export class Toad extends Phaser.GameObjects.Sprite {
     this.scene = scene;
     this.sprite = this.scene.physics.add.sprite(x, y, "toad");
     this.sprite.isDed = false;
-    // this.gameOver = false;
 
     this.sprite.setCollideWorldBounds(true);
     this.sprite.setBounce(0.2);
@@ -21,14 +17,10 @@ export class Toad extends Phaser.GameObjects.Sprite {
         scene.game.config.height
       );
     }
-    // this.init();
-    // this.create();
+
     return this;
   }
-  // init() {
-  //   this.max_hp = 3;
-  //   this.real_bar;
-  // }
+
   collideWith(gameObject) {
     this.collider = this.scene.physics.add.collider(this.sprite, gameObject);
     return this;
@@ -77,7 +69,6 @@ export class Toad extends Phaser.GameObjects.Sprite {
       this.sprite.play("left", true);
       this.reFollowPlayer();
       this.sprite.setTint(0xffffff);
-      // this.scene.cameras.main.stopFollow(this.sprite);
     } else if (input.right.isDown) {
       this.sprite.setVelocityX(200).setFlipX(false);
       this.sprite.play("right", true);
@@ -94,28 +85,8 @@ export class Toad extends Phaser.GameObjects.Sprite {
       this.sprite.setTint(0xffffff);
     }
   }
-  // gameOver() {
-  //   this.sprite.die();
-  //   // this.scene.cameras.main.on("camerafadeoutcomplete", (camera, effect) =>
-  //   //   this.scene.restart()
-  //   // );
-  //   // this.scene.cameras.main.on(
-  //   //   "camerashakecomplete",
-  //   //   (camera, effect) => camera.fade(500)
-  //   // );
-  //   // this.scene.cameras.main.on("camerafadeoutcomplete", (camera, effect) =>
-  //   //   scene.restart()
-  //   // );
-  //   // this.scene.cameras.main.on(
-  //   //   Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
-  //   //   () => {
-  //   //     this.scene.restart();
-  //   //   }
-  //   // );
-  // }
 
   die() {
-    count++;
     this.sprite.setTint(0xff0000);
     this.sprite.isDed = true;
     this.sprite.setVelocity(0, -500);
@@ -123,33 +94,9 @@ export class Toad extends Phaser.GameObjects.Sprite {
     this.sprite.setCollideWorldBounds("false");
     this.scene.physics.world.removeCollider(this.scene.collider);
 
-    console.log(count);
     function restart() {
       this.scene.scene.restart();
-      console.log("restart");
     }
     this.scene.time.delayedCall(800, restart, [], this);
-    // this.scene.scene.stop();
-    // this.scene.scene.start();
-    // this.input.on("up", () => this.scene.start("garden"));
-    // this.scene.restart;
-    // this.scene.cameras.main.on(
-    //   "camerafadeoutcomplete",
-    //   (camera, effect) => this.scene.events.start
-    // );
-    // var playbtn = this.add.dom(390, 600).createFromCache("play-btn");
-
-    // playbtn.setPerspective(600);
-
-    // playbtn.addListener("click");
-    // playbtn.on("click", (event) => {
-    //   this.scene.restart();
-    // });
-    // this.tweens.add({
-    //   targets: playbtn,
-    //   y: 300,
-    //   duration: 3000,
-    //   ease: "Power3",
-    // });
   }
 }

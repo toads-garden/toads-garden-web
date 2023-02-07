@@ -16,16 +16,7 @@ export default (scene) => {
     frames: [{ key: "toad", frame: 0 }],
     frameRate: 20,
   });
-  // scene.anims.create({
-  //   key: "bunnyIdle",
-  //   frames: scene.anims.generateFrameNames("bunny", {
-  //     start: 0,
-  //     end: 5,
-  //     prefix: "bunny-sheet_",
-  //   }),
-  //   repeat: -1,
-  //   frameRate: 10,
-  // });
+
   scene.anims.create({
     key: "bunnyRunLeft",
     frames: scene.anims.generateFrameNames("bunny", {
