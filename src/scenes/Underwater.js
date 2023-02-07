@@ -107,7 +107,7 @@ class Underwater extends Phaser.Scene {
 
     //music
     let click = 0;
-    var collectSound = this.sound.add("collect", { loop: true, volume: 0.5 });
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
     var waterMusic = this.sound.add("water", { loop: true, volume: 0.1 });
     waterMusic.play();
     let audioOn = this.add
