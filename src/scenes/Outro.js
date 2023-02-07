@@ -133,7 +133,7 @@ class Outro extends Phaser.Scene {
     octPop = this.physics.add.sprite(300, 40, "octopus").setScale(2);
     octPop.play("octShow");
     octPop.setCollideWorldBounds("true");
-    player = this.physics.add.sprite(100, 400, "toad");
+    player = this.physics.add.sprite(80, 250, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
     this.physics.add.collider(player, terrain);
@@ -159,6 +159,8 @@ class Outro extends Phaser.Scene {
   }
 
   update() {
+    //55 350
+    console.log(player.body.y);
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
 
