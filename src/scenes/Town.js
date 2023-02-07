@@ -5,6 +5,11 @@ var player;
 var cursors;
 var pipe;
 var townMusic;
+var townMushroom;
+var bunny;
+var fox;
+var octopus;
+var crab;
 
 class Town extends Phaser.Scene {
   constructor(data) {
@@ -18,6 +23,7 @@ class Town extends Phaser.Scene {
     this.load.image("audioOff", "../assets/img/audioOff.png");
     this.load.tilemapTiledJSON("townBeta", "../assets/json/townBeta.json");
     this.load.image("townTiles", "../assets/img/townTiles.png");
+    this.load.image("townBeta", "../assets/img/townBeta.png");
     // this.load.image("pipe", "../assets/img/pipe.png");
     this.load.spritesheet(
       "townMushroomSprite",
@@ -26,6 +32,11 @@ class Town extends Phaser.Scene {
         frameWidth: 48,
         frameHeight: 49,
       }
+    );
+    this.load.atlas(
+      "townMushroom",
+      "./assets/img/townMushroomSprite.png",
+      "./assets/json/townMushroom.json"
     );
     this.load.atlas("toad", "./assets/img/toad.png", "./assets/json/toad.json");
     this.load.atlas(
@@ -60,6 +71,8 @@ class Town extends Phaser.Scene {
   }
 
   create() {
+    this.add.image(325, 240, "townBeta");
+
     //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
@@ -84,7 +97,7 @@ class Town extends Phaser.Scene {
       return click;
     });
 
-    // this.physics.world.setBounds(0, 0, 650, 480);
+    this.physics.world.setBounds(0, 0, 650, 480);
     // pipe = this.add.image(575, 420, "pipe");
     const townMap = this.make.tilemap({ key: "townBeta" });
     const tileset = townMap.addTilesetImage("townTiles", "townTiles");
@@ -98,12 +111,12 @@ class Town extends Phaser.Scene {
     const bridges = townMap.createLayer("Bridges", tileset);
     const houses = townMap.createLayer("Houses", tileset);
 
-    player = this.physics.add.sprite(100, 400, "townMushroomSprite");
+    player = this.physics.add.sprite(300, 300, "townMushroom");
     player.setCollideWorldBounds("true");
     // player.setBounce(0.2);
     this.anims.create({
       key: "idle",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+      frames: this.anims.generateFrameNumbers("townMushroom_", {
         start: 1,
         end: 1,
       }),
@@ -112,7 +125,7 @@ class Town extends Phaser.Scene {
     });
     this.anims.create({
       key: "down",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+      frames: this.anims.generateFrameNumbers("townMushroom_", {
         start: 0,
         end: 2,
       }),
@@ -121,7 +134,7 @@ class Town extends Phaser.Scene {
     });
     this.anims.create({
       key: "left",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+      frames: this.anims.generateFrameNumbers("townMushroom_", {
         start: 3,
         end: 5,
       }),
@@ -130,7 +143,7 @@ class Town extends Phaser.Scene {
     });
     this.anims.create({
       key: "right",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+      frames: this.anims.generateFrameNumbers("townMushroom_", {
         start: 6,
         end: 8,
       }),
@@ -139,7 +152,7 @@ class Town extends Phaser.Scene {
     });
     this.anims.create({
       key: "up",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
+      frames: this.anims.generateFrameNumbers("townMushroom_", {
         start: 9,
         end: 11,
       }),
@@ -149,7 +162,7 @@ class Town extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    // this.physics.add.collider(player, ground);
+    this.physics.add.collider(player, land);
     // this.physics.add.collider(player, singlePlat);
     // this.physics.add.overlap(player, plant, collect, null, this);
     // this.physics.add.overlap(player, wood, collect, null, this);
@@ -159,20 +172,20 @@ class Town extends Phaser.Scene {
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
 
-      player.anims.play("left", true);
+      player.anims.play("townMushroomLeft", true);
     } else if (cursors.right.isDown) {
       player.setVelocityX(160).setFlipX(false);
 
-      player.anims.play("right", true);
+      player.anims.play("townMushroomRight", true);
     } else {
       player.setVelocityX(0);
 
-      player.anims.play("turn");
+      player.anims.play("townMushroomRight");
     }
 
-    // if (cursors.up.isDown && player.body.onFloor()) {
-    //   player.setVelocityY(-250);
-    // }
+    if (cursors.up.isDown && player.body.onFloor()) {
+      player.setVelocityY(-250);
+    }
 
     //   var xDifference = Math.abs(Math.floor(player.body.x) - 548);
     //   var yDifference = Math.abs(Math.floor(player.body.y) - 336);

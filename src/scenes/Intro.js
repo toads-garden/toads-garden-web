@@ -49,6 +49,11 @@ class Intro extends Scene {
     this.load.on("complete", () => {
       generateAnimations(this);
     });
+    this.load.atlas(
+      "townMushroom",
+      "./assets/img/townMushroomSprite.png",
+      "./assets/json/townMushroom.json"
+    );
     this.load.image("playButton", "../assets/img/playButton.png");
   }
   create(data) {

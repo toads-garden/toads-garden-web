@@ -66,6 +66,11 @@ class Outro extends Phaser.Scene {
       "./assets/img/witch.png",
       "./assets/json/witch_atlas.json"
     );
+    this.load.atlas(
+      "townMushroom",
+      "./assets/img/townMushroomSprite.png",
+      "./assets/json/townMushroom.json"
+    );
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -224,7 +229,6 @@ class Outro extends Phaser.Scene {
 
   update() {
     //55 350
-    console.log(player.body.y);
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
 

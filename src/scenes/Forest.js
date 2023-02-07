@@ -57,6 +57,11 @@ class Forest extends Phaser.Scene {
       "./assets/img/witch.png",
       "./assets/json/witch_atlas.json"
     );
+    this.load.atlas(
+      "townMushroom",
+      "./assets/img/townMushroomSprite.png",
+      "./assets/json/townMushroom.json"
+    );
   }
 
   create() {
