@@ -47,7 +47,7 @@ And extra credits to our awesome GHP instructors:
 
 - Water Tileset: https://ninjikin.itch.io/water
 
-- Fox Sprite: https://elthen.itch.io/2d-pixel-art-fox-sprites
+- Fox, Octopus, and Crab Sprites: https://elthen.itch.io
 
 - Mushroom Tiles: https://dreamgryphon.itch.io/landscapes
 
@@ -64,3 +64,5 @@ And extra credits to our awesome GHP instructors:
 - Town Tiles: https://cypor.itch.io/12x12-rpg-tileset
 
 - Witch Sprite: https://9e0.itch.io/witches-pack
+
+- Beach Background: https://free-game-assets.itch.io/free-beach-2d-backgrounds
