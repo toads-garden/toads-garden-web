@@ -84,7 +84,11 @@ class Underwater extends Phaser.Scene {
     const invisEnemyBlock = waterMap
       .createLayer("invisEnemyBlock", waterTile)
       .setVisible(false);
+    const bubbleInvis = waterMap
+      .createLayer("bubble-layer", waterTile)
+      .setVisible(false);
     invisEnemyBlock.setCollisionByExclusion(-1);
+    bubbleInvis.setCollisionByExclusion(-1);
     waterPipe.setCollisionByExclusion(-1);
     waterGround.setCollisionByExclusion(-1);
     let pipe = this.add.image(1850, 420, "pipe");
@@ -96,20 +100,20 @@ class Underwater extends Phaser.Scene {
 
     function createBubbles() {
       bubbles.create(
-        100 + Math.random() * 1920,
+        100 + Math.random() * 1850,
         100 + Math.random() * 300,
         "bubbles"
       );
     }
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 16; i++) {
       createBubbles();
     }
     bubbles.children.iterate(function (child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.9, 1));
+      child.setBounceY(Phaser.Math.FloatBetween(0.9, 1.0));
     });
     this.physics.add.collider(bubbles, waterGround);
     this.physics.add.collider(bubbles, waterPipe);
-
+    this.physics.add.collider(bubbles, bubbleInvis);
     //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
@@ -267,7 +271,7 @@ class Underwater extends Phaser.Scene {
     var xDifference = Math.abs(Math.floor(player.body.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.body.y) - 340);
     var threshhold = 5;
-    if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
+    if (xDifference <= threshhold && yDifference <= threshhold && score >= 15) {
       this.scene.start("Outro");
       this.sound.removeByKey("water");
     }
