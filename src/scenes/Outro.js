@@ -103,6 +103,13 @@ class Outro extends Phaser.Scene {
     const terrain = beachmap.createLayer("beach-floor", tileset);
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
+
+    // player = this.physics.add.sprite(100, 400, "toad");
+
+    // player.setCollideWorldBounds("true");
+    // player.setBounce(0.2);
+
+
     witch = this.physics.add
       .sprite(250, 400, "witch")
       .setFlipX(true)
