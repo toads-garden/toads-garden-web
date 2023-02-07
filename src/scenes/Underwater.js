@@ -242,9 +242,9 @@ class Underwater extends Phaser.Scene {
         crab.play("crabWalkRight", true);
       }
       if (crab.direction === "RIGHT") {
-        crab.setVelocityX(100).setFlipX(false);
+        crab.setVelocityX(80).setFlipX(false);
       } else {
-        crab.setVelocityX(-100).setFlipX(true);
+        crab.setVelocityX(-80).setFlipX(true);
       }
     }
     if (cursors.left.isDown) {
