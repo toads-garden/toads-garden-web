@@ -95,7 +95,6 @@ class Learn extends Phaser.Scene {
     const learnmap = this.make.tilemap({ key: "learnmap" });
     const tileset = learnmap.addTilesetImage("terrain", "tiles");
     const ground = learnmap.createLayer("learn-terrain", tileset);
-    // platforms.setCollisionByExclusion(-1);
 
     ground.setCollisionByExclusion(-1);
     singlePlat = this.physics.add.staticGroup();
