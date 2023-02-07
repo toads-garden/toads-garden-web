@@ -33,6 +33,8 @@ And extra credits to our awesome GHP instructors:
 
 - Plant Icon: https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack
 
+-Game Icons: https://www.kenney.nl/assets/game-icons
+
 - Character Sprite: https://caz-creates-games.itch.io/cute-mushroom-character-sprite
 
 - Tileset: https://pixelfrog-assets.itch.io/pixel-adventure-1
@@ -58,6 +60,8 @@ And extra credits to our awesome GHP instructors:
 - Forest Music: https://soundcloud.com/luvemenot/game-over-super-mario-world
 
 - Underwater Music: https://soundcloud.com/lucaspucasmusic/space-fantasy-super-mario-galaxy-lofi-remix
+
+- Beach Music: https://open.spotify.com/album/2XzBBWt0KemRLREfA74kIG#
 
 - Town Music: https://soundcloud.com/keisha-lu/super-mario-bros-theme-song
 
