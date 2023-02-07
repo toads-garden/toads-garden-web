@@ -1,11 +1,8 @@
 import Phaser from "Phaser";
-import Forest from "./scenes/Forest";
-import Garden from "./scenes/Garden";
-import Hearts from "./scenes/hearts";
-// import SettingsMenu from "./scenes/SettingsMenu";
-// import UIScene from "./scenes/UIScene";
 import Intro from "./scenes/Intro";
 import Learn from "./scenes/Learn";
+import Garden from "./scenes/Garden";
+import Forest from "./scenes/Forest";
 import Underwater from "./scenes/Underwater";
 
 const config = {
@@ -26,16 +23,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [
-    Intro,
-    Learn,
-    Garden,
-    Hearts,
-    Forest,
-    Underwater,
-    // UIScene,
-    // SettingsMenu,
-  ],
+  scene: [Intro, Learn, Garden, Forest, Underwater],
 };
 
 new Phaser.Game(config);
