@@ -77,16 +77,6 @@ export default (scene) => {
     frameRate: 10,
   });
   scene.anims.create({
-    key: "octIdle",
-    frames: scene.anims.generateFrameNames("octupus", {
-      start: 21,
-      end: 26,
-      prefix: "octopus_sprite_sheet_",
-    }),
-    repeat: -1,
-    frameRate: 10,
-  });
-  scene.anims.create({
     key: "octSwimUp",
     frames: scene.anims.generateFrameNames("octopus", {
       start: 0,
@@ -101,6 +91,16 @@ export default (scene) => {
     frames: scene.anims.generateFrameNames("octopus", {
       start: 0,
       end: 3,
+      prefix: "octopus_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
+  scene.anims.create({
+    key: "octIdle",
+    frames: scene.anims.generateFrameNames("octopus", {
+      start: 21,
+      end: 26,
       prefix: "octopus_sprite_sheet_",
     }),
     repeat: -1,
