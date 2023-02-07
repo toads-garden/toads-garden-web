@@ -177,11 +177,21 @@ class Underwater extends Phaser.Scene {
     this.physics.add.collider(player, waterGround);
     this.physics.add.collider(player, waterPipe);
     this.physics.add.collider(player, bubbles, collect, null, this);
+    this.physics.add.collider(player, octopuses, die, null, this);
     cursors = this.input.keyboard.createCursorKeys();
     // player = new Toad(this, 100, 400)
     //   .collideWith(waterGround)
     //   .overlapWith(collectibleBubble, collect)
     //   .hitEnemy(octopuses); //hitOct);
+    function die(player) {
+      player.setTint(0xff0000);
+      this.cameras.main.fade(800);
+      player.setVelocity(0, -500);
+      function restart() {
+        this.scene.restart();
+      }
+      this.time.delayedCall(800, restart, [], this);
+    }
   }
   update() {
     // player.update(this.inputs);
