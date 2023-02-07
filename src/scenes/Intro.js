@@ -45,8 +45,6 @@ class Intro extends Scene {
     this.load.image("playButton", "../assets/img/playButton.png");
   }
   create(data) {
-    const x = innerWidth / 2;
-    const y = innerHeight / 2;
     this.add.image(960, 240, "background");
     // var music = this.sound.add("intro", { loop: true, volume: 0.1 });
     // music.play();
@@ -80,7 +78,7 @@ class Intro extends Scene {
     // });
 
     gameButton.on("pointerup", () => {
-      this.scene.start("Outro", {
+      this.scene.start("Underwater", {
         music: data.music,
       });
     });

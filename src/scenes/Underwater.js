@@ -192,23 +192,6 @@ class Underwater extends Phaser.Scene {
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
     this.cameras.main.startFollow(player, true, 0.08, 0.08);
-    this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "turn",
-      frames: [{ key: "toad", frame: 0 }],
-      frameRate: 20,
-    });
     this.physics.add.collider(player, waterGround);
     this.physics.add.collider(player, waterPipe);
     this.physics.add.collider(player, bubbles, collect, null, this);
@@ -216,6 +199,7 @@ class Underwater extends Phaser.Scene {
     this.physics.add.collider(player, crabs, die, null, this);
     cursors = this.input.keyboard.createCursorKeys();
     function die(player) {
+      waterMusic.stop();
       player.setTint(0xff0000);
       this.cameras.main.fade(800);
       player.setVelocity(0, -500);
@@ -281,7 +265,7 @@ class Underwater extends Phaser.Scene {
     }
 
     var xDifference = Math.abs(Math.floor(player.body.x) - 1853);
-    var yDifference = Math.abs(Math.floor(player.body.y) - 362);
+    var yDifference = Math.abs(Math.floor(player.body.y) - 340);
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Outro");
