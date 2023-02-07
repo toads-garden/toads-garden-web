@@ -33,6 +33,8 @@ And extra credits to our awesome GHP instructors:
 
 - Plant Icon: https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack
 
+-Game Icons: https://www.kenney.nl/assets/game-icons
+
 - Character Sprite: https://caz-creates-games.itch.io/cute-mushroom-character-sprite
 
 - Tileset: https://pixelfrog-assets.itch.io/pixel-adventure-1

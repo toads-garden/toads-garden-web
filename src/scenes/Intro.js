@@ -97,7 +97,7 @@ class Intro extends Scene {
     // });
 
     gameButton.on("pointerup", () => {
-      this.scene.start("Underwater", {
+      this.scene.start("Garden", {
         music: data.music,
       });
     });
