@@ -12,6 +12,7 @@ var bunny;
 var fox;
 var octopus;
 var crab;
+var octPop;
 
 class Outro extends Phaser.Scene {
   constructor(data) {
@@ -109,7 +110,6 @@ class Outro extends Phaser.Scene {
     // player.setCollideWorldBounds("true");
     // player.setBounce(0.2);
 
-
     witch = this.physics.add
       .sprite(250, 400, "witch")
       .setFlipX(true)
@@ -131,6 +131,9 @@ class Outro extends Phaser.Scene {
     crab = this.physics.add.sprite(570, 375, "crab").setScale(2);
     crab.play("crabIdle");
     crab.setCollideWorldBounds("true");
+    octPop = this.physics.add.sprite(300, 40, "octopus").setScale(2);
+    octPop.play("octShow");
+    octPop.setCollideWorldBounds("true");
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
@@ -140,6 +143,7 @@ class Outro extends Phaser.Scene {
     this.physics.add.collider(fox, terrain);
     this.physics.add.collider(octopus, terrain);
     this.physics.add.collider(crab, terrain);
+    this.physics.add.collider(octPop, terrain);
 
     cursors = this.input.keyboard.createCursorKeys();
 
