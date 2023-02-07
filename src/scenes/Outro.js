@@ -6,9 +6,12 @@ var wood;
 var plant;
 var cursors;
 var collectSound;
-var beachMusic;
 var witch;
 var beachMusic;
+var bunny;
+var fox;
+var octopus;
+var crab;
 
 class Outro extends Phaser.Scene {
   constructor(data) {
@@ -27,13 +30,10 @@ class Outro extends Phaser.Scene {
     this.load.image("wood", "../assets/img/wood.png");
     this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json"); //map.json
     this.load.image("water", "../assets/img/water.png");
-    this.load.spritesheet("toad", "assets/img/toad.png", {
-      frameWidth: 48,
-      frameHeight: 44,
-    });
-    this.load.on("complete", () => {
-      generateAnimations(this);
-    });
+    // this.load.spritesheet("toad", "assets/img/toad.png", {
+    //   frameWidth: 48,
+    //   frameHeight: 44,
+    // });
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",
@@ -98,7 +98,7 @@ class Outro extends Phaser.Scene {
     const terrain = beachmap.createLayer("beach-floor", tileset);
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
-    player = this.physics.add.sprite(100, 400, "toad");
+    // player = this.physics.add.sprite(100, 400, "toad");
     witch = this.physics.add
       .sprite(500, 400, "witch")
       .setFlipX(true)
