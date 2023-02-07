@@ -12,10 +12,10 @@ class Town extends Phaser.Scene {
   }
 
   preload() {
-    // this.load.audio("town", "../assets/audio/town.mp3");
-    // this.load.audio("collect", "../assets/audio/collect.mp3");
-    this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
-    this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
+    this.load.audio("town", "../assets/audio/town.mp3");
+    this.load.audio("collect", "../assets/audio/collect.mp3");
+    this.load.image("audioOn", "../assets/img/audioOn.png");
+    this.load.image("audioOff", "../assets/img/audioOff.png");
     this.load.tilemapTiledJSON("townBeta", "../assets/json/townBeta.json");
     this.load.image("townTiles", "../assets/img/townTiles.png");
     // this.load.image("pipe", "../assets/img/pipe.png");
@@ -27,7 +27,7 @@ class Town extends Phaser.Scene {
         frameHeight: 49,
       }
     );
-    // this.load.atlas("toad", "./assets/img/toad.png", "./assets/json/toad.json");
+    this.load.atlas("toad", "./assets/img/toad.png", "./assets/json/toad.json");
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",
@@ -61,28 +61,28 @@ class Town extends Phaser.Scene {
 
   create() {
     //music
-    // let click = 0;
-    // var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
-    // var townMusic = this.sound.add("town", { loop: true, volume: 0.1 });
-    // townMusic.play();
-    // let audioOn = this.add
-    //   .image(620, 30, "audioOnBlack")
-    //   .setScale(0.5)
-    //   .setScrollFactor(0);
-    // audioOn.setInteractive();
-    // audioOn.on("pointerup", () => {
-    //   if (click % 2 || click === 0) {
-    //     collectSound.play({ volume: 0 });
-    //     townMusic.stop();
-    //     audioOn = this.add.image(620, 30, "audioOffBlack").setScale(0.5);
-    //     click++;
-    //   } else {
-    //     townMusic.play();
-    //     audioOn = this.add.image(620, 30, "audioOnBlack").setScale(0.5);
-    //     click++;
-    //   }
-    //   return click;
-    // });
+    let click = 0;
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+    var townMusic = this.sound.add("town", { loop: true, volume: 0.1 });
+    townMusic.play();
+    let audioOn = this.add
+      .image(620, 30, "audioOn")
+      .setScale(0.5)
+      .setScrollFactor(0);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        collectSound.play({ volume: 0 });
+        townMusic.stop();
+        audioOn = this.add.image(620, 30, "audioOff").setScale(0.5);
+        click++;
+      } else {
+        townMusic.play();
+        audioOn = this.add.image(620, 30, "audioOn").setScale(0.5);
+        click++;
+      }
+      return click;
+    });
 
     // this.physics.world.setBounds(0, 0, 650, 480);
     // pipe = this.add.image(575, 420, "pipe");

@@ -158,7 +158,7 @@ export default (scene) => {
   });
   scene.anims.create({
     key: "townMushroomIdle",
-    frames: scene.anims.generateFrameNames("townMushroomIdle", {
+    frames: scene.anims.generateFrameNames("townMushroomSprite", {
       start: 1,
       end: 1,
       prefix: "townMushroom_",
@@ -168,7 +168,7 @@ export default (scene) => {
   });
   scene.anims.create({
     key: "townMushroomDown",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    frames: scene.anims.generateFrameNames("townMushroomSprite", {
       start: 0,
       end: 2,
       prefix: "townMushroom_",
@@ -178,7 +178,7 @@ export default (scene) => {
   });
   scene.anims.create({
     key: "townMushroomLeft",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    frames: scene.anims.generateFrameNames("townMushroomSprite", {
       start: 3,
       end: 5,
       prefix: "townMushroom_",
@@ -188,7 +188,7 @@ export default (scene) => {
   });
   scene.anims.create({
     key: "townMushroomRight",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    frames: scene.anims.generateFrameNames("townMushroomSprite", {
       start: 6,
       end: 8,
       prefix: "townMushroom_",
@@ -198,7 +198,7 @@ export default (scene) => {
   });
   scene.anims.create({
     key: "townMushroomDown",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    frames: scene.anims.generateFrameNames("townMushroomSprite", {
       start: 9,
       end: 11,
       prefix: "townMushroom_",
