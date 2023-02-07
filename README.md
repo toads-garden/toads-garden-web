@@ -61,6 +61,8 @@ And extra credits to our awesome GHP instructors:
 
 - Underwater Music: https://soundcloud.com/lucaspucasmusic/space-fantasy-super-mario-galaxy-lofi-remix
 
+- Beach Music: https://open.spotify.com/album/2XzBBWt0KemRLREfA74kIG#
+
 - Town Music: https://soundcloud.com/keisha-lu/super-mario-bros-theme-song
 
 - Town Tiles: https://cypor.itch.io/12x12-rpg-tileset
