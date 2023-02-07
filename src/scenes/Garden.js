@@ -12,17 +12,17 @@ var score = 0;
 var text;
 var bunnies;
 var gardenMusic;
-
-// var scene;
 var gameOver = false;
+
 class Garden extends Phaser.Scene {
-  platforms;
   constructor() {
     super("Garden");
   }
   preload() {
     this.load.audio("garden", "../assets/audio/garden.mp3");
     this.load.image("background", "../assets/img/garden.png");
+    this.load.image("audioOn", "../assets/img/audioOn.png");
+    // this.load.image("audioOff", "../assets/img/audioOff.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
     this.load.image("play-btn", "../assets/img/playButton.png");
@@ -63,20 +63,16 @@ class Garden extends Phaser.Scene {
     );
   }
   create() {
-    // this.scene.run("hearts");
+    const x = innerWidth / 2;
+    const y = innerHeight / 2;
     this.scene.run("settingsMenu");
-    var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
-    gardenMusic.play();
     this.add.image(960, 240, "background");
+
     let pipe = this.add.image(1850, 420, "pipe");
     const map = this.make.tilemap({ key: "map" });
-    // const backTileSet = map.addTilesetImage("garden", "background");
     const tileset = map.addTilesetImage("terrain", "tiles");
     const plantTileset = map.addTilesetImage("plants", "plantTiles");
 
-    // const back = map.createLayer("background", backTileSet);
-    // var pipe = map.createLayer("pipe", pipeTileset).setVisible(false);
-    // console.log(pipe);
     const invisiblePlayer = map
       .createLayer("pipeInvisible", tileset)
       .setVisible(false);
@@ -101,20 +97,7 @@ class Garden extends Phaser.Scene {
       key: "bunny",
     });
 
-    // function createBunnies() {
-    //   bunnies.create(
-    //     900 + Math.random() * 300,
-    //     100 + Math.random() * 200,
-    //     "bunny"
-    //   );
-    // }
-    // for (let i = 0; i < 2; i++) {
-    //   createBunnies();
-    // }
-    // for (const bunny of bunnies.children.entries) {
-    //   bunny.direction = "RIGHT";
-    // }
-    // 57 x 74
+    //bunnies
     EnemyLayer.forEach((object) => {
       let bunnyObj = bunnies.create(object.x, object.y, "bunny");
       bunnyObj.setScale(object.width / 28.5, object.height / 37);
@@ -132,7 +115,6 @@ class Garden extends Phaser.Scene {
       .hitEnemy(bunnies, hitBunny);
 
     //collectibles
-    // collectibles = this.physics.add.staticGroup();
     CollectibleLayer.forEach((object) => {
       let obj = collectibles.create(object.x, object.y, "collectible");
       obj.setScale(object.width / 16, object.height / 16);
@@ -140,7 +122,7 @@ class Garden extends Phaser.Scene {
       obj.body.width = object.width;
       obj.body.height = object.height;
     });
-    // this.physics.add.overlap(this.player, collectibles, collect, null, this);
+
     //score
     text = this.add.text(0, 0, `Herbs Collected: ${score}`, {
       fontSize: "20px",
@@ -165,23 +147,37 @@ class Garden extends Phaser.Scene {
       score = 0;
     }
     this.physics.add.overlap(player, collectibles, collect, null, this);
+
+    //music
+    let click = 0;
+    var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
+    gardenMusic.play();
+    let audioOn = this.add.image(620, 30, "audioOn").setScrollFactor(0);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        gardenMusic.stop();
+        audioOn = this.add.image(620, 30, "audioOff");
+        click++;
+      } else {
+        gardenMusic.play();
+        audioOn = this.add.image(620, 30, "audioOn");
+        click++;
+      }
+      return click;
+    });
   }
-  // restart() {
-  //   this.scene.create;
-  // }
+
   update() {
     player.update(this.inputs);
-    //console.log(player.sprite.x);
     for (const bunny of bunnies.children.entries) {
       if (bunny.body.blocked.left) {
         bunny.direction = "RIGHT";
         bunny.play("bunnyRunRight", true);
-        // bunny.setFlipX("true");
       }
       if (bunny.body.blocked.right) {
         bunny.direction = "LEFT";
         bunny.play("bunnyRunLeft", true);
-        // bunny.setFlipX("true");
       }
       if (bunny.direction === "RIGHT") {
         bunny.setVelocityX(100).setFlipX(true);
@@ -197,7 +193,6 @@ class Garden extends Phaser.Scene {
       this.scene.start("Forest");
       this.sound.removeByKey("garden");
     }
-    //
   }
 }
 export default Garden;

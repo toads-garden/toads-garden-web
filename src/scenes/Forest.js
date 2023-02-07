@@ -21,6 +21,7 @@ class Forest extends Phaser.Scene {
   preload() {
     this.load.audio("forest", "../assets/audio/forest.mp3"); //forest audio
     this.load.image("forest", "../assets/img/forest.png"); //background
+    this.load.image("audioOn", "../assets/img/audioOn.png"); // audio button
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
     this.load.image("wood", "../assets/img/wood.png"); //icons
     this.load.tilemapTiledJSON("forestMap", "../assets/json/forest.json"); //map.json
@@ -53,9 +54,23 @@ class Forest extends Phaser.Scene {
 
   create() {
     //music
+    let click = 0;
     var forestMusic = this.sound.add("forest", { loop: true, volume: 0.1 });
     forestMusic.play();
-
+    let audioOn = this.add.image(620, 30, "audioOn").setScrollFactor(0);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        forestMusic.stop();
+        audioOn = this.add.image(620, 30, "audioOff");
+        click++;
+      } else {
+        forestMusic.play();
+        audioOn = this.add.image(620, 30, "audioOn");
+        click++;
+      }
+      return click;
+    });
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
@@ -73,15 +88,14 @@ class Forest extends Phaser.Scene {
     const forestInvis = forestMap
       .createLayer("forestInvis", newtile)
       .setVisible(false);
-    //const platforms = map.createLayer('platform', tileset);
-    //const invisible = map.createLayer('invisible',tileset).setVisible(false);
-    //platforms.setCollisionByExclusion(-1);
+
+    //collisions
     forestInvis.setCollisionByExclusion(-1);
     forestGround.setCollisionByExclusion(-1);
     forestPipe.setCollisionByExclusion(-1);
+
     //collectibles
     collectibleWood = this.physics.add.staticGroup();
-    //collectibles = this.physics.add.staticGroup();
     woodLayer = forestMap.getObjectLayer("woodLayer")["objects"];
     woodLayer.forEach((object) => {
       let obj = collectibleWood.create(object.x, object.y, "wood");
@@ -132,7 +146,6 @@ class Forest extends Phaser.Scene {
       .collideWith([forestGround, forestPipe])
       .overlapWith(collectibleWood, collect)
       .hitEnemy(foxes, hitFox);
-    //this.physics.add.overlap(player, collectibles, collect, null, this);
   }
 
   update() {
@@ -153,7 +166,6 @@ class Forest extends Phaser.Scene {
       }
     }
     //346
-    //console.log(player.sprite.y);
     var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 346);
     var threshhold = 5;

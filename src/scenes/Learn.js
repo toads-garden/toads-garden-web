@@ -1,5 +1,4 @@
 import Phaser from "Phaser";
-// import { Scene } from "Phaser";
 import generateAnimations from "../config/animations";
 
 var player;
@@ -14,6 +13,7 @@ class Learn extends Phaser.Scene {
   constructor(data) {
     super("Learn");
   }
+
   preload() {
     this.load.audio("intro", "../assets/audio/intro.mp3");
     this.load.image("audioOn", "../assets/img/audioOn.png");
@@ -59,43 +59,30 @@ class Learn extends Phaser.Scene {
       generateAnimations(this);
     });
   }
+
   create(data) {
     const x = innerWidth / 2;
     const y = innerHeight / 2;
-    let click = 0;
+
     this.add.image(960, 240, "background");
 
     //music
+    let click = 0;
     var introMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
     introMusic.play();
-    // let audioOff = this.add.image(600, 75, "audioOff").setScale(0.3);
-    let audioOn = this.add.image(600, 75, "audioOn").setScale(0.3);
+    let audioOn = this.add.image(620, 30, "audioOn");
     audioOn.setInteractive();
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         introMusic.stop();
-        audioOn = this.add.image(600, 75, "audioOff");
+        audioOn = this.add.image(620, 30, "audioOff");
         click++;
       } else {
         introMusic.play();
-        audioOn = this.add.image(600, 75, "audioOn");
+        audioOn = this.add.image(620, 30, "audioOn");
         click++;
       }
       return click;
-    });
-    let audioOff = this.add
-      .image(x + 200, y * 1.85, "audioOff")
-      .setScale(x * 0.0018);
-    audioOff.setInteractive();
-    audioOff.on("pointerup", () => {
-      audioOff = this.add
-        .image(x + 200, y * 1.85, "audioOff")
-        .setScale(x * 0.0018);
-    });
-    audioOff.on("pointerout", () => {
-      audioOff = this.add
-        .image(x + 200, y * 1.85, "audioOff")
-        .setScale(x * 0.0018);
     });
 
     this.physics.world.setBounds(0, 0, 650, 480);
