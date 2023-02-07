@@ -34,6 +34,7 @@ class Outro extends Phaser.Scene {
     //   frameWidth: 48,
     //   frameHeight: 44,
     // });
+
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",
@@ -59,6 +60,10 @@ class Outro extends Phaser.Scene {
       "./assets/img/witch.png",
       "./assets/json/witch_atlas.json"
     );
+    this.load.spritesheet("toad", "assets/img/toad.png", {
+      frameWidth: 48,
+      frameHeight: 44,
+    });
 
     this.load.on("complete", () => {
       generateAnimations(this);
@@ -99,15 +104,45 @@ class Outro extends Phaser.Scene {
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
     // player = this.physics.add.sprite(100, 400, "toad");
+
+    // player.setCollideWorldBounds("true");
+    // player.setBounce(0.2);
+
     witch = this.physics.add
-      .sprite(500, 400, "witch")
+      .sprite(250, 400, "witch")
+      .setFlipX(true)
+      .setScale(2.5);
+    witch.setCollideWorldBounds("true");
+    witch.play("witchIdle");
+    bunny = this.physics.add.sprite(500, 350, "bunny");
+    bunny.play("bunnyIdle");
+    bunny.setCollideWorldBounds("true");
+    fox = this.physics.add.sprite(425, 375, "fox").setFlipX(true).setScale(2);
+    fox.play("foxIdle");
+    fox.setCollideWorldBounds("true");
+    octopus = this.physics.add
+      .sprite(350, 400, "octopus")
       .setFlipX(true)
       .setScale(2);
-    witch.setCollideWorldBounds("true");
+    octopus.play("octIdle");
+    octopus.setCollideWorldBounds("true");
+    crab = this.physics.add.sprite(570, 375, "crab").setScale(2);
+    crab.play("crabIdle");
+    crab.setCollideWorldBounds("true");
+    player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
     this.physics.add.collider(player, terrain);
+    // this.physics.add.collider(player, witch);
+    // this.physics.add.collider(player, bunny);
+    // this.physics.add.collider(player, fox);
+    // this.physics.add.collider(player, octopus);
+    // this.physics.add.collider(player, crab);
     this.physics.add.collider(witch, terrain);
+    this.physics.add.collider(bunny, terrain);
+    this.physics.add.collider(fox, terrain);
+    this.physics.add.collider(octopus, terrain);
+    this.physics.add.collider(crab, terrain);
 
     cursors = this.input.keyboard.createCursorKeys();
 
