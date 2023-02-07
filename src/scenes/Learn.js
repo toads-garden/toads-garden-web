@@ -1,5 +1,4 @@
 import Phaser from "Phaser";
-import { GameObjects } from "phaser";
 import generateAnimations from "../config/animations";
 
 var player;
@@ -86,7 +85,6 @@ class Learn extends Phaser.Scene {
         audioOn = this.add.image(620, 30, "audioOffBlack").setScale(0.5);
         click++;
       } else {
-        clickSound.play();
         introMusic.play();
         audioOn = this.add.image(620, 30, "audioOnBlack").setScale(0.5);
         click++;
