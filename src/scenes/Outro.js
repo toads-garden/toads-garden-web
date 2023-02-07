@@ -7,6 +7,7 @@ var plant;
 var cursors;
 var collectSound;
 var witch;
+var beachMusic;
 
 class Outro extends Phaser.Scene {
   constructor(data) {
@@ -14,8 +15,7 @@ class Outro extends Phaser.Scene {
   }
 
   preload() {
-    this.load.audio("beach", "..assets/audio/beach.mp3");
-    this.load.audio("intro", "../assets/audio/intro.mp3");
+    this.load.audio("beach", "../assets/audio/beach.mp3");
     this.load.audio("collect", "../assets/audio/collect.mp3");
     this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
@@ -67,10 +67,10 @@ class Outro extends Phaser.Scene {
   create(data) {
     this.add.image(325, 240, "beach");
 
-    music;
+    // music;
     let click = 0;
+    var beachMusic = this.sound.add("beach", { loop: true, volume: 0.1 });
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
-    var beachMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
     beachMusic.play();
     let audioOn = this.add
       .image(620, 30, "audioOnBlack")
