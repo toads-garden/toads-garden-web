@@ -54,7 +54,8 @@ module.exports = {
   },
   devServer: {
     static: path.resolve(__dirname, "./dist"),
-    disableHostCheck: true,
+    historyApiFallback: true,
+    allowedHosts: "all",
   },
   plugins: [
     new CopyWebpackPlugin({
