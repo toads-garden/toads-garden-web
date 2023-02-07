@@ -4,7 +4,7 @@ var witch;
 var singlePlatform;
 
 class Intro extends Scene {
-  constructor(data) {
+  constructor() {
     super("Intro");
   }
   preload() {

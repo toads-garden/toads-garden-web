@@ -223,12 +223,11 @@ class Outro extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.typewriteText(
-      "                \nToad, you did it!!\n                 \nWith your help our village can build houses,\nprovide free medical care, and have \naccess to clean water!! \n                 \nThe bunnies, foxes, crabs, and octopuses have \ncome together to celebrate this achievement! \n                \nLet's party!!!"
+      "                \nToad, you did it!!\n                 \nWith your help our village can build houses,\nprovide free medical care, and have \naccess to clean water!! \n                 \nThe bunnies, foxes, crabs, and octopuses have \ncome together to celebrate this achievement! \n                \nPlay again to gather even more supplies \nfor the village!\n                \nBut for now...\n                \nLet's party!!!"
     );
   }
 
   update() {
-    //55 350
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
 
