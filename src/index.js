@@ -4,6 +4,7 @@ import Learn from "./scenes/Learn";
 import Garden from "./scenes/Garden";
 import Forest from "./scenes/Forest";
 import Underwater from "./scenes/Underwater";
+import Outro from "./scenes/Outro";
 
 const config = {
   type: Phaser.AUTO,
@@ -23,7 +24,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [Intro, Learn, Garden, Forest, Underwater],
+  scene: [Intro, Learn, Garden, Forest, Underwater, Outro],
 };
 
 new Phaser.Game(config);
