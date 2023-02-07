@@ -107,6 +107,16 @@ export default (scene) => {
     frameRate: 10,
   });
   scene.anims.create({
+    key: "octShow",
+    frames: scene.anims.generateFrameNames("octopus", {
+      start: 28,
+      end: 33,
+      prefix: "octopus_sprite_sheet_",
+    }),
+    repeat: -1,
+    frameRate: 5,
+  });
+  scene.anims.create({
     key: "crabIdle",
     frames: scene.anims.generateFrameNames("crab", {
       start: 4,

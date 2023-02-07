@@ -25,7 +25,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Town, Intro, Learn, Garden, Forest, Underwater, Outro],
+  scene: [Intro, Learn, Garden, Forest, Underwater, Outro, Town],
 };
 
 new Phaser.Game(config);

@@ -124,6 +124,7 @@ class Forest extends Phaser.Scene {
       return false;
     }
     function hitFox(player, foxes) {
+      forestMusic.stop();
       gameIsOver();
     }
     function gameIsOver() {
@@ -186,7 +187,7 @@ class Forest extends Phaser.Scene {
         fox.setVelocityX(-100).setFlipX(true);
       }
     }
-
+    console.log(player.sprite.y);
     var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 346);
     var threshhold = 5;

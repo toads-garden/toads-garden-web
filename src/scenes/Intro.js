@@ -1,4 +1,7 @@
 import { Scene } from "Phaser";
+import generateAnimations from "../config/animations";
+var witch;
+var singlePlatform;
 
 class Intro extends Scene {
   constructor(data) {
@@ -11,6 +14,7 @@ class Intro extends Scene {
     this.load.image("collectible", "../assets/img/icons.png");
     this.load.image("play-btn", "../assets/img/playButton.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
+    this.load.image("singlePlatform", "../assets/img/singlePlatform.png");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.image("pipe", "../assets/img/pipe.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
@@ -42,15 +46,28 @@ class Intro extends Scene {
       "./assets/img/witch.png",
       "./assets/json/witch_atlas.json"
     );
+    this.load.on("complete", () => {
+      generateAnimations(this);
+    });
     this.load.image("playButton", "../assets/img/playButton.png");
   }
   create(data) {
-    const x = innerWidth / 2;
-    const y = innerHeight / 2;
     this.add.image(960, 240, "background");
     // var music = this.sound.add("intro", { loop: true, volume: 0.1 });
     // music.play();
-
+    singlePlatform = this.physics.add.staticGroup();
+    singlePlatform
+      .create(580, 410, "singlePlatform")
+      .setScale(2)
+      .refreshBody()
+      .setVisible(false);
+    witch = this.physics.add
+      .sprite(580, 300, "witch")
+      .setFlipX(true)
+      .setScale(2.5);
+    witch.setCollideWorldBounds("true");
+    this.physics.add.collider(witch, singlePlatform);
+    witch.play("witchIdle");
     //Text
     this.story = this.add
       .text(325, 220 / 1.2, "", {
@@ -80,7 +97,7 @@ class Intro extends Scene {
     // });
 
     gameButton.on("pointerup", () => {
-      this.scene.start("Outro", {
+      this.scene.start("Underwater", {
         music: data.music,
       });
     });

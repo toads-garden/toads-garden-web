@@ -12,6 +12,7 @@ var bunny;
 var fox;
 var octopus;
 var crab;
+var octPop;
 
 class Outro extends Phaser.Scene {
   constructor(data) {
@@ -69,7 +70,7 @@ class Outro extends Phaser.Scene {
     });
   }
 
-  create(data) {
+  create() {
     this.add.image(325, 240, "beach");
 
     // music;
@@ -102,9 +103,12 @@ class Outro extends Phaser.Scene {
     const terrain = beachmap.createLayer("beach-floor", tileset);
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
+
     // player = this.physics.add.sprite(100, 400, "toad");
+
     // player.setCollideWorldBounds("true");
     // player.setBounce(0.2);
+
     witch = this.physics.add
       .sprite(250, 400, "witch")
       .setFlipX(true)
@@ -126,20 +130,19 @@ class Outro extends Phaser.Scene {
     crab = this.physics.add.sprite(570, 375, "crab").setScale(2);
     crab.play("crabIdle");
     crab.setCollideWorldBounds("true");
+    octPop = this.physics.add.sprite(300, 40, "octopus").setScale(2);
+    octPop.play("octShow");
+    octPop.setCollideWorldBounds("true");
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
     this.physics.add.collider(player, terrain);
-    // this.physics.add.collider(player, witch);
-    // this.physics.add.collider(player, bunny);
-    // this.physics.add.collider(player, fox);
-    // this.physics.add.collider(player, octopus);
-    // this.physics.add.collider(player, crab);
     this.physics.add.collider(witch, terrain);
     this.physics.add.collider(bunny, terrain);
     this.physics.add.collider(fox, terrain);
     this.physics.add.collider(octopus, terrain);
     this.physics.add.collider(crab, terrain);
+    this.physics.add.collider(octPop, terrain);
 
     cursors = this.input.keyboard.createCursorKeys();
 
@@ -151,7 +154,7 @@ class Outro extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.typewriteText(
-      "                \nToad, you did it!!\n                 \nWith your help our village can build houses,\nprovide free medical care, and have \naccess to clean water!! \n                 \nThe bunnies, foxes, crabs, and octopuses have \ncome together to celebrate this achievement! \n                \nLet's party!!"
+      "                \nToad, you did it!!\n                 \nWith your help our village can build houses,\nprovide free medical care, and have \naccess to clean water!! \n                 \nThe bunnies, foxes, crabs, and octopuses have \ncome together to celebrate this achievement! \n                \nLet's party!!!"
     );
   }
 
