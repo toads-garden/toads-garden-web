@@ -1,4 +1,5 @@
 import Phaser from "Phaser";
+import { GameObjects } from "phaser";
 import generateAnimations from "../config/animations";
 
 var player;
@@ -70,7 +71,8 @@ class Learn extends Phaser.Scene {
 
     //music
     let click = 0;
-    var introMusic = this.sound.add("intro", { loop: true });
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+    var introMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
     introMusic.play();
     let audioOn = this.add
       .image(620, 30, "audioOnBlack")
@@ -79,10 +81,12 @@ class Learn extends Phaser.Scene {
     audioOn.setInteractive();
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
+        collectSound.play({ volume: 0 });
         introMusic.stop();
         audioOn = this.add.image(620, 30, "audioOffBlack").setScale(0.5);
         click++;
       } else {
+        clickSound.play();
         introMusic.play();
         audioOn = this.add.image(620, 30, "audioOnBlack").setScale(0.5);
         click++;
@@ -130,8 +134,6 @@ class Learn extends Phaser.Scene {
     });
 
     cursors = this.input.keyboard.createCursorKeys();
-
-    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
 
     function collect(player, obj) {
       obj.destroy(obj.x, obj.y);
