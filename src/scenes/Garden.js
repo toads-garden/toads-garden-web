@@ -207,7 +207,7 @@ class Garden extends Phaser.Scene {
     var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 362);
     var threshhold = 5;
-    if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
+    if (xDifference <= threshhold && yDifference <= threshhold && score >= 15) {
       this.scene.start("Forest");
       this.sound.removeByKey("garden");
     }
