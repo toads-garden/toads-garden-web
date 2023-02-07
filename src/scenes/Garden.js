@@ -57,6 +57,11 @@ class Garden extends Phaser.Scene {
       "./assets/img/crab.png",
       "./assets/json/crab_atlas.json"
     );
+    this.load.atlas(
+      "witch",
+      "./assets/img/witch.png",
+      "./assets/json/witch_atlas.json"
+    );
   }
   create() {
     const x = innerWidth / 2;

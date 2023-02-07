@@ -57,6 +57,11 @@ class Underwater extends Phaser.Scene {
       "./assets/img/crab.png",
       "./assets/json/crab_atlas.json"
     );
+    this.load.atlas(
+      "witch",
+      "./assets/img/witch.png",
+      "./assets/json/witch_atlas.json"
+    );
   }
   create() {
     this.cameras.main.setBounds(0, 0, 1920, 480);
@@ -278,7 +283,7 @@ class Underwater extends Phaser.Scene {
     var yDifference = Math.abs(Math.floor(player.body.y) - 362);
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
-      this.scene.start("Underwater");
+      this.scene.start("Outro");
     }
   }
 }

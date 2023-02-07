@@ -107,4 +107,14 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
+  scene.anims.create({
+    key: "witchIdle",
+    frames: scene.anims.generateFrameNames("witch", {
+      start: 0,
+      end: 5,
+      prefix: "b_witch_idle_",
+    }),
+    repeat: -1,
+    frameRate: 10,
+  });
 };

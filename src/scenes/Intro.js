@@ -39,6 +39,11 @@ class Intro extends Scene {
       "./assets/img/crab.png",
       "./assets/json/crab_atlas.json"
     );
+    this.load.atlas(
+      "witch",
+      "./assets/img/witch.png",
+      "./assets/json/witch_atlas.json"
+    );
     this.load.image("playButton", "../assets/img/playButton.png");
   }
   create(data) {
@@ -77,7 +82,7 @@ class Intro extends Scene {
     // });
 
     gameButton.on("pointerup", () => {
-      this.scene.start("Learn", {
+      this.scene.start("Outro", {
         music: data.music,
       });
     });
