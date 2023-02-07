@@ -15,8 +15,7 @@ class Outro extends Phaser.Scene {
   }
 
   preload() {
-    this.load.audio("beach", "..assets/audio/beach.mp3");
-    this.load.audio("intro", "../assets/audio/intro.mp3");
+    this.load.audio("beach", "../assets/audio/beach.mp3");
     this.load.audio("collect", "../assets/audio/collect.mp3");
     this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
