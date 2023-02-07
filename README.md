@@ -4,9 +4,9 @@
 
 ## Premise
 
-Toad is a modern-day heroine - she wants her village to have access to affordable housing, free healthcare, and a clean water.
+Toad is a modern-day heroine - she wants her village to have access to affordable housing, free healthcare, and clean water.
 
-Follow them through 3 mystical worlds: a Secret Garden, Enchanted Forest, and an Underwater Oasis. On each unique world, they will collect magic tokens to help their village friends, and avoid weary enemies - corporate greed in animated form - along the way.
+Players play as Toad and navigate through 3 mystical worlds: a Secret Garden, Enchanted Forest, and an Underwater Oasis. On each unique world, they will collect magic tokens to help their village friends, and avoid weary enemies - corporate greed in animated form - along the way.
 
 ## How to play
 
@@ -50,3 +50,13 @@ And extra credits to our awesome GHP instructors:
 - Fox Sprite: https://elthen.itch.io/2d-pixel-art-fox-sprites
 
 - Mushroom Tiles: https://dreamgryphon.itch.io/landscapes
+
+- Intro Music: https://soundcloud.com/rifti-beats/super-mario-theme-lofi-hip-hop-remix?in=user-36451043/sets/super-mario-lofi-1
+
+- Garden Music: https://soundcloud.com/tm-44-rest/super-mario-bros-underwater-theme-lo-fi-hip-hop-remix
+
+-Forest Music: https://soundcloud.com/luvemenot/game-over-super-mario-world
+
+-Underwater Music: https://soundcloud.com/lucaspucasmusic/space-fantasy-super-mario-galaxy-lofi-remix
+
+-Town Music: https://soundcloud.com/keisha-lu/super-mario-bros-theme-song
