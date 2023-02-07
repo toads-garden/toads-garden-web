@@ -1,4 +1,4 @@
-import Phaser from "Phaser";
+import Phaser from "phaser";
 import Intro from "./scenes/Intro";
 import Learn from "./scenes/Learn";
 import Garden from "./scenes/Garden";

@@ -1,4 +1,4 @@
-import { Scene } from "Phaser";
+import { Scene } from "phaser";
 import generateAnimations from "../config/animations";
 var witch;
 var singlePlatform;
