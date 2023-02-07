@@ -1,4 +1,5 @@
 import { Scene } from "Phaser";
+import generateAnimations from "../config/animations";
 var witch;
 var singlePlatform;
 
@@ -45,6 +46,9 @@ class Intro extends Scene {
       "./assets/img/witch.png",
       "./assets/json/witch_atlas.json"
     );
+    this.load.on("complete", () => {
+      generateAnimations(this);
+    });
     this.load.image("playButton", "../assets/img/playButton.png");
   }
   create(data) {
