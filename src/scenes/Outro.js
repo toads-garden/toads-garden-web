@@ -14,6 +14,7 @@ class Outro extends Phaser.Scene {
   }
 
   preload() {
+    this.load.audio("beach", "..assets/audio/beach.mp3");
     this.load.audio("intro", "../assets/audio/intro.mp3");
     this.load.audio("collect", "../assets/audio/collect.mp3");
     this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
@@ -66,27 +67,29 @@ class Outro extends Phaser.Scene {
   create(data) {
     this.add.image(325, 240, "beach");
 
-    //music
-    // let click = 0;
-    // var introMusic = this.sound.add("intro", { loop: true });
-    // introMusic.play();
-    // let audioOn = this.add
-    //   .image(620, 30, "audioOnBlack")
-    //   .setScale(0.5)
-    //   .setScrollFactor(0);
-    // audioOn.setInteractive();
-    // audioOn.on("pointerup", () => {
-    //   if (click % 2 || click === 0) {
-    //     introMusic.stop();
-    //     audioOn = this.add.image(620, 30, "audioOffBlack").setScale(0.5);
-    //     click++;
-    //   } else {
-    //     introMusic.play();
-    //     audioOn = this.add.image(620, 30, "audioOnBlack").setScale(0.5);
-    //     click++;
-    //   }
-    //   return click;
-    // });
+    music;
+    let click = 0;
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+    var beachMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
+    beachMusic.play();
+    let audioOn = this.add
+      .image(620, 30, "audioOnBlack")
+      .setScale(0.5)
+      .setScrollFactor(0);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        collectSound.play({ volume: 0 });
+        beachMusic.stop();
+        audioOn = this.add.image(620, 30, "audioOffBlack").setScale(0.5);
+        click++;
+      } else {
+        beachMusic.play();
+        audioOn = this.add.image(620, 30, "audioOnBlack").setScale(0.5);
+        click++;
+      }
+      return click;
+    });
 
     this.physics.world.setBounds(0, 0, 650, 480);
     const beachmap = this.make.tilemap({ key: "beachmap" });
