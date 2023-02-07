@@ -21,19 +21,14 @@ class Garden extends Phaser.Scene {
   preload() {
     this.load.audio("garden", "../assets/audio/garden.mp3");
     this.load.image("background", "../assets/img/garden.png");
-    this.load.image("audioOn", "../assets/img/audioOn.png");
-    // this.load.image("audioOff", "../assets/img/audioOff.png");
+    this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
+    this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
     this.load.image("play-btn", "../assets/img/playButton.png");
-    this.load.image("heartFull", "../assets/img/heartFull.png");
-    this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.image("pipe", "../assets/img/pipe.png");
-    this.load.image("grey-box", "../assets/img/grey_box.png");
-    this.load.image("gear", "../assets/img/gear.png");
-    this.load.image("checkmark", "../assets/img/checkmark.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -65,9 +60,38 @@ class Garden extends Phaser.Scene {
   create() {
     const x = innerWidth / 2;
     const y = innerHeight / 2;
-    this.scene.run("settingsMenu");
+
     this.add.image(960, 240, "background");
 
+    //music
+    let click = 0;
+    var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
+    gardenMusic.play();
+    let audioOn = this.add
+      .image(620, 30, "audioOnBlack")
+      .setScale(0.5)
+      .setScrollFactor(0);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        gardenMusic.stop();
+        audioOn = this.add
+          .image(620, 30, "audioOffBlack")
+          .setScale(0.5)
+          .setScrollFactor(0);
+        click++;
+      } else {
+        gardenMusic.play();
+        audioOn = this.add
+          .image(620, 30, "audioOnBlack")
+          .setScale(0.5)
+          .setScrollFactor(0);
+        click++;
+      }
+      return click;
+    });
+
+    //platforms and ground
     let pipe = this.add.image(1850, 420, "pipe");
     const map = this.make.tilemap({ key: "map" });
     const tileset = map.addTilesetImage("terrain", "tiles");
@@ -88,9 +112,11 @@ class Garden extends Phaser.Scene {
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
+
+    //cursors
+    cursors = this.input.keyboard.createCursorKeys();
     this.inputs = this.input.keyboard.createCursorKeys();
 
-    cursors = this.input.keyboard.createCursorKeys();
     //bunny
     invisiblePlayer.setCollisionByExclusion(-1);
     bunnies = this.physics.add.group({
@@ -124,11 +150,13 @@ class Garden extends Phaser.Scene {
     });
 
     //score
-    text = this.add.text(0, 0, `Herbs Collected: ${score}`, {
-      fontSize: "20px",
-      fill: "#000000",
-    });
-    text.setScrollFactor(0);
+    text = this.add
+      .text(20, 23, `Herbs Collected: ${score}`, {
+        fontSize: "20px",
+        fill: "#000000",
+      })
+      .setScrollFactor(0);
+
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
       score++;
@@ -147,25 +175,6 @@ class Garden extends Phaser.Scene {
       score = 0;
     }
     this.physics.add.overlap(player, collectibles, collect, null, this);
-
-    //music
-    let click = 0;
-    var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
-    gardenMusic.play();
-    let audioOn = this.add.image(620, 30, "audioOn").setScrollFactor(0);
-    audioOn.setInteractive();
-    audioOn.on("pointerup", () => {
-      if (click % 2 || click === 0) {
-        gardenMusic.stop();
-        audioOn = this.add.image(620, 30, "audioOff");
-        click++;
-      } else {
-        gardenMusic.play();
-        audioOn = this.add.image(620, 30, "audioOn");
-        click++;
-      }
-      return click;
-    });
   }
 
   update() {

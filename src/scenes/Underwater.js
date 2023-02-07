@@ -13,9 +13,9 @@ var crabs;
 var gameOver = false;
 var cameras;
 var pipe;
+var waterMusic;
 
 class Underwater extends Phaser.Scene {
-  //platforms;
   constructor() {
     super({
       key: "Underwater",
@@ -28,8 +28,10 @@ class Underwater extends Phaser.Scene {
     });
   }
   preload() {
-    //this.load.audio('underwater'); //underwater audio
+    this.load.audio("water", "../assets/audio/water.mp3"); //water audio
     this.load.image("waterbg", "../assets/img/waterbg.png"); //background
+    this.load.image("audioOn", "../assets/img/audioOn.png");
+    this.load.image("audioOff", "../assets/img/audioOff.png");
     this.load.image("water", "../assets/img/water.png"); //terrain
     this.load.image("bubbles", "../assets/img/bubble_1.png"); //icons
     this.load.tilemapTiledJSON("waterMap", "../assets/json/watermap.json"); //map.json
@@ -55,13 +57,13 @@ class Underwater extends Phaser.Scene {
     );
   }
   create() {
-    //var music = this.sound.add('underwater', {loop: true, volume:0.1});
-    //music.play();
     this.cameras.main.setBounds(0, 0, 1920, 480);
     this.physics.world.setBounds(0, 0, 1920, 480);
+
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
+
     //platforms and ground
     this.add.image(960, 240, "waterbg");
     const waterMap = this.make.tilemap({ key: "waterMap" });
@@ -79,10 +81,12 @@ class Underwater extends Phaser.Scene {
     waterPipe.setCollisionByExclusion(-1);
     waterGround.setCollisionByExclusion(-1);
     let pipe = this.add.image(1850, 420, "pipe");
+
     //collectibles
     bubbles = this.physics.add.group({
       key: "bubbles",
     });
+
     function createBubbles() {
       bubbles.create(
         100 + Math.random() * 1920,
@@ -98,6 +102,35 @@ class Underwater extends Phaser.Scene {
     });
     this.physics.add.collider(bubbles, waterGround);
     this.physics.add.collider(bubbles, waterPipe);
+
+    //music
+    let click = 0;
+    var waterMusic = this.sound.add("water", { loop: true, volume: 0.1 });
+    waterMusic.play();
+    let audioOn = this.add
+      .image(620, 30, "audioOn")
+      .setScale(0.5)
+      .setScrollFactor(0);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        waterMusic.stop();
+        audioOn = this.add
+          .image(620, 30, "audioOff")
+          .setScale(0.5)
+          .setScrollFactor(0);
+        click++;
+      } else {
+        waterMusic.play();
+        audioOn = this.add
+          .image(620, 30, "audioOn")
+          .setScale(0.5)
+          .setScrollFactor(0);
+        click++;
+      }
+      return click;
+    });
+
     //octopuses
     EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
     octopuses = this.physics.add.group({ key: "octopus" });
@@ -129,11 +162,12 @@ class Underwater extends Phaser.Scene {
     this.physics.add.collider(crabs, invisEnemyBlock);
 
     //score
-    text = this.add.text(0, 0, `Bubbles Collected: ${score}`, {
-      fontSize: "20px",
-      fill: "#ffffff",
-    });
-    text.setScrollFactor(0);
+    text = this.add
+      .text(20, 23, `Bubbles Collected: ${score}`, {
+        fontSize: "20px",
+        fill: "#ffffff",
+      })
+      .setScrollFactor(0);
 
     function collect(player, collectibleBubble) {
       collectibleBubble.destroy(collectibleBubble.x, collectibleBubble.y);
@@ -193,6 +227,7 @@ class Underwater extends Phaser.Scene {
       this.time.delayedCall(800, restart, [], this);
     }
   }
+
   update() {
     // player.update(this.inputs);
     for (const oct of octopuses.children.entries) {
@@ -226,11 +261,11 @@ class Underwater extends Phaser.Scene {
       }
     }
     if (cursors.left.isDown) {
-      player.setVelocityX(-500).setFlipX(true);
+      player.setVelocityX(-75).setFlipX(true);
 
       player.anims.play("left", true);
     } else if (cursors.right.isDown) {
-      player.setVelocityX(500).setFlipX(false);
+      player.setVelocityX(75).setFlipX(false);
 
       player.anims.play("right", true);
     } else {

@@ -14,7 +14,6 @@ var gameOver = false;
 var forestMusic;
 
 class Forest extends Phaser.Scene {
-  //platforms;
   constructor() {
     super("Forest");
   }
@@ -53,24 +52,6 @@ class Forest extends Phaser.Scene {
   }
 
   create() {
-    //music
-    let click = 0;
-    var forestMusic = this.sound.add("forest", { loop: true, volume: 0.1 });
-    forestMusic.play();
-    let audioOn = this.add.image(620, 30, "audioOn").setScrollFactor(0);
-    audioOn.setInteractive();
-    audioOn.on("pointerup", () => {
-      if (click % 2 || click === 0) {
-        forestMusic.stop();
-        audioOn = this.add.image(620, 30, "audioOff");
-        click++;
-      } else {
-        forestMusic.play();
-        audioOn = this.add.image(620, 30, "audioOn");
-        click++;
-      }
-      return click;
-    });
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
@@ -120,11 +101,12 @@ class Forest extends Phaser.Scene {
     this.physics.add.collider(foxes, forestInvis);
 
     //score
-    text = this.add.text(0, 0, `Wood Collected: ${score}`, {
-      fontSize: "20px",
-      fill: "#ffffff",
-    });
-    text.setScrollFactor(0);
+    text = this.add
+      .text(20, 23, `Wood Collected: ${score}`, {
+        fontSize: "20px",
+        fill: "#ffffff",
+      })
+      .setScrollFactor(0);
 
     function collect(player, collectibleWood) {
       collectibleWood.destroy(collectibleWood.x, collectibleWood.y);
@@ -146,6 +128,34 @@ class Forest extends Phaser.Scene {
       .collideWith([forestGround, forestPipe])
       .overlapWith(collectibleWood, collect)
       .hitEnemy(foxes, hitFox);
+
+    //music
+    let click = 0;
+    var forestMusic = this.sound.add("forest", { loop: true, volume: 0.1 });
+    forestMusic.play();
+    let audioOn = this.add
+      .image(620, 30, "audioOn")
+      .setScale(0.5)
+      .setScrollFactor(0);
+    audioOn.setInteractive();
+    audioOn.on("pointerup", () => {
+      if (click % 2 || click === 0) {
+        forestMusic.stop();
+        audioOn = this.add
+          .image(620, 30, "audioOff")
+          .setScale(0.5)
+          .setScrollFactor(0);
+        click++;
+      } else {
+        forestMusic.play();
+        audioOn = this.add
+          .image(620, 30, "audioOn")
+          .setScale(0.5)
+          .setScrollFactor(0);
+        click++;
+      }
+      return click;
+    });
   }
 
   update() {

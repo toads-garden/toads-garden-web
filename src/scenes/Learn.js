@@ -16,8 +16,8 @@ class Learn extends Phaser.Scene {
 
   preload() {
     this.load.audio("intro", "../assets/audio/intro.mp3");
-    this.load.image("audioOn", "../assets/img/audioOn.png");
-    this.load.image("audioOff", "../assets/img/audioOff.png");
+    this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
+    this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("plant", "../assets/img/icons.png");
@@ -68,18 +68,21 @@ class Learn extends Phaser.Scene {
 
     //music
     let click = 0;
-    var introMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
+    var introMusic = this.sound.add("intro", { loop: true });
     introMusic.play();
-    let audioOn = this.add.image(620, 30, "audioOn");
+    let audioOn = this.add
+      .image(620, 30, "audioOnBlack")
+      .setScale(0.5)
+      .setScrollFactor(0);
     audioOn.setInteractive();
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         introMusic.stop();
-        audioOn = this.add.image(620, 30, "audioOff");
+        audioOn = this.add.image(620, 30, "audioOffBlack").setScale(0.5);
         click++;
       } else {
         introMusic.play();
-        audioOn = this.add.image(620, 30, "audioOn");
+        audioOn = this.add.image(620, 30, "audioOnBlack").setScale(0.5);
         click++;
       }
       return click;
@@ -146,29 +149,8 @@ class Learn extends Phaser.Scene {
     this.typewriteText(
       "                \nToad uses the left, right, and up \nbuttons to move around.\n                 \nJumping into items collects them for the town.\nToad can jump onto platforms to help get around.\n                \nThe pipes at the end of the stage transport  \nyou to the next world once you've \ncollected 15 items. \n                \nThere aren't any enemies here but \nwatch out on your journey!"
     );
-
-    // // Let's go button
-    // let gameButton = this.add.image(325, y + 45, "playButton").setScale(0.3);
-
-    // gameButton.setInteractive();
-
-    // gameButton.on("pointerover", () => {
-    //   gameButton = this.add
-    //     .image(x + 200, y * 1.85, "letsGo-red")
-    //     .setScale(x * 0.0018);
-    // });
-    // gameButton.on("pointerout", () => {
-    //   gameButton = this.add
-    //     .image(x + 200, y * 1.85, "letsGo-white")
-    //     .setScale(x * 0.0018);
-    // });
-
-    // gameButton.on("pointerup", () => {
-    //   this.scene.start("Garden", {
-    //     music: data.music,
-    //   });
-    // });
   }
+
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
