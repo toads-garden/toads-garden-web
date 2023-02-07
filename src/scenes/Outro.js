@@ -6,6 +6,7 @@ var wood;
 var plant;
 var cursors;
 var collectSound;
+var beachMusic;
 var witch;
 
 class Outro extends Phaser.Scene {
@@ -67,7 +68,7 @@ class Outro extends Phaser.Scene {
   create(data) {
     this.add.image(325, 240, "beach");
 
-    music;
+    //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
     var beachMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
