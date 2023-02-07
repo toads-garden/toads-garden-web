@@ -13,6 +13,7 @@ var fox;
 var octopus;
 var crab;
 var octPop;
+var singlePlatform;
 
 class Outro extends Phaser.Scene {
   constructor(data) {
@@ -26,11 +27,13 @@ class Outro extends Phaser.Scene {
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
     this.load.image("beach", "../assets/img/beach.png");
     this.load.image("tiles", "../assets/img/terrain.png");
+    this.load.image("replay", "../assets/img/replay.png");
     this.load.image("plant", "../assets/img/icons.png");
     this.load.image("play-btn", "../assets/img/playButton.png");
     this.load.image("wood", "../assets/img/wood.png");
     this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json"); //map.json
     this.load.image("water", "../assets/img/water.png");
+    this.load.image("singlePlatform", "../assets/img/singlePlatform.png");
     // this.load.spritesheet("toad", "assets/img/toad.png", {
     //   frameWidth: 48,
     //   frameHeight: 44,
@@ -97,13 +100,36 @@ class Outro extends Phaser.Scene {
       }
       return click;
     });
+    let gameButton = this.add.image(600, 50, "replay").setScale(0.2);
 
+    gameButton.setInteractive();
+
+    // gameButton.on("pointerover", () => {
+    //   gameButton = this.add
+    //     .image(x + 200, y * 1.85, "letsGo-red")
+    //     .setScale(x * 0.0018);
+    // });
+    // gameButton.on("pointerout", () => {
+    //   gameButton = this.add
+    //     .image(x + 200, y * 1.85, "letsGo-white")
+    //     .setScale(x * 0.0018);
+    // });
+
+    gameButton.on("pointerup", () => {
+      this.scene.start("Garden");
+    });
     this.physics.world.setBounds(0, 0, 650, 480);
     const beachmap = this.make.tilemap({ key: "beachmap" });
     const tileset = beachmap.addTilesetImage("water", "water");
     const terrain = beachmap.createLayer("beach-floor", tileset);
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
+    singlePlatform = this.physics.add.staticGroup();
+    singlePlatform
+      .create(425, 375, "singlePlatform")
+      .setScale(2)
+      .refreshBody()
+      .setVisible(false);
 
     // player = this.physics.add.sprite(100, 400, "toad");
 
@@ -131,13 +157,14 @@ class Outro extends Phaser.Scene {
     crab = this.physics.add.sprite(570, 375, "crab").setScale(2);
     crab.play("crabIdle");
     crab.setCollideWorldBounds("true");
-    octPop = this.physics.add.sprite(300, 40, "octopus").setScale(2);
+    octPop = this.physics.add.sprite(425, 300, "octopus").setScale(2);
     octPop.play("octShow");
     octPop.setCollideWorldBounds("true");
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
     this.physics.add.collider(player, terrain);
+    this.physics.add.collider(octPop, singlePlatform);
     this.physics.add.collider(witch, terrain);
     this.physics.add.collider(bunny, terrain);
     this.physics.add.collider(fox, terrain);
