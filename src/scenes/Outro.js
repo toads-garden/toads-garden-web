@@ -13,6 +13,10 @@ var fox;
 var octopus;
 var crab;
 var octPop;
+var singlePlatform;
+var foxy;
+var bunny2;
+var crab2;
 
 class Outro extends Phaser.Scene {
   constructor(data) {
@@ -26,11 +30,13 @@ class Outro extends Phaser.Scene {
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
     this.load.image("beach", "../assets/img/beach.png");
     this.load.image("tiles", "../assets/img/terrain.png");
+    this.load.image("replay", "../assets/img/replay.png");
     this.load.image("plant", "../assets/img/icons.png");
     this.load.image("play-btn", "../assets/img/playButton.png");
     this.load.image("wood", "../assets/img/wood.png");
     this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json"); //map.json
     this.load.image("water", "../assets/img/water.png");
+    this.load.image("singlePlatform", "../assets/img/singlePlatform.png");
     // this.load.spritesheet("toad", "assets/img/toad.png", {
     //   frameWidth: 48,
     //   frameHeight: 44,
@@ -96,13 +102,53 @@ class Outro extends Phaser.Scene {
       }
       return click;
     });
+    let gameButton = this.add.image(590, 30, "replay").setScale(0.6);
 
+    gameButton.setInteractive();
+
+    // gameButton.on("pointerover", () => {
+    //   gameButton = this.add
+    //     .image(x + 200, y * 1.85, "letsGo-red")
+    //     .setScale(x * 0.0018);
+    // });
+    // gameButton.on("pointerout", () => {
+    //   gameButton = this.add
+    //     .image(x + 200, y * 1.85, "letsGo-white")
+    //     .setScale(x * 0.0018);
+    // });
+
+    gameButton.on("pointerup", () => {
+      this.scene.start("Garden");
+      this.sound.removeByKey("beach");
+    });
     this.physics.world.setBounds(0, 0, 650, 480);
     const beachmap = this.make.tilemap({ key: "beachmap" });
     const tileset = beachmap.addTilesetImage("water", "water");
     const terrain = beachmap.createLayer("beach-floor", tileset);
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
+    singlePlatform = this.physics.add.staticGroup();
+    singlePlatform
+      .create(425, 375, "singlePlatform")
+      .setScale(2)
+      .refreshBody()
+      .setVisible(false);
+
+    singlePlatform
+      .create(570, 400, "singlePlatform")
+      .setScale(2)
+      .refreshBody()
+      .setVisible(false);
+
+    singlePlatform
+      .create(170, 395, "singlePlatform")
+      .refreshBody()
+      .setVisible(false);
+
+    singlePlatform
+      .create(75, 300, "singlePlatform")
+      .refreshBody()
+      .setVisible(false);
 
     // player = this.physics.add.sprite(100, 400, "toad");
 
@@ -110,33 +156,51 @@ class Outro extends Phaser.Scene {
     // player.setBounce(0.2);
 
     witch = this.physics.add
-      .sprite(250, 400, "witch")
+      .sprite(270, 400, "witch")
       .setFlipX(true)
       .setScale(2.5);
     witch.setCollideWorldBounds("true");
     witch.play("witchIdle");
+
     bunny = this.physics.add.sprite(500, 350, "bunny");
     bunny.play("bunnyIdle");
     bunny.setCollideWorldBounds("true");
+    bunny2 = this.physics.add.sprite(166, 300, "bunny");
+    bunny2.play("bunnyIdle");
+    bunny2.setCollideWorldBounds("true");
+
     fox = this.physics.add.sprite(425, 375, "fox").setFlipX(true).setScale(2);
+    foxy = this.physics.add.sprite(580, 300, "fox").setFlipX(true).setScale(2);
     fox.play("foxIdle");
     fox.setCollideWorldBounds("true");
+    foxy.play("foxIdle");
+    foxy.setCollideWorldBounds("true");
+
     octopus = this.physics.add
       .sprite(350, 400, "octopus")
       .setFlipX(true)
       .setScale(2);
     octopus.play("octIdle");
     octopus.setCollideWorldBounds("true");
+
     crab = this.physics.add.sprite(570, 375, "crab").setScale(2);
     crab.play("crabIdle");
     crab.setCollideWorldBounds("true");
-    octPop = this.physics.add.sprite(300, 40, "octopus").setScale(2);
+    crab2 = this.physics.add.sprite(68, 200, "crab").setScale(2);
+    crab2.play("crabIdle");
+    crab2.setCollideWorldBounds("true");
+
+    octPop = this.physics.add.sprite(425, 300, "octopus").setScale(2);
     octPop.play("octShow");
     octPop.setCollideWorldBounds("true");
     player = this.physics.add.sprite(80, 250, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
     this.physics.add.collider(player, terrain);
+    this.physics.add.collider(octPop, singlePlatform);
+    this.physics.add.collider(foxy, singlePlatform);
+    this.physics.add.collider(bunny2, singlePlatform);
+    this.physics.add.collider(crab2, singlePlatform);
     this.physics.add.collider(witch, terrain);
     this.physics.add.collider(bunny, terrain);
     this.physics.add.collider(fox, terrain);
