@@ -182,16 +182,6 @@ class Underwater extends Phaser.Scene {
       return false;
     }
 
-    // function hitOct(player, octopuses) {
-    //   gameIsOver();
-    // }
-
-    // function gameIsOver() {
-    //   gameOver = true;
-    //   player.die();
-    //   score = 0;
-    // }
-
     //TOAD
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
@@ -218,24 +208,22 @@ class Underwater extends Phaser.Scene {
     this.physics.add.collider(player, waterPipe);
     this.physics.add.collider(player, bubbles, collect, null, this);
     this.physics.add.collider(player, octopuses, die, null, this);
+    this.physics.add.collider(player, crabs, die, null, this);
     cursors = this.input.keyboard.createCursorKeys();
-    // player = new Toad(this, 100, 400)
-    //   .collideWith(waterGround)
-    //   .overlapWith(collectibleBubble, collect)
-    //   .hitEnemy(octopuses); //hitOct);
     function die(player) {
       player.setTint(0xff0000);
       this.cameras.main.fade(800);
       player.setVelocity(0, -500);
+
       function restart() {
         this.scene.restart();
+        score = 0;
       }
       this.time.delayedCall(800, restart, [], this);
     }
   }
 
   update() {
-    // player.update(this.inputs);
     for (const oct of octopuses.children.entries) {
       if (oct.body.blocked.up) {
         oct.direction = "DOWN";

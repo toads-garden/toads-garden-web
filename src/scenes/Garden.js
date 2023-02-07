@@ -5,8 +5,7 @@ var cursors;
 var player;
 var CollectibleLayer;
 var EnemyLayer;
-var PipeLayer;
-var pipe;
+
 var collectibles;
 var score = 0;
 var text;
@@ -113,7 +112,6 @@ class Garden extends Phaser.Scene {
     CollectibleLayer = map.getObjectLayer("CollectibleLayer")["objects"];
     EnemyLayer = map.getObjectLayer("EnemyLayer")["objects"];
 
-    // pipe.setCollisionByExclusion(-1);
     platforms.setCollisionByExclusion(-1);
     invisible.setCollisionByExclusion(-1);
     ground.setCollisionByExclusion(-1);
@@ -177,7 +175,6 @@ class Garden extends Phaser.Scene {
     function gameIsOver() {
       gameOver = true;
 
-      // this.physics.pause();
       player.die();
       score = 0;
     }
