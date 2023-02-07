@@ -12,6 +12,7 @@ var score = 0;
 var text;
 var bunnies;
 var gardenMusic;
+var collectSound;
 var gameOver = false;
 
 class Garden extends Phaser.Scene {
@@ -19,16 +20,17 @@ class Garden extends Phaser.Scene {
     super("Garden");
   }
   preload() {
-    this.load.audio("garden", "../assets/audio/garden.mp3");
-    this.load.image("background", "../assets/img/garden.png");
-    this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
-    this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
-    this.load.image("tiles", "../assets/img/terrain.png");
-    this.load.image("collectible", "../assets/img/icons.png");
-    this.load.image("play-btn", "../assets/img/playButton.png");
-    this.load.tilemapTiledJSON("map", "../assets/json/map.json");
-    this.load.image("plantTiles", "../assets/img/mushroom.png");
-    this.load.image("pipe", "../assets/img/pipe.png");
+    this.load.audio("garden", "../assets/audio/garden.mp3"); //garden audio
+    this.load.audio("collect", "../assets/audio/collect.mp3"); //collect audio
+    this.load.image("background", "../assets/img/garden.png"); //background
+    this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png"); //musicOn
+    this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png"); //musicOff
+    this.load.image("tiles", "../assets/img/terrain.png"); //terrain
+    this.load.image("collectible", "../assets/img/icons.png"); //icons
+    this.load.image("play-btn", "../assets/img/playButton.png"); //playButton
+    this.load.tilemapTiledJSON("map", "../assets/json/map.json"); //map.json
+    this.load.image("plantTiles", "../assets/img/mushroom.png"); //plants
+    this.load.image("pipe", "../assets/img/pipe.png"); //pipe
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -157,8 +159,11 @@ class Garden extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
+      collectSound.play();
       score++;
       text.setText(`Herbs Collected: ${score}`);
       return false;

@@ -14,6 +14,7 @@ var gameOver = false;
 var cameras;
 var pipe;
 var waterMusic;
+var collectSound;
 
 class Underwater extends Phaser.Scene {
   constructor() {
@@ -29,13 +30,14 @@ class Underwater extends Phaser.Scene {
   }
   preload() {
     this.load.audio("water", "../assets/audio/water.mp3"); //water audio
+    this.load.audio("collect", "../assets/audio/collect.mp3"); // collect audio
     this.load.image("waterbg", "../assets/img/waterbg.png"); //background
-    this.load.image("audioOn", "../assets/img/audioOn.png");
-    this.load.image("audioOff", "../assets/img/audioOff.png");
+    this.load.image("audioOn", "../assets/img/audioOn.png"); //musicOn
+    this.load.image("audioOff", "../assets/img/audioOff.png"); //musicOff
     this.load.image("water", "../assets/img/water.png"); //terrain
     this.load.image("bubbles", "../assets/img/bubble_1.png"); //icons
     this.load.tilemapTiledJSON("waterMap", "../assets/json/watermap.json"); //map.json
-    this.load.image("pipe", "../assets/img/pipe.png");
+    this.load.image("pipe", "../assets/img/pipe.png"); //pipe
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -169,8 +171,11 @@ class Underwater extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+
     function collect(player, collectibleBubble) {
       collectibleBubble.destroy(collectibleBubble.x, collectibleBubble.y);
+      collectSound.play();
       score++;
       text.setText(`Bubbles Collected: ${score}`);
       return false;

@@ -8,6 +8,7 @@ var cursors;
 var pipe;
 var singlePlat;
 var introMusic;
+var collectSound;
 
 class Learn extends Phaser.Scene {
   constructor(data) {
@@ -16,6 +17,7 @@ class Learn extends Phaser.Scene {
 
   preload() {
     this.load.audio("intro", "../assets/audio/intro.mp3");
+    this.load.audio("collect", "../assets/audio/collect.mp3");
     this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
     this.load.image("background", "../assets/img/garden.png");
@@ -129,8 +131,11 @@ class Learn extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
 
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+
     function collect(player, obj) {
       obj.destroy(obj.x, obj.y);
+      collectSound.play();
       return false;
     }
 

@@ -12,6 +12,7 @@ var EnemyLayerFox;
 var foxes;
 var gameOver = false;
 var forestMusic;
+var collectSound;
 
 class Forest extends Phaser.Scene {
   constructor() {
@@ -19,6 +20,7 @@ class Forest extends Phaser.Scene {
   }
   preload() {
     this.load.audio("forest", "../assets/audio/forest.mp3"); //forest audio
+    this.load.audio("collect", "../assets/audio/collect.mp3"); //collect audio
     this.load.image("forest", "../assets/img/forest.png"); //background
     this.load.image("audioOn", "../assets/img/audioOn.png"); // audio button
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
@@ -108,9 +110,11 @@ class Forest extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+
     function collect(player, collectibleWood) {
       collectibleWood.destroy(collectibleWood.x, collectibleWood.y);
-
+      collectSound.play();
       score++;
       text.setText(`Wood Collected: ${score}`);
       return false;
