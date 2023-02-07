@@ -4,7 +4,7 @@ var witch;
 var singlePlatform;
 
 class Intro extends Scene {
-  constructor(data) {
+  constructor() {
     super("Intro");
   }
   preload() {
@@ -97,9 +97,7 @@ class Intro extends Scene {
     // });
 
     gameButton.on("pointerup", () => {
-      this.scene.start("Outro", {
-        music: data.music,
-      });
+      this.scene.start("Learn");
     });
   }
 
