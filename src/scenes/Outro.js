@@ -8,6 +8,10 @@ var cursors;
 var collectSound;
 var witch;
 var beachMusic;
+var bunny;
+var fox;
+var octopus;
+var crab;
 
 class Outro extends Phaser.Scene {
   constructor(data) {
@@ -98,15 +102,35 @@ class Outro extends Phaser.Scene {
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
     player = this.physics.add.sprite(100, 400, "toad");
+    player.setCollideWorldBounds("true");
+    player.setBounce(0.2);
     witch = this.physics.add
-      .sprite(500, 400, "witch")
+      .sprite(250, 400, "witch")
       .setFlipX(true)
       .setScale(2);
     witch.setCollideWorldBounds("true");
-    player.setCollideWorldBounds("true");
-    player.setBounce(0.2);
+    witch.play("witchIdle");
+    bunny = this.physics.add.sprite(500, 400, "bunny");
+    bunny.play("bunnyIdle");
+    bunny.setCollideWorldBounds("true");
+    fox = this.physics.add.sprite(425, 400, "fox").setFlipX(true).setScale(2);
+    fox.play("foxIdle");
+    fox.setCollideWorldBounds("true");
+    octopus = this.physics.add
+      .sprite(350, 400, "octopus")
+      .setFlipX(true)
+      .setScale(2);
+    octopus.play("octIdle");
+    octopus.setCollideWorldBounds("true");
+    crab = this.physics.add.sprite(550, 400, "crab").setScale(2);
+    crab.play("crabIdle");
+    crab.setCollideWorldBounds("true");
     this.physics.add.collider(player, terrain);
     this.physics.add.collider(witch, terrain);
+    this.physics.add.collider(bunny, terrain);
+    this.physics.add.collider(fox, terrain);
+    this.physics.add.collider(octopus, terrain);
+    this.physics.add.collider(crab, terrain);
 
     cursors = this.input.keyboard.createCursorKeys();
 
