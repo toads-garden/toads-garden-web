@@ -269,6 +269,7 @@ class Underwater extends Phaser.Scene {
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Outro");
+      this.sound.removeByKey("water");
     }
   }
 }
