@@ -10,8 +10,6 @@ class Intro extends Scene {
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
     this.load.image("play-btn", "../assets/img/playButton.png");
-    this.load.image("heartFull", "../assets/img/heartFull.png");
-    this.load.image("heartEmpty", "../assets/img/heartEmpty.png");
     this.load.tilemapTiledJSON("map", "../assets/json/map.json");
     this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.image("pipe", "../assets/img/pipe.png");
