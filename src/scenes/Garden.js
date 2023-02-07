@@ -71,6 +71,7 @@ class Garden extends Phaser.Scene {
 
     //music
     let click = 0;
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
     var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
     gardenMusic.play();
     let audioOn = this.add
@@ -80,6 +81,7 @@ class Garden extends Phaser.Scene {
     audioOn.setInteractive();
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
+        collectSound.play({ volume: 0 });
         gardenMusic.stop();
         audioOn = this.add
           .image(620, 30, "audioOffBlack")
@@ -87,6 +89,7 @@ class Garden extends Phaser.Scene {
           .setScrollFactor(0);
         click++;
       } else {
+        collectSound.play({ volume: 0.5 });
         gardenMusic.play();
         audioOn = this.add
           .image(620, 30, "audioOnBlack")
@@ -162,8 +165,6 @@ class Garden extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
-    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
-
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
       collectSound.play();
@@ -173,6 +174,7 @@ class Garden extends Phaser.Scene {
     }
 
     function hitBunny(player, bunnies) {
+      gardenMusic.stop();
       gameIsOver();
     }
     function gameIsOver() {

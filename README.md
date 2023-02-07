@@ -55,12 +55,12 @@ And extra credits to our awesome GHP instructors:
 
 - Garden Music: https://soundcloud.com/tm-44-rest/super-mario-bros-underwater-theme-lo-fi-hip-hop-remix
 
--Forest Music: https://soundcloud.com/luvemenot/game-over-super-mario-world
+- Forest Music: https://soundcloud.com/luvemenot/game-over-super-mario-world
 
--Underwater Music: https://soundcloud.com/lucaspucasmusic/space-fantasy-super-mario-galaxy-lofi-remix
+- Underwater Music: https://soundcloud.com/lucaspucasmusic/space-fantasy-super-mario-galaxy-lofi-remix
 
--Town Music: https://soundcloud.com/keisha-lu/super-mario-bros-theme-song
+- Town Music: https://soundcloud.com/keisha-lu/super-mario-bros-theme-song
 
--Town Tiles: https://cypor.itch.io/12x12-rpg-tileset
+- Town Tiles: https://cypor.itch.io/12x12-rpg-tileset
 
--Witch Sprite: https://9e0.itch.io/witches-pack
+- Witch Sprite: https://9e0.itch.io/witches-pack

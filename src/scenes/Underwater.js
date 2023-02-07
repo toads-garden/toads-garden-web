@@ -112,6 +112,7 @@ class Underwater extends Phaser.Scene {
 
     //music
     let click = 0;
+    var collectSound = this.sound.add("collect", { loop: true, volume: 0.5 });
     var waterMusic = this.sound.add("water", { loop: true, volume: 0.1 });
     waterMusic.play();
     let audioOn = this.add
@@ -121,6 +122,7 @@ class Underwater extends Phaser.Scene {
     audioOn.setInteractive();
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
+        collectSound.play({ volume: 0 });
         waterMusic.stop();
         audioOn = this.add
           .image(620, 30, "audioOff")
@@ -128,6 +130,7 @@ class Underwater extends Phaser.Scene {
           .setScrollFactor(0);
         click++;
       } else {
+        collectSound.play({ volume: 0.5 });
         waterMusic.play();
         audioOn = this.add
           .image(620, 30, "audioOn")
@@ -175,8 +178,6 @@ class Underwater extends Phaser.Scene {
         fill: "#ffffff",
       })
       .setScrollFactor(0);
-
-    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
 
     function collect(player, collectibleBubble) {
       collectibleBubble.destroy(collectibleBubble.x, collectibleBubble.y);

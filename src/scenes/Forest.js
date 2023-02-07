@@ -22,7 +22,8 @@ class Forest extends Phaser.Scene {
     this.load.audio("forest", "../assets/audio/forest.mp3"); //forest audio
     this.load.audio("collect", "../assets/audio/collect.mp3"); //collect audio
     this.load.image("forest", "../assets/img/forest.png"); //background
-    this.load.image("audioOn", "../assets/img/audioOn.png"); // audio button
+    this.load.image("audioOn", "../assets/img/audioOn.png"); //audio button
+    this.load.image("audioOff", "../assets/img/audioOff.png"); //audioOff button
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
     this.load.image("wood", "../assets/img/wood.png"); //icons
     this.load.tilemapTiledJSON("forestMap", "../assets/json/forest.json"); //map.json
@@ -115,8 +116,6 @@ class Forest extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
-    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
-
     function collect(player, collectibleWood) {
       collectibleWood.destroy(collectibleWood.x, collectibleWood.y);
       collectSound.play();
@@ -140,6 +139,7 @@ class Forest extends Phaser.Scene {
 
     //music
     let click = 0;
+    var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
     var forestMusic = this.sound.add("forest", { loop: true, volume: 0.1 });
     forestMusic.play();
     let audioOn = this.add
@@ -149,6 +149,7 @@ class Forest extends Phaser.Scene {
     audioOn.setInteractive();
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
+        collectSound.play({ volume: 0 });
         forestMusic.stop();
         audioOn = this.add
           .image(620, 30, "audioOff")
@@ -156,6 +157,7 @@ class Forest extends Phaser.Scene {
           .setScrollFactor(0);
         click++;
       } else {
+        collectSound.play({ volume: 0.5 });
         forestMusic.play();
         audioOn = this.add
           .image(620, 30, "audioOn")
