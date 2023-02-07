@@ -9,6 +9,7 @@ var pipe;
 var singlePlat;
 var introMusic;
 var collectSound;
+var bubble;
 
 class Learn extends Phaser.Scene {
   constructor(data) {
@@ -28,6 +29,7 @@ class Learn extends Phaser.Scene {
     this.load.image("plantTiles", "../assets/img/mushroom.png");
     this.load.image("wood", "../assets/img/wood.png");
     this.load.image("pipe", "../assets/img/pipe.png");
+    this.load.image("bubbles", "../assets/img/bubble_1.png"); //icons
     this.load.image("singlePlatform", "../assets/img/singlePlatform.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
@@ -68,9 +70,6 @@ class Learn extends Phaser.Scene {
   }
 
   create(data) {
-    const x = innerWidth / 2;
-    const y = innerHeight / 2;
-
     this.add.image(960, 240, "background");
 
     //music
@@ -113,27 +112,11 @@ class Learn extends Phaser.Scene {
     plant.create(100, 200, "plant").setScale(1.5);
     wood = this.physics.add.staticGroup();
     wood.create(300, 400, "wood").setScale(1.5);
-
+    bubble = this.physics.add.staticGroup();
+    bubble.create(550, 175, "bubbles").setScale(1.5);
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
-    this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("toad", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "turn",
-      frames: [{ key: "toad", frame: 0 }],
-      frameRate: 20,
-    });
 
     cursors = this.input.keyboard.createCursorKeys();
 
@@ -147,6 +130,7 @@ class Learn extends Phaser.Scene {
     this.physics.add.collider(player, singlePlat);
     this.physics.add.overlap(player, plant, collect, null, this);
     this.physics.add.overlap(player, wood, collect, null, this);
+    this.physics.add.overlap(player, bubble, collect, null, this);
 
     this.story = this.add
       .text(325, 155 / 1.2, "", {
