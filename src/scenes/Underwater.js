@@ -8,7 +8,7 @@ var text;
 var bubbles;
 var EnemyLayerCrab;
 var EnemyLayerOct;
-var octupuses;
+var octopuses;
 var crabs;
 var gameOver = false;
 var cameras;
@@ -66,6 +66,9 @@ class Underwater extends Phaser.Scene {
     this.add.image(960, 240, "waterbg");
     const waterMap = this.make.tilemap({ key: "waterMap" });
     const waterTile = waterMap.addTilesetImage("water", "water");
+    const waterPipe = waterMap
+      .createLayer("water-pipe", waterTile)
+      .setVisible(false);
     const waterGround = waterMap
       .createLayer("water-ground", waterTile)
       .setVisible(false);
@@ -73,6 +76,7 @@ class Underwater extends Phaser.Scene {
       .createLayer("invisEnemyBlock", waterTile)
       .setVisible(false);
     invisEnemyBlock.setCollisionByExclusion(-1);
+    waterPipe.setCollisionByExclusion(-1);
     waterGround.setCollisionByExclusion(-1);
     let pipe = this.add.image(1850, 420, "pipe");
     //collectibles
@@ -93,20 +97,22 @@ class Underwater extends Phaser.Scene {
       child.setBounceY(Phaser.Math.FloatBetween(0.9, 1));
     });
     this.physics.add.collider(bubbles, waterGround);
-
+    this.physics.add.collider(bubbles, waterPipe);
     //octopuses
     EnemyLayerOct = waterMap.getObjectLayer("EnemyLayerOct")["objects"];
-    octupuses = this.physics.add.group({ key: "octopus" });
+    octopuses = this.physics.add.group({ key: "octopus" });
     EnemyLayerOct.forEach((object) => {
-      let octObj = octupuses.create(object.x, object.y, "octopus");
+      let octObj = octopuses.create(object.x, object.y, "octopus");
       octObj.setScale(object.width / 16, object.height / 16);
       octObj.setOrigin(0);
       octObj.body.width = object.width;
-      octObj.direction = "UP";
+
+      octObj.direction = "DOWN";
+
       octObj.body.height = object.height;
     });
-    this.physics.add.collider(octupuses, waterGround);
-    this.physics.add.collider(octupuses, invisEnemyBlock);
+    this.physics.add.collider(octopuses, waterGround);
+    this.physics.add.collider(octopuses, invisEnemyBlock);
 
     //crabs
     EnemyLayerCrab = waterMap.getObjectLayer("EnemyLayerCrab")["objects"];
@@ -136,7 +142,7 @@ class Underwater extends Phaser.Scene {
       return false;
     }
 
-    // function hitOct(player, octupuses) {
+    // function hitOct(player, octopuses) {
     //   gameIsOver();
     // }
 
@@ -169,25 +175,36 @@ class Underwater extends Phaser.Scene {
       frameRate: 20,
     });
     this.physics.add.collider(player, waterGround);
+    this.physics.add.collider(player, waterPipe);
     this.physics.add.collider(player, bubbles, collect, null, this);
+    this.physics.add.collider(player, octopuses, die, null, this);
     cursors = this.input.keyboard.createCursorKeys();
     // player = new Toad(this, 100, 400)
     //   .collideWith(waterGround)
     //   .overlapWith(collectibleBubble, collect)
-    //   .hitEnemy(octupuses); //hitOct);
+    //   .hitEnemy(octopuses); //hitOct);
+    function die(player) {
+      player.setTint(0xff0000);
+      this.cameras.main.fade(800);
+      player.setVelocity(0, -500);
+      function restart() {
+        this.scene.restart();
+      }
+      this.time.delayedCall(800, restart, [], this);
+    }
   }
   update() {
     // player.update(this.inputs);
-    for (const oct of octupuses.children.entries) {
+    for (const oct of octopuses.children.entries) {
       if (oct.body.blocked.up) {
         oct.direction = "DOWN";
-        oct.play("octSwimUp", true);
+        oct.play("octSwimDown", true);
       }
       if (oct.body.blocked.down) {
         oct.direction = "UP";
-        oct.play("octSwimDown", true);
+        oct.play("octSwimUp", true);
       }
-      if (oct.direction === "UP") {
+      if (oct.direction === "DOWN") {
         oct.setVelocityY(100);
       } else {
         oct.setVelocityY(-100);
@@ -209,11 +226,11 @@ class Underwater extends Phaser.Scene {
       }
     }
     if (cursors.left.isDown) {
-      player.setVelocityX(-100).setFlipX(true);
+      player.setVelocityX(-500).setFlipX(true);
 
       player.anims.play("left", true);
     } else if (cursors.right.isDown) {
-      player.setVelocityX(100).setFlipX(false);
+      player.setVelocityX(500).setFlipX(false);
 
       player.anims.play("right", true);
     } else {

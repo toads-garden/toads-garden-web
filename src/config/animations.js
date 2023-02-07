@@ -99,8 +99,8 @@ export default (scene) => {
   scene.anims.create({
     key: "crabWalkRight",
     frames: scene.anims.generateFrameNames("crab", {
-      start: 4,
-      end: 7,
+      start: 9,
+      end: 13,
       prefix: "crab_sprite_sheet_",
     }),
     repeat: -1,
@@ -109,8 +109,8 @@ export default (scene) => {
   scene.anims.create({
     key: "crabWalkLeft",
     frames: scene.anims.generateFrameNames("crab", {
-      start: 4,
-      end: 7,
+      start: 9,
+      end: 13,
       prefix: "crab_sprite_sheet_",
     }),
     repeat: -1,
