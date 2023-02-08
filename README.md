@@ -35,7 +35,8 @@ And extra credits to our awesome GHP instructors:
 
 2023 Toads Garden TM -- All Rights Reserved
 
-(/src/assets/img/screenshot.png)
+
+![Game screenshot](/src/assets/img/screenshot.png?raw=true "Screenshot")
 
 ## Additional Credits
 
