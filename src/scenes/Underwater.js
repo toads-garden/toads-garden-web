@@ -152,6 +152,8 @@ class Underwater extends Phaser.Scene {
       let octObj = octopuses.create(object.x, object.y, "octopus");
       octObj.setScale(object.width / 16, object.height / 16);
       octObj.setOrigin(0);
+      octObj.setSize(20, 18, true);
+      octObj.setOffset(7, 6);
       octObj.body.width = object.width;
 
       octObj.direction = "DOWN";
