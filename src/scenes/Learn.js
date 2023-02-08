@@ -69,7 +69,7 @@ class Learn extends Phaser.Scene {
     });
   }
 
-  create(data) {
+  create() {
     this.add.image(960, 240, "background");
 
     //music
@@ -96,6 +96,7 @@ class Learn extends Phaser.Scene {
       return click;
     });
 
+    //creating items for scene
     this.physics.world.setBounds(0, 0, 650, 480);
     pipe = this.add.image(575, 420, "pipe");
     const learnmap = this.make.tilemap({ key: "learnmap" });
@@ -120,18 +121,21 @@ class Learn extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
 
+    //functions
     function collect(player, obj) {
       obj.destroy(obj.x, obj.y);
       collectSound.play();
       return false;
     }
 
+    //add colliders
     this.physics.add.collider(player, ground);
     this.physics.add.collider(player, singlePlat);
     this.physics.add.overlap(player, plant, collect, null, this);
     this.physics.add.overlap(player, wood, collect, null, this);
     this.physics.add.overlap(player, bubble, collect, null, this);
 
+    //text
     this.story = this.add
       .text(325, 155 / 1.2, "", {
         fill: "#29465B",
@@ -145,6 +149,7 @@ class Learn extends Phaser.Scene {
   }
 
   update() {
+    //toad controls
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
 
@@ -163,6 +168,7 @@ class Learn extends Phaser.Scene {
       player.setVelocityY(-250);
     }
 
+    //pipe transport
     var xDifference = Math.abs(Math.floor(player.body.x) - 548);
     var yDifference = Math.abs(Math.floor(player.body.y) - 336);
     var threshhold = 5;
