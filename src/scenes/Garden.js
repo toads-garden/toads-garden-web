@@ -124,14 +124,13 @@ class Garden extends Phaser.Scene {
     //cursors
     cursors = this.input.keyboard.createCursorKeys();
     this.inputs = this.input.keyboard.createCursorKeys();
-
-    //bunny
     invisiblePlayer.setCollisionByExclusion(-1);
+
+    //bunnies
     bunnies = this.physics.add.group({
       key: "bunny",
     });
 
-    //bunnies
     EnemyLayer.forEach((object) => {
       let bunnyObj = bunnies.create(object.x, object.y, "bunny");
       bunnyObj.setScale(object.width / 28.5, object.height / 37);
@@ -170,6 +169,7 @@ class Garden extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
+    //functions
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
       collectSound.play();
@@ -208,7 +208,7 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    //362
+    //pipe transport
     var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 362);
     var threshhold = 5;
