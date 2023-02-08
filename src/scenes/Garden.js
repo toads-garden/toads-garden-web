@@ -145,6 +145,7 @@ class Garden extends Phaser.Scene {
     this.physics.add.collider(bunnies, ground);
     this.physics.add.collider(bunnies, invisible);
 
+    //toad
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms, invisiblePlayer])
       .overlapWith(collectibles, collect)
@@ -169,7 +170,7 @@ class Garden extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
-    //functions
+    //collect
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
       collectSound.play();
@@ -177,7 +178,7 @@ class Garden extends Phaser.Scene {
       text.setText(`Herbs Collected: ${score}`);
       return false;
     }
-
+    //hit enemy
     function hitBunny(player, bunnies) {
       gardenMusic.stop();
       gameIsOver();
@@ -193,6 +194,7 @@ class Garden extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
+    //bunny movement
     for (const bunny of bunnies.children.entries) {
       if (bunny.body.blocked.left) {
         bunny.direction = "RIGHT";
@@ -208,7 +210,7 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    //pipe transport
+    //pipe to next scene location
     var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 362);
     var threshhold = 5;

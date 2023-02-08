@@ -113,7 +113,7 @@ class Forest extends Phaser.Scene {
     this.physics.add.collider(foxes, forestGround);
     this.physics.add.collider(foxes, forestInvis);
 
-    //score
+    //score and collect items
     text = this.add
       .text(20, 23, `Wood Collected: ${score}`, {
         fontSize: "20px",
@@ -128,6 +128,7 @@ class Forest extends Phaser.Scene {
       text.setText(`Wood Collected: ${score}`);
       return false;
     }
+    //hit enemy
     function hitFox(player, foxes) {
       forestMusic.stop();
       gameIsOver();
@@ -177,6 +178,7 @@ class Forest extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
+    //fox movement
     for (const fox of foxes.children.entries) {
       if (fox.body.blocked.left) {
         fox.direction = "RIGHT";
@@ -192,7 +194,7 @@ class Forest extends Phaser.Scene {
         fox.setVelocityX(-100).setFlipX(true);
       }
     }
-
+    //pipe to next scene location
     var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 346);
     var threshhold = 5;
