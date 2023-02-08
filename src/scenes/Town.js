@@ -29,15 +29,15 @@ class Town extends Phaser.Scene {
       "townMushroomSprite",
       "assets/img/townMushroomSprite.png",
       {
-        frameWidth: 48,
-        frameHeight: 49,
+        frameWidth: 49,
+        frameHeight: 48,
       }
     );
-    this.load.atlas(
-      "townMushroom",
-      "./assets/img/townMushroomSprite.png",
-      "./assets/json/townMushroom.json"
-    );
+    // this.load.atlas(
+    //   "townMushroom",
+    //   "./assets/img/townMushroomSprite.png",
+    //   "./assets/json/townMushroom.json"
+    // );
     this.load.atlas("toad", "./assets/img/toad.png", "./assets/json/toad.json");
     this.load.atlas(
       "bunny",
