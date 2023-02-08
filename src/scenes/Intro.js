@@ -1,4 +1,4 @@
-import { Scene } from "Phaser";
+import { Scene } from "phaser";
 import generateAnimations from "../config/animations";
 var witch;
 var singlePlatform;
@@ -8,7 +8,7 @@ class Intro extends Scene {
     super("Intro");
   }
   preload() {
-    // this.load.audio("intro", "../assets/audio/intro.mp3");
+    //load all assets
     this.load.image("background", "../assets/img/garden.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("collectible", "../assets/img/icons.png");
@@ -61,16 +61,17 @@ class Intro extends Scene {
     );
     this.load.image("playButton", "../assets/img/playButton.png");
   }
-  create(data) {
+  create() {
     this.add.image(960, 240, "background");
-    // var music = this.sound.add("intro", { loop: true, volume: 0.1 });
-    // music.play();
+    //add invisible platform
     singlePlatform = this.physics.add.staticGroup();
     singlePlatform
       .create(580, 410, "singlePlatform")
       .setScale(2)
       .refreshBody()
       .setVisible(false);
+
+    //add witch
     witch = this.physics.add
       .sprite(580, 300, "witch")
       .setFlipX(true)
@@ -78,6 +79,7 @@ class Intro extends Scene {
     witch.setCollideWorldBounds("true");
     this.physics.add.collider(witch, singlePlatform);
     witch.play("witchIdle");
+
     //Text
     this.story = this.add
       .text(325, 220 / 1.2, "", {
@@ -94,17 +96,6 @@ class Intro extends Scene {
     let gameButton = this.add.image(325, 415, "playButton").setScale(0.3);
 
     gameButton.setInteractive();
-
-    // gameButton.on("pointerover", () => {
-    //   gameButton = this.add
-    //     .image(x + 200, y * 1.85, "letsGo-red")
-    //     .setScale(x * 0.0018);
-    // });
-    // gameButton.on("pointerout", () => {
-    //   gameButton = this.add
-    //     .image(x + 200, y * 1.85, "letsGo-white")
-    //     .setScale(x * 0.0018);
-    // });
 
     gameButton.on("pointerup", () => {
       this.scene.start("Town", {

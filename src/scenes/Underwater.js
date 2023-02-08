@@ -1,4 +1,4 @@
-import Phaser from "Phaser";
+import Phaser from "phaser";
 import generateAnimations from "../config/animations";
 
 var cursors;
@@ -101,6 +101,8 @@ class Underwater extends Phaser.Scene {
     bubbleInvis.setCollisionByExclusion(-1);
     waterPipe.setCollisionByExclusion(-1);
     waterGround.setCollisionByExclusion(-1);
+
+    //pipe image
     let pipe = this.add.image(1850, 420, "pipe");
 
     //collectibles
@@ -124,6 +126,7 @@ class Underwater extends Phaser.Scene {
     this.physics.add.collider(bubbles, waterGround);
     this.physics.add.collider(bubbles, waterPipe);
     this.physics.add.collider(bubbles, bubbleInvis);
+
     //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
@@ -160,8 +163,10 @@ class Underwater extends Phaser.Scene {
     octopuses = this.physics.add.group({ key: "octopus" });
     EnemyLayerOct.forEach((object) => {
       let octObj = octopuses.create(object.x, object.y, "octopus");
-      octObj.setScale(object.width / 16, object.height / 16);
+      octObj.setScale(object.width / 12, object.height / 12);
       octObj.setOrigin(0);
+      octObj.setSize(20, 18, true);
+      octObj.setOffset(7, 6);
       octObj.body.width = object.width;
 
       octObj.direction = "DOWN";
@@ -193,6 +198,7 @@ class Underwater extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
+    //collect bubbles
     function collect(player, collectibleBubble) {
       collectibleBubble.destroy(collectibleBubble.x, collectibleBubble.y);
       collectSound.play();
@@ -227,6 +233,7 @@ class Underwater extends Phaser.Scene {
   }
 
   update() {
+    //octopus movement
     for (const oct of octopuses.children.entries) {
       if (oct.body.blocked.up) {
         oct.direction = "DOWN";
@@ -242,6 +249,7 @@ class Underwater extends Phaser.Scene {
         oct.setVelocityY(-100);
       }
     }
+    //crab movement
     for (const crab of crabs.children.entries) {
       if (crab.body.blocked.left) {
         crab.direction = "RIGHT";
@@ -257,6 +265,7 @@ class Underwater extends Phaser.Scene {
         crab.setVelocityX(-80).setFlipX(true);
       }
     }
+    //toad movement
     if (cursors.left.isDown) {
       player.setVelocityX(-75).setFlipX(true);
 
@@ -278,10 +287,11 @@ class Underwater extends Phaser.Scene {
       player.setVelocityY(75);
     }
 
-    var xDifference = Math.abs(Math.floor(player.body.x) - 1853);
+    //pipe to next scene location
+    var xDifference = Math.abs(Math.floor(player.body.x) - 1825);
     var yDifference = Math.abs(Math.floor(player.body.y) - 340);
     var threshhold = 5;
-    if (xDifference <= threshhold && yDifference <= threshhold && score >= 15) {
+    if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Outro");
       this.sound.removeByKey("water");
     }

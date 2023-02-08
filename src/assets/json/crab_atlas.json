@@ -6,7 +6,7 @@
                 "x": 0,
                 "y": 0,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -17,9 +17,9 @@
             "filename": "crab_sprite_sheet_1",
             "frame": {
                 "x": 0,
-                "y": 32,
+                "y": 16,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -30,9 +30,9 @@
             "filename": "crab_sprite_sheet_2",
             "frame": {
                 "x": 0,
-                "y": 64,
+                "y": 32,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -43,9 +43,9 @@
             "filename": "crab_sprite_sheet_3",
             "frame": {
                 "x": 0,
-                "y": 96,
+                "y": 48,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -56,9 +56,9 @@
             "filename": "crab_sprite_sheet_4",
             "frame": {
                 "x": 0,
-                "y": 128,
+                "y": 64,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -69,9 +69,9 @@
             "filename": "crab_sprite_sheet_5",
             "frame": {
                 "x": 0,
-                "y": 160,
+                "y": 80,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -82,9 +82,9 @@
             "filename": "crab_sprite_sheet_6",
             "frame": {
                 "x": 0,
-                "y": 192,
+                "y": 96,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -95,9 +95,9 @@
             "filename": "crab_sprite_sheet_7",
             "frame": {
                 "x": 0,
-                "y": 224,
+                "y": 112,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -108,9 +108,9 @@
             "filename": "crab_sprite_sheet_8",
             "frame": {
                 "x": 0,
-                "y": 256,
+                "y": 128,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -121,9 +121,9 @@
             "filename": "crab_sprite_sheet_9",
             "frame": {
                 "x": 0,
-                "y": 288,
+                "y": 144,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -134,9 +134,9 @@
             "filename": "crab_sprite_sheet_10",
             "frame": {
                 "x": 0,
-                "y": 320,
+                "y": 160,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -147,9 +147,9 @@
             "filename": "crab_sprite_sheet_11",
             "frame": {
                 "x": 0,
-                "y": 352,
+                "y": 176,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -160,9 +160,9 @@
             "filename": "crab_sprite_sheet_12",
             "frame": {
                 "x": 0,
-                "y": 384,
+                "y": 192,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -173,9 +173,9 @@
             "filename": "crab_sprite_sheet_13",
             "frame": {
                 "x": 0,
-                "y": 416,
+                "y": 208,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -186,9 +186,9 @@
             "filename": "crab_sprite_sheet_14",
             "frame": {
                 "x": 0,
-                "y": 448,
+                "y": 224,
                 "w": 32,
-                "h": 32
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,
@@ -199,9 +199,217 @@
             "filename": "crab_sprite_sheet_15",
             "frame": {
                 "x": 0,
+                "y": 240,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_16",
+            "frame": {
+                "x": 0,
+                "y": 256,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_17",
+            "frame": {
+                "x": 0,
+                "y": 272,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_18",
+            "frame": {
+                "x": 0,
+                "y": 288,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_19",
+            "frame": {
+                "x": 0,
+                "y": 304,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_20",
+            "frame": {
+                "x": 0,
+                "y": 320,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_21",
+            "frame": {
+                "x": 0,
+                "y": 336,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_22",
+            "frame": {
+                "x": 0,
+                "y": 352,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_23",
+            "frame": {
+                "x": 0,
+                "y": 368,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_24",
+            "frame": {
+                "x": 0,
+                "y": 384,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_25",
+            "frame": {
+                "x": 0,
+                "y": 400,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_26",
+            "frame": {
+                "x": 0,
+                "y": 416,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_27",
+            "frame": {
+                "x": 0,
+                "y": 432,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_28",
+            "frame": {
+                "x": 0,
+                "y": 448,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_29",
+            "frame": {
+                "x": 0,
+                "y": 464,
+                "w": 32,
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_30",
+            "frame": {
+                "x": 0,
                 "y": 480,
                 "w": 32,
-                "h": 32
+                "h": 16
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crab_sprite_sheet_31",
+            "frame": {
+                "x": 0,
+                "y": 496,
+                "w": 32,
+                "h": 16
             },
             "anchor": {
                 "x": 0.5,

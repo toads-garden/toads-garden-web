@@ -1,4 +1,5 @@
 export default (scene) => {
+  //toad anims
   scene.anims.create({
     key: "right",
     frames: scene.anims.generateFrameNames("toad", { start: 0, end: 3 }),
@@ -16,6 +17,7 @@ export default (scene) => {
     frames: [{ key: "toad", frame: 0 }],
     frameRate: 20,
   });
+  //bunny anims
   scene.anims.create({
     key: "bunnyIdle",
     frames: scene.anims.generateFrameNames("bunny", {
@@ -46,6 +48,7 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
+  //fox anims
   scene.anims.create({
     key: "foxIdle",
     frames: scene.anims.generateFrameNames("fox", {
@@ -76,6 +79,7 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
+  //octopus anims
   scene.anims.create({
     key: "octSwimUp",
     frames: scene.anims.generateFrameNames("octopus", {
@@ -116,11 +120,12 @@ export default (scene) => {
     repeat: -1,
     frameRate: 5,
   });
+  //crab anims
   scene.anims.create({
     key: "crabIdle",
     frames: scene.anims.generateFrameNames("crab", {
-      start: 4,
-      end: 8,
+      start: 12,
+      end: 15,
       prefix: "crab_sprite_sheet_",
     }),
     repeat: -1,
@@ -129,23 +134,24 @@ export default (scene) => {
   scene.anims.create({
     key: "crabWalkRight",
     frames: scene.anims.generateFrameNames("crab", {
-      start: 9,
-      end: 13,
+      start: 28,
+      end: 29,
       prefix: "crab_sprite_sheet_",
     }),
     repeat: -1,
-    frameRate: 10,
+    frameRate: 6,
   });
   scene.anims.create({
     key: "crabWalkLeft",
     frames: scene.anims.generateFrameNames("crab", {
-      start: 9,
-      end: 13,
+      start: 28,
+      end: 29,
       prefix: "crab_sprite_sheet_",
     }),
     repeat: -1,
-    frameRate: 10,
+    frameRate: 6,
   });
+  //witch anims
   scene.anims.create({
     key: "witchIdle",
     frames: scene.anims.generateFrameNames("witch", {

@@ -1,4 +1,4 @@
-import Phaser from "Phaser";
+import Phaser from "phaser";
 import generateAnimations from "../config/animations";
 import { Toad } from "../gameObjects/Toad.js";
 var cursors;
@@ -129,14 +129,13 @@ class Garden extends Phaser.Scene {
     //cursors
     cursors = this.input.keyboard.createCursorKeys();
     this.inputs = this.input.keyboard.createCursorKeys();
-
-    //bunny
     invisiblePlayer.setCollisionByExclusion(-1);
+
+    //bunnies
     bunnies = this.physics.add.group({
       key: "bunny",
     });
 
-    //bunnies
     EnemyLayer.forEach((object) => {
       let bunnyObj = bunnies.create(object.x, object.y, "bunny");
       bunnyObj.setScale(object.width / 28.5, object.height / 37);
@@ -144,10 +143,14 @@ class Garden extends Phaser.Scene {
       bunnyObj.body.width = object.width;
       bunnyObj.direction = "RIGHT";
       bunnyObj.body.height = object.height;
+      bunnyObj.setSize(50, 44, true);
+      bunnyObj.setOffset(0, 32);
     });
 
     this.physics.add.collider(bunnies, ground);
     this.physics.add.collider(bunnies, invisible);
+
+    //toad
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms, invisiblePlayer])
       .overlapWith(collectibles, collect)
@@ -160,6 +163,8 @@ class Garden extends Phaser.Scene {
       obj.setOrigin(0);
       obj.body.width = object.width;
       obj.body.height = object.height;
+      obj.setSize(50, 44, true);
+      obj.setOffset(16, 20);
     });
 
     //score
@@ -170,6 +175,7 @@ class Garden extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
+    //collect
     function collect(player, collectible) {
       collectible.destroy(collectible.x, collectible.y);
       collectSound.play();
@@ -177,7 +183,7 @@ class Garden extends Phaser.Scene {
       text.setText(`Herbs Collected: ${score}`);
       return false;
     }
-
+    //hit enemy
     function hitBunny(player, bunnies) {
       gardenMusic.stop();
       gameIsOver();
@@ -193,6 +199,7 @@ class Garden extends Phaser.Scene {
 
   update() {
     player.update(this.inputs);
+    //bunny movement
     for (const bunny of bunnies.children.entries) {
       if (bunny.body.blocked.left) {
         bunny.direction = "RIGHT";
@@ -208,7 +215,7 @@ class Garden extends Phaser.Scene {
         bunny.setVelocityX(-100).setFlipX(false);
       }
     }
-    //362
+    //pipe to next scene location
     var xDifference = Math.abs(Math.floor(player.sprite.x) - 1853);
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 362);
     var threshhold = 5;
