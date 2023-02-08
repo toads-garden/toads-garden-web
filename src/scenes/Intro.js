@@ -98,9 +98,7 @@ class Intro extends Scene {
     gameButton.setInteractive();
 
     gameButton.on("pointerup", () => {
-      this.scene.start("Town", {
-        music: data.music,
-      });
+      this.scene.start("Town", {});
     });
   }
 
