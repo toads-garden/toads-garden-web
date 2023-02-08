@@ -59,6 +59,11 @@ class Learn extends Phaser.Scene {
       "./assets/json/crab_atlas.json"
     );
     this.load.atlas(
+      "mush",
+      "./assets/img/toadretry.png",
+      "./assets/json/toadretry.json"
+    );
+    this.load.atlas(
       "witch",
       "./assets/img/witch.png",
       "./assets/json/witch_atlas.json"

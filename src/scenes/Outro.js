@@ -47,6 +47,11 @@ class Outro extends Phaser.Scene {
       "./assets/json/bunny_atlas.json"
     );
     this.load.atlas(
+      "mush",
+      "./assets/img/toadretry.png",
+      "./assets/json/toadretry.json"
+    );
+    this.load.atlas(
       "fox",
       "./assets/img/fox.png",
       "./assets/json/fox_atlas.json"

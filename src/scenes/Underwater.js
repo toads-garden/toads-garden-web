@@ -67,6 +67,11 @@ class Underwater extends Phaser.Scene {
       "./assets/img/townMushroomSprite.png",
       "./assets/json/townMushroom.json"
     );
+    this.load.atlas(
+      "mush",
+      "./assets/img/toadretry.png",
+      "./assets/json/toadretry.json"
+    );
   }
   create() {
     this.cameras.main.setBounds(0, 0, 1920, 480);

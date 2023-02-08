@@ -54,6 +54,11 @@ class Intro extends Scene {
       "./assets/img/townMushroomSprite.png",
       "./assets/json/townMushroom.json"
     );
+    this.load.atlas(
+      "mush",
+      "./assets/img/toadretry.png",
+      "./assets/json/toadretry.json"
+    );
     this.load.image("playButton", "../assets/img/playButton.png");
   }
   create(data) {

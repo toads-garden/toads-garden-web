@@ -156,52 +156,92 @@ export default (scene) => {
     repeat: -1,
     frameRate: 10,
   });
+  // scene.anims.create({
+  //   key: "townMushroomIdle",
+  //   frames: scene.anims.generateFrameNames("townMushroom", {
+  //     start: 1,
+  //     end: 1,
+  //     prefix: "townmushroom_",
+  //   }),
+  //   repeat: -1,
+  //   frameRate: 10,
+  // });
+  // scene.anims.create({
+  //   key: "townMushroomDown",
+  //   frames: scene.anims.generateFrameNames("townMushroom", {
+  //     start: 0,
+  //     end: 2,
+  //     prefix: "townmushroom_",
+  //   }),
+  //   repeat: -1,
+  //   frameRate: 10,
+  // });
+  // scene.anims.create({
+  //   key: "townMushroomLeft",
+  //   frames: scene.anims.generateFrameNames("townMushroom", {
+  //     start: 3,
+  //     end: 5,
+  //     prefix: "townmushroom_",
+  //   }),
+  //   repeat: -1,
+  //   frameRate: 10,
+  // });
+  // scene.anims.create({
+  //   key: "townMushroomRight",
+  //   frames: scene.anims.generateFrameNames("townMushroom", {
+  //     start: 6,
+  //     end: 8,
+  //     prefix: "townmushroom_",
+  //   }),
+  //   repeat: -1,
+  //   frameRate: 10,
+  // });
+  // scene.anims.create({
+  //   key: "townMushroomDown",
+  //   frames: scene.anims.generateFrameNames("townMushroom", {
+  //     start: 9,
+  //     end: 11,
+  //     prefix: "townmushroom_",
+  //   }),
+  //   repeat: -1,
+  //   frameRate: 10,
+  // });
   scene.anims.create({
-    key: "townMushroomIdle",
-    frames: scene.anims.generateFrameNames("townMushroom", {
-      start: 1,
-      end: 1,
-      prefix: "townmushroom_",
-    }),
-    repeat: -1,
-    frameRate: 10,
-  });
-  scene.anims.create({
-    key: "townMushroomDown",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    key: "mushidle",
+    frames: scene.anims.generateFrameNames("mush", {
       start: 0,
       end: 2,
-      prefix: "townmushroom_",
+      prefix: "toadretry_",
     }),
     repeat: -1,
     frameRate: 10,
   });
   scene.anims.create({
-    key: "townMushroomLeft",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    key: "mushleft",
+    frames: scene.anims.generateFrameNames("mush", {
       start: 3,
       end: 5,
-      prefix: "townmushroom_",
+      prefix: "toadretry_",
     }),
     repeat: -1,
     frameRate: 10,
   });
   scene.anims.create({
-    key: "townMushroomRight",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    key: "mushright",
+    frames: scene.anims.generateFrameNames("mush", {
       start: 6,
       end: 8,
-      prefix: "townmushroom_",
+      prefix: "toadretry_",
     }),
     repeat: -1,
     frameRate: 10,
   });
   scene.anims.create({
-    key: "townMushroomDown",
-    frames: scene.anims.generateFrameNames("townMushroom", {
+    key: "mushup",
+    frames: scene.anims.generateFrameNames("mush", {
       start: 9,
       end: 11,
-      prefix: "townmushroom_",
+      prefix: "toadretry_",
     }),
     repeat: -1,
     frameRate: 10,
