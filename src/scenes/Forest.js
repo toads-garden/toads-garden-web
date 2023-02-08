@@ -92,6 +92,8 @@ class Forest extends Phaser.Scene {
       obj.setOrigin(0);
       obj.body.width = object.width;
       obj.body.height = object.height;
+      obj.setSize(50, 44, true);
+      obj.setOffset(16, 20);
     });
 
     //foxes
@@ -101,10 +103,13 @@ class Forest extends Phaser.Scene {
       let foxObj = foxes.create(object.x, object.y, "fox");
       foxObj.setScale(object.width / 16, object.height / 16);
       foxObj.setOrigin(0);
+      foxObj.setSize(32, 18, true);
+      foxObj.setOffset(0, 14);
       foxObj.body.width = object.width;
       foxObj.direction = "RIGHT";
       foxObj.body.height = object.height;
     });
+
     this.physics.add.collider(foxes, forestGround);
     this.physics.add.collider(foxes, forestInvis);
 

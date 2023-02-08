@@ -139,10 +139,13 @@ class Garden extends Phaser.Scene {
       bunnyObj.body.width = object.width;
       bunnyObj.direction = "RIGHT";
       bunnyObj.body.height = object.height;
+      bunnyObj.setSize(50, 44, true);
+      bunnyObj.setOffset(0, 32);
     });
 
     this.physics.add.collider(bunnies, ground);
     this.physics.add.collider(bunnies, invisible);
+
     player = new Toad(this, 100, 400)
       .collideWith([ground, platforms, invisiblePlayer])
       .overlapWith(collectibles, collect)
@@ -155,6 +158,8 @@ class Garden extends Phaser.Scene {
       obj.setOrigin(0);
       obj.body.width = object.width;
       obj.body.height = object.height;
+      obj.setSize(50, 44, true);
+      obj.setOffset(16, 20);
     });
 
     //score
