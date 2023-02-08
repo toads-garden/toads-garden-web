@@ -2,8 +2,7 @@ import Phaser from "phaser";
 import generateAnimations from "../config/animations";
 
 var player;
-var wood;
-var plant;
+
 var cursors;
 var collectSound;
 var witch;
@@ -31,16 +30,13 @@ class Outro extends Phaser.Scene {
     this.load.image("beach", "../assets/img/beach.png");
     this.load.image("tiles", "../assets/img/terrain.png");
     this.load.image("replay", "../assets/img/replay.png");
-    this.load.image("plant", "../assets/img/icons.png");
+
     this.load.image("play-btn", "../assets/img/playButton.png");
-    this.load.image("wood", "../assets/img/wood.png");
-    this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json"); //map.json
+
+    this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json");
     this.load.image("water", "../assets/img/water.png");
     this.load.image("singlePlatform", "../assets/img/singlePlatform.png");
-    // this.load.spritesheet("toad", "assets/img/toad.png", {
-    //   frameWidth: 48,
-    //   frameHeight: 44,
-    // });
+
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",
@@ -122,6 +118,7 @@ class Outro extends Phaser.Scene {
       this.sound.removeByKey("beach");
     });
     this.physics.world.setBounds(0, 0, 650, 480);
+    //invisible terrain
     const beachmap = this.make.tilemap({ key: "beachmap" });
     const tileset = beachmap.addTilesetImage("water", "water");
     const terrain = beachmap.createLayer("beach-floor", tileset);
@@ -149,12 +146,7 @@ class Outro extends Phaser.Scene {
       .create(75, 300, "singlePlatform")
       .refreshBody()
       .setVisible(false);
-
-    // player = this.physics.add.sprite(100, 400, "toad");
-
-    // player.setCollideWorldBounds("true");
-    // player.setBounce(0.2);
-
+    //all npcs
     witch = this.physics.add
       .sprite(270, 400, "witch")
       .setFlipX(true)
@@ -196,6 +188,7 @@ class Outro extends Phaser.Scene {
     player = this.physics.add.sprite(80, 250, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
+    //all colliders
     this.physics.add.collider(player, terrain);
     this.physics.add.collider(octPop, singlePlatform);
     this.physics.add.collider(foxy, singlePlatform);
@@ -209,7 +202,7 @@ class Outro extends Phaser.Scene {
     this.physics.add.collider(octPop, terrain);
 
     cursors = this.input.keyboard.createCursorKeys();
-
+    //text
     this.story = this.add
       .text(325, 155 / 1.2, "", {
         fill: "#29465B",
@@ -223,6 +216,7 @@ class Outro extends Phaser.Scene {
   }
 
   update() {
+    //toad movement
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
 

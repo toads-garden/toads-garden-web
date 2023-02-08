@@ -38,6 +38,7 @@ class Learn extends Phaser.Scene {
     this.load.on("complete", () => {
       generateAnimations(this);
     });
+    //LOAD ALL ATLASES
     this.load.atlas(
       "bunny",
       "./assets/img/bunny.png",
@@ -96,7 +97,7 @@ class Learn extends Phaser.Scene {
       return click;
     });
 
-    //creating items for scene
+    //creating items + terrain for scene
     this.physics.world.setBounds(0, 0, 650, 480);
     pipe = this.add.image(575, 420, "pipe");
     const learnmap = this.make.tilemap({ key: "learnmap" });
@@ -149,7 +150,7 @@ class Learn extends Phaser.Scene {
   }
 
   update() {
-    //toad controls
+    //toad movement
     if (cursors.left.isDown) {
       player.setVelocityX(-160).setFlipX(true);
 
@@ -168,7 +169,7 @@ class Learn extends Phaser.Scene {
       player.setVelocityY(-250);
     }
 
-    //pipe transport
+    //pipe to next scene location
     var xDifference = Math.abs(Math.floor(player.body.x) - 548);
     var yDifference = Math.abs(Math.floor(player.body.y) - 336);
     var threshhold = 5;

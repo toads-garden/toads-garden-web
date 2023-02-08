@@ -8,7 +8,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
 
     this.sprite.setCollideWorldBounds(true);
     this.sprite.setBounce(0.2);
-
+    //camera follow and deadzones
     scene.cameras.main.setBounds(0, 0, 1920, 480).startFollow(this.sprite);
 
     if (useDeadZone) {
@@ -20,7 +20,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
 
     return this;
   }
-
+  //toad colliders
   collideWith(gameObject) {
     this.collider = this.scene.physics.add.collider(this.sprite, gameObject);
     return this;
@@ -42,7 +42,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
     );
     return this;
   }
-
+  //camera following player
   reFollowPlayer() {
     this.scene.physics.world.bounds.setPosition(
       this.scene.cameras.main.worldView.x,
@@ -64,6 +64,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
     if (this.gameOver) {
       return;
     }
+    //movements
     if (input.left.isDown) {
       this.sprite.setVelocityX(-200).setFlipX(true);
       this.sprite.play("left", true);
@@ -85,7 +86,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
       this.sprite.setTint(0xffffff);
     }
   }
-
+  //death function
   die() {
     this.sprite.setTint(0xff0000);
     this.sprite.isDed = true;
