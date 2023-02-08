@@ -101,7 +101,7 @@ class Forest extends Phaser.Scene {
     foxes = this.physics.add.group({ key: "fox" });
     EnemyLayerFox.forEach((object) => {
       let foxObj = foxes.create(object.x, object.y, "fox");
-      foxObj.setScale(object.width / 16, object.height / 16);
+      foxObj.setScale(object.width / 12, object.height / 12);
       foxObj.setOrigin(0);
       foxObj.setSize(32, 18, true);
       foxObj.setOffset(0, 14);
