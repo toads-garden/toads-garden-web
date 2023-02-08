@@ -101,51 +101,6 @@ class Town extends Phaser.Scene {
     player = this.physics.add.sprite(100, 400, "townMushroomSprite");
     player.setCollideWorldBounds("true");
     // player.setBounce(0.2);
-    this.anims.create({
-      key: "idle",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
-        start: 1,
-        end: 1,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "down",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
-        start: 0,
-        end: 2,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
-        start: 3,
-        end: 5,
-      }),
-      frameRate: 20,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
-        start: 6,
-        end: 8,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "up",
-      frames: this.anims.generateFrameNumbers("townMushroomSprite", {
-        start: 9,
-        end: 11,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
 
     cursors = this.input.keyboard.createCursorKeys();
 

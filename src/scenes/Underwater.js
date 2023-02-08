@@ -153,7 +153,7 @@ class Underwater extends Phaser.Scene {
     octopuses = this.physics.add.group({ key: "octopus" });
     EnemyLayerOct.forEach((object) => {
       let octObj = octopuses.create(object.x, object.y, "octopus");
-      octObj.setScale(object.width / 16, object.height / 16);
+      octObj.setScale(object.width / 12, object.height / 12);
       octObj.setOrigin(0);
       octObj.setSize(20, 18, true);
       octObj.setOffset(7, 6);
