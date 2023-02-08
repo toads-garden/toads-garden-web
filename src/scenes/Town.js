@@ -3,6 +3,7 @@ import generateAnimations from "../config/animations";
 
 var player;
 var cursors;
+var cameras;
 var pipe;
 var townMusic;
 var townMushroom;
@@ -12,7 +13,7 @@ var octopus;
 var crab;
 
 class Town extends Phaser.Scene {
-  constructor(data) {
+  constructor() {
     super("Town");
   }
 
@@ -75,8 +76,6 @@ class Town extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(325, 240, "townBeta");
-
     //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
@@ -101,23 +100,35 @@ class Town extends Phaser.Scene {
       return click;
     });
 
-    this.physics.world.setBounds(0, 0, 650, 480);
+    const map = this.make.tilemap({
+      key: "townBeta",
+    });
+
+    this.physics.world.bounds.width = 1536;
+    this.physics.world.bounds.height = 1536;
+    this.cameras.main.setBounds(0, 0, 1536, 1536);
+    this.add.image(0, 0, "townTiles");
+
+    this.physics.world.setBounds(0, 0, 1536, 1536);
     // pipe = this.add.image(575, 420, "pipe");
     const townMap = this.make.tilemap({ key: "townBeta" });
     const tileset = townMap.addTilesetImage("townTiles", "townTiles");
     const ocean = townMap.createLayer("Ocean", tileset);
     const land = townMap.createLayer("Land", tileset);
+    const mountains = townMap.createLayer("Mountains", tileset);
+    const gardens = townMap.createLayer("Gardens", tileset);
+    const houses = townMap.createLayer("Houses", tileset);
     const paths = townMap.createLayer("Paths", tileset);
-    const garden = townMap.createLayer("Gardens", tileset);
     const trees = townMap.createLayer("Trees", tileset);
     const trees1 = townMap.createLayer("Trees1", tileset);
     const trees2 = townMap.createLayer("Trees2", tileset);
     const bridges = townMap.createLayer("Bridges", tileset);
-    const houses = townMap.createLayer("Houses", tileset);
 
     player = this.physics.add.sprite(300, 300, "mush");
     player.setCollideWorldBounds("true");
     // player.setBounce(0.2);
+    this.cameras.main.startFollow(player, true);
+    this.cameras.main.setBounds(0, 0, 1536, 1536);
 
     cursors = this.input.keyboard.createCursorKeys();
 
