@@ -119,8 +119,8 @@ export default (scene) => {
   scene.anims.create({
     key: "crabIdle",
     frames: scene.anims.generateFrameNames("crab", {
-      start: 13,
-      end: 16,
+      start: 12,
+      end: 15,
       prefix: "crab_sprite_sheet_",
     }),
     repeat: -1,
