@@ -12,6 +12,7 @@ var text;
 var bunnies;
 var gardenMusic;
 var collectSound;
+var pipeSound;
 var gameOver = false;
 var pauseButton;
 
@@ -22,6 +23,7 @@ class Garden extends Phaser.Scene {
   preload() {
     this.load.audio("garden", "../assets/audio/garden.mp3"); //garden audio
     this.load.audio("collect", "../assets/audio/collect.mp3"); //collect audio
+    this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3"); //pipe audio
     this.load.image("background", "../assets/img/garden.png"); //background
     this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png"); //musicOn
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png"); //musicOff
@@ -75,6 +77,7 @@ class Garden extends Phaser.Scene {
     let click = 0;
     let pauseClick = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+    var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
     var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
     gardenMusic.play();
     let audioOn = this.add
@@ -244,7 +247,8 @@ class Garden extends Phaser.Scene {
       score >= 15
     ) {
       this.scene.start("Forest");
-      score = 0;
+      this.score = 0;
+      this.sound.play("pipeSound");
       this.sound.removeByKey("garden");
     }
   }
