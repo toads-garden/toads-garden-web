@@ -13,6 +13,7 @@ var foxes;
 var gameOver = false;
 var forestMusic;
 var collectSound;
+var pipeSound;
 
 class Forest extends Phaser.Scene {
   constructor() {
@@ -21,6 +22,7 @@ class Forest extends Phaser.Scene {
   preload() {
     this.load.audio("forest", "../assets/audio/forest.mp3"); //forest audio
     this.load.audio("collect", "../assets/audio/collect.mp3"); //collect audio
+    this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3"); //pipe audio
     this.load.image("forest", "../assets/img/forest.png"); //background
     this.load.image("audioOn", "../assets/img/audioOn.png"); //audio button
     this.load.image("audioOff", "../assets/img/audioOff.png"); //audioOff button
@@ -147,6 +149,7 @@ class Forest extends Phaser.Scene {
     //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+    var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
     var forestMusic = this.sound.add("forest", { loop: true, volume: 0.1 });
     forestMusic.play();
     let audioOn = this.add
@@ -200,6 +203,7 @@ class Forest extends Phaser.Scene {
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 15) {
       this.scene.start("Underwater");
+      this.sound.play("pipeSound");
       this.sound.removeByKey("forest");
     }
   }

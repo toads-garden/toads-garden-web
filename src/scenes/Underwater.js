@@ -15,6 +15,7 @@ var cameras;
 var pipe;
 var waterMusic;
 var collectSound;
+var pipeSound;
 
 class Underwater extends Phaser.Scene {
   constructor() {
@@ -31,6 +32,7 @@ class Underwater extends Phaser.Scene {
   preload() {
     this.load.audio("water", "../assets/audio/water.mp3"); //water audio
     this.load.audio("collect", "../assets/audio/collect.mp3"); // collect audio
+    this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3"); //pipe audio
     this.load.image("waterbg", "../assets/img/waterbg.png"); //background
     this.load.image("audioOn", "../assets/img/audioOn.png"); //musicOn
     this.load.image("audioOff", "../assets/img/audioOff.png"); //musicOff
@@ -120,6 +122,7 @@ class Underwater extends Phaser.Scene {
     //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+    var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
     var waterMusic = this.sound.add("water", { loop: true, volume: 0.1 });
     waterMusic.play();
     let audioOn = this.add
@@ -287,6 +290,7 @@ class Underwater extends Phaser.Scene {
     var threshhold = 5;
     if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Outro");
+      this.sound.play("pipeSound");
       this.sound.removeByKey("water");
     }
   }
