@@ -86,11 +86,11 @@ class Learn extends Phaser.Scene {
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         collectSound.play({ volume: 0 });
-        introMusic.stop();
+        introMusic.pause();
         audioOn = this.add.image(620, 30, "audioOffBlack").setScale(0.5);
         click++;
       } else {
-        introMusic.play();
+        introMusic.resume();
         audioOn = this.add.image(620, 30, "audioOnBlack").setScale(0.5);
         click++;
       }
@@ -145,7 +145,7 @@ class Learn extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.typewriteText(
-      "                \nToad uses the left, right, and up \nbuttons to move around.\n                 \nJumping into items collects them for the town.\nToad can jump onto platforms to help get around.\n                \nThe pipes at the end of the stage transport  \nyou to the next world once you've \ncollected 15 items. \n                \nThere aren't any enemies here but \nwatch out on your journey!"
+      "                \nToad uses the left, right, and up \nbuttons to move around.\n                 \nJumping into items collects them for the town.\nToad can jump onto platforms to help get around.\n                \nThe pipes at the end of the stage transport  \nyou to the next world once you've \ncollected 15 items. \n                \nThere aren't any enemies here but \nwatch out for wildlife on your journey!"
     );
   }
 

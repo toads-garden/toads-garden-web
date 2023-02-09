@@ -82,7 +82,7 @@ class Garden extends Phaser.Scene {
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         collectSound.play({ volume: 0 });
-        gardenMusic.stop();
+        gardenMusic.pause();
         audioOn = this.add
           .image(620, 30, "audioOffBlack")
           .setScale(0.5)
@@ -90,7 +90,7 @@ class Garden extends Phaser.Scene {
         click++;
       } else {
         collectSound.play({ volume: 0.5 });
-        gardenMusic.play();
+        gardenMusic.resume();
         audioOn = this.add
           .image(620, 30, "audioOnBlack")
           .setScale(0.5)
