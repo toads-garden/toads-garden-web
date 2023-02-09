@@ -6,6 +6,7 @@ var player;
 var cursors;
 var pipe;
 var cameras;
+var pipeSound;
 
 class Transition1 extends Phaser.Scene {
   constructor() {
@@ -16,6 +17,7 @@ class Transition1 extends Phaser.Scene {
     this.load.image("pipe", "../assets/img/pipe.png");
     this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json");
     this.load.image("water", "../assets/img/water.png");
+    this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -58,6 +60,7 @@ class Transition1 extends Phaser.Scene {
     const terrain = beachmap.createLayer("beach-floor", tileset);
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
+    var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
 
     //add witch
     witch = this.physics.add
@@ -76,15 +79,25 @@ class Transition1 extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
     //text
-    this.story = this.add
-      .text(325, 200 / 1, "", {
+    this.add.text(150, 150, "Congrats on completing Level 1!", {
+      fontSize: "15px",
+      fill: "#29465B",
+      align: "center",
+    });
+    this.add.text(150, 175, "I'll make medicine with the herbs!", {
+      fontSize: "15px",
+      fill: "#29465B",
+      align: "center",
+    });
+    this.add.text(
+      150,
+      200,
+      "Good luck on the next world, go through the pipe!",
+      {
+        fontSize: "15px",
         fill: "#29465B",
         align: "center",
-      })
-      .setOrigin(0.5);
-
-    this.typewriteText(
-      "                \nCongrats on completing Level 1!\n                 \nI'll make medicine with the herbs!\n                \nGood luck on the next world, go through the pipe! \n"
+      }
     );
   }
   update() {
@@ -113,20 +126,8 @@ class Transition1 extends Phaser.Scene {
     var xThreshhold = 30;
     if (xDifference <= xThreshhold && yDifference <= threshhold) {
       this.scene.start("Forest");
-      // this.sound.removeByKey("intro");
+      this.sound.play("pipeSound");
     }
-  }
-  typewriteText(text) {
-    const length = text.length;
-    let i = 0;
-    this.time.addEvent({
-      callback: () => {
-        this.story.text += text[i];
-        i++;
-      },
-      repeat: length - 1,
-      delay: 40,
-    });
   }
 }
 
