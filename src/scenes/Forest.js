@@ -157,7 +157,7 @@ class Forest extends Phaser.Scene {
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         collectSound.play({ volume: 0 });
-        forestMusic.stop();
+        forestMusic.pause();
         audioOn = this.add
           .image(620, 30, "audioOff")
           .setScale(0.5)
@@ -165,7 +165,7 @@ class Forest extends Phaser.Scene {
         click++;
       } else {
         collectSound.play({ volume: 0.5 });
-        forestMusic.play();
+        forestMusic.resume();
         audioOn = this.add
           .image(620, 30, "audioOn")
           .setScale(0.5)

@@ -22,7 +22,7 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 200 },
-      debug: false,
+      debug: true,
     },
   },
   scene: [Intro, Learn, Garden, Forest, Underwater, Outro, Town],

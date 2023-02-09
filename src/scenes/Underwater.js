@@ -130,7 +130,7 @@ class Underwater extends Phaser.Scene {
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         collectSound.play({ volume: 0 });
-        waterMusic.stop();
+        waterMusic.pause();
         audioOn = this.add
           .image(620, 30, "audioOff")
           .setScale(0.5)
@@ -138,7 +138,7 @@ class Underwater extends Phaser.Scene {
         click++;
       } else {
         collectSound.play({ volume: 0.5 });
-        waterMusic.play();
+        waterMusic.resume();
         audioOn = this.add
           .image(620, 30, "audioOn")
           .setScale(0.5)
