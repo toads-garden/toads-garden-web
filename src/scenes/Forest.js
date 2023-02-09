@@ -24,7 +24,8 @@ class Forest extends Phaser.Scene {
     this.load.audio("collect", "../assets/audio/collect.mp3"); //collect audio
     this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3"); //pipe audio
     this.load.image("forest", "../assets/img/forest.png"); //background
-    this.load.image("audioOn", "../assets/img/audioOn.png"); //audio button
+    this.load.image("audioOn", "../assets/img/audioOn.png"); //audio button\
+    this.load.image("pauseWhite", "../assets/img/pauseWhite.png");
     this.load.image("audioOff", "../assets/img/audioOff.png"); //audioOff button
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
     this.load.image("wood", "../assets/img/wood.png"); //icons
@@ -65,7 +66,7 @@ class Forest extends Phaser.Scene {
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
-
+    let isPaused = false;
     //platforms and ground
     this.add.image(960, 240, "forest");
     let pipe = this.add.image(1850, 410, "pipe");
@@ -176,6 +177,20 @@ class Forest extends Phaser.Scene {
         click++;
       }
       return click;
+    });
+    let pauseButton = this.add
+      .image(590, 31, "pauseWhite")
+      .setScale(0.5)
+      .setScrollFactor(0);
+
+    pauseButton.setInteractive();
+    pauseButton.on("pointerup", () => {
+      this.isPaused = !this.isPaused;
+      if (!this.isPaused) {
+        this.game.loop.sleep();
+      } else {
+        this.game.loop.wake();
+      }
     });
   }
 

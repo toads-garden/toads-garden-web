@@ -38,6 +38,7 @@ class Underwater extends Phaser.Scene {
     this.load.image("audioOff", "../assets/img/audioOff.png"); //musicOff
     this.load.image("water", "../assets/img/water.png"); //terrain
     this.load.image("bubbles", "../assets/img/bubble_1.png"); //icons
+    this.load.image("pauseWhite", "../assets/img/pauseWhite.png");
     this.load.tilemapTiledJSON("waterMap", "../assets/json/watermap.json"); //map.json
     this.load.image("pipe", "../assets/img/pipe.png"); //pipe
     this.load.spritesheet("toad", "assets/img/toad.png", {
@@ -68,7 +69,7 @@ class Underwater extends Phaser.Scene {
   create() {
     this.cameras.main.setBounds(0, 0, 1920, 480);
     this.physics.world.setBounds(0, 0, 1920, 480);
-
+    let isPaused = false;
     //cursors
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
@@ -227,6 +228,20 @@ class Underwater extends Phaser.Scene {
       }
       this.time.delayedCall(800, restart, [], this);
     }
+    let pauseButton = this.add
+      .image(590, 31, "pauseWhite")
+      .setScale(0.5)
+      .setScrollFactor(0);
+
+    pauseButton.setInteractive();
+    pauseButton.on("pointerup", () => {
+      this.isPaused = !this.isPaused;
+      if (!this.isPaused) {
+        this.game.loop.sleep();
+      } else {
+        this.game.loop.wake();
+      }
+    });
   }
 
   update() {

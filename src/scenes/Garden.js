@@ -76,6 +76,7 @@ class Garden extends Phaser.Scene {
     //music
     let click = 0;
     let pauseClick = 0;
+    let isPaused = false;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
     var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
     var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
@@ -111,20 +112,34 @@ class Garden extends Phaser.Scene {
       .setScrollFactor(0);
 
     pauseButton.setInteractive();
-    pauseButton.once(
-      "pointerup",
-      function () {
-        this.scene.pause();
-      },
-      this
-    );
-    pauseButton.once(
-      "pointerdown",
-      function () {
-        game.loop.wake();
-      },
-      this
-    );
+    pauseButton.on("pointerup", () => {
+      this.isPaused = !this.isPaused;
+      if (!this.isPaused) {
+        this.game.loop.sleep();
+      } else {
+        this.game.loop.wake();
+      }
+    });
+    // pauseButton.once(
+    //   "pointerup",
+    //   function () {
+    //     this.scene.pause();
+    //   },
+    //   this
+    // );
+    // pauseButton.once(
+    //   "pointerdown",
+    //   function () {
+    //     game.loop.wake();
+    //   },
+    //   this
+    // );
+    // this.resumeGame = function () {
+    //   this.pauseText = this.add.text(250, 200, "Continue", {
+    //     fontSize: "64px",
+    //     fill: "#fff",
+    //   });
+    // };
 
     //platforms and ground
     let pipe = this.add.image(1850, 420, "pipe");
