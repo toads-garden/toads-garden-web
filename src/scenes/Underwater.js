@@ -155,8 +155,8 @@ class Underwater extends Phaser.Scene {
       let octObj = octopuses.create(object.x, object.y, "octopus");
       octObj.setScale(object.width / 12, object.height / 12);
       octObj.setOrigin(0);
-      octObj.setSize(20, 18, true);
-      octObj.setOffset(7, 6);
+      octObj.setSize(14, 16, true);
+      octObj.setOffset(8, 6);
       octObj.body.width = object.width;
 
       octObj.direction = "DOWN";
@@ -173,6 +173,8 @@ class Underwater extends Phaser.Scene {
       let crabObj = crabs.create(object.x, object.y, "crab");
       crabObj.setScale(object.width / 16, object.height / 16);
       crabObj.setOrigin(0);
+      crabObj.setSize(20, 16, true);
+      crabObj.setOffset(6, 0);
       crabObj.body.width = object.width;
       crabObj.direction = "RIGHT";
       crabObj.body.height = object.height;
@@ -201,6 +203,8 @@ class Underwater extends Phaser.Scene {
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
+    player.setSize(40, 40);
+    player.setOffset(4, 4);
     this.cameras.main.startFollow(player, true, 0.08, 0.08);
     this.physics.add.collider(player, waterGround);
     this.physics.add.collider(player, waterPipe);
