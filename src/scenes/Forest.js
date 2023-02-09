@@ -24,7 +24,8 @@ class Forest extends Phaser.Scene {
     this.load.audio("collect", "../assets/audio/collect.mp3"); //collect audio
     this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3"); //pipe audio
     this.load.image("forest", "../assets/img/forest.png"); //background
-    this.load.image("audioOn", "../assets/img/audioOn.png"); //audio button
+    this.load.image("audioOn", "../assets/img/audioOn.png"); //audio button\
+    this.load.image("pauseWhite", "../assets/img/pauseWhite.png");
     this.load.image("audioOff", "../assets/img/audioOff.png"); //audioOff button
     this.load.image("forestTiles", "../assets/img/forest-terrain.png"); //terrain
     this.load.image("wood", "../assets/img/wood.png"); //icons
@@ -66,7 +67,7 @@ class Forest extends Phaser.Scene {
     this.cameras.main.fadeIn(300, 0, 0, 0);
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
-
+    let isPaused = false;
     //platforms and ground
     this.add.image(960, 240, "forest");
     let pipe = this.add.image(1850, 410, "pipe");
@@ -178,6 +179,20 @@ class Forest extends Phaser.Scene {
       }
       return click;
     });
+    let pauseButton = this.add
+      .image(590, 31, "pauseWhite")
+      .setScale(0.5)
+      .setScrollFactor(0);
+
+    pauseButton.setInteractive();
+    pauseButton.on("pointerup", () => {
+      this.isPaused = !this.isPaused;
+      if (!this.isPaused) {
+        this.game.loop.sleep();
+      } else {
+        this.game.loop.wake();
+      }
+    });
   }
 
   update() {
@@ -203,12 +218,8 @@ class Forest extends Phaser.Scene {
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 346);
     var threshhold = 5;
     var xThreshhold = 30;
-    if (
-      xDifference <= xThreshhold &&
-      yDifference <= threshhold &&
-      score >= 15
-    ) {
-      this.scene.start("Underwater");
+    if (xDifference <= xThreshhold && yDifference <= threshhold && score >= 1) {
+      this.scene.start("Transition2");
       this.sound.play("pipeSound");
       this.score = 0;
       this.sound.removeByKey("forest");
