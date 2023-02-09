@@ -103,8 +103,8 @@ class Forest extends Phaser.Scene {
       let foxObj = foxes.create(object.x, object.y, "fox");
       foxObj.setScale(object.width / 12, object.height / 12);
       foxObj.setOrigin(0);
-      foxObj.setSize(32, 18, true);
-      foxObj.setOffset(0, 14);
+      foxObj.setSize(18, 16, true);
+      foxObj.setOffset(7, 16);
       foxObj.body.width = object.width;
       foxObj.direction = "RIGHT";
       foxObj.body.height = object.height;
