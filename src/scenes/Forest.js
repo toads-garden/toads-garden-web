@@ -224,7 +224,7 @@ class Forest extends Phaser.Scene {
     ) {
       this.scene.start("Transition2");
       this.sound.play("pipeSound");
-      this.score = 0;
+      score = 0;
       this.sound.removeByKey("forest");
     }
   }

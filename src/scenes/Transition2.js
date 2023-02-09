@@ -7,6 +7,7 @@ var cursors;
 var pipe;
 var cameras;
 var pipeSound;
+var singlePlatform;
 
 class Transition2 extends Phaser.Scene {
   constructor() {
@@ -18,6 +19,7 @@ class Transition2 extends Phaser.Scene {
     this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json");
     this.load.image("water", "../assets/img/water.png");
     this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3");
+    this.load.image("singlePlatform", "../assets/img/singlePlatform.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -69,6 +71,13 @@ class Transition2 extends Phaser.Scene {
       .setScale(2.5);
     witch.setCollideWorldBounds("true");
     witch.play("witchIdle");
+    singlePlatform = this.physics.add.staticGroup();
+    singlePlatform
+      .create(575, 415, "singlePlatform")
+      .setScale(1.2)
+      .refreshBody()
+      .setVisible(false);
+
     //toad
     player = this.physics.add.sprite(300, 400, "toad");
     player.setCollideWorldBounds("true");
@@ -76,21 +85,27 @@ class Transition2 extends Phaser.Scene {
     player.setSize(40, 40);
     player.setOffset(4, 4);
     this.physics.add.collider(player, terrain);
+    this.physics.add.collider(player, singlePlatform);
 
     cursors = this.input.keyboard.createCursorKeys();
 
     //text
-    this.add.text(150, 150, "With all the logs, I can build homes!", {
+    this.add.text(130, 90, "With all of those logs, I can build homes!", {
       fontSize: "15px",
       fill: "#29465B",
       align: "center",
     });
-    this.add.text(150, 175, "You have one world left to conquer!", {
+    this.add.text(160, 120, "You have one world left to conquer!", {
       fontSize: "15px",
       fill: "#29465B",
       align: "center",
     });
-    this.add.text(150, 200, "Go collect bubbles for clean water!", {
+    this.add.text(110, 150, "To swim, use the up, down, left and right keys!", {
+      fontSize: "15px",
+      fill: "#29465B",
+      align: "center",
+    });
+    this.add.text(160, 180, "Go collect bubbles for clean water!", {
       fontSize: "15px",
       fill: "#29465B",
       align: "center",
@@ -116,8 +131,8 @@ class Transition2 extends Phaser.Scene {
       player.setVelocityY(-250);
     }
     //pipe to next scene location
-    var xDifference = Math.abs(Math.floor(player.body.x) - 548);
-    var yDifference = Math.abs(Math.floor(player.body.y) - 336);
+    var xDifference = Math.abs(Math.floor(player.body.x) - 557);
+    var yDifference = Math.abs(Math.floor(player.body.y) - 366);
     var threshhold = 5;
     var xThreshhold = 30;
     if (xDifference <= xThreshhold && yDifference <= threshhold) {
