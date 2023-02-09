@@ -14,6 +14,7 @@ var gardenMusic;
 var collectSound;
 var pipeSound;
 var gameOver = false;
+var pauseButton;
 
 class Garden extends Phaser.Scene {
   constructor() {
@@ -26,6 +27,7 @@ class Garden extends Phaser.Scene {
     this.load.image("background", "../assets/img/garden.png"); //background
     this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png"); //musicOn
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png"); //musicOff
+    this.load.image("pauseBlack", "../assets/img/pauseBlack.png");
     this.load.image("tiles", "../assets/img/terrain.png"); //terrain
     this.load.image("collectible", "../assets/img/icons.png"); //icons
     this.load.image("play-btn", "../assets/img/playButton.png"); //playButton
@@ -73,6 +75,8 @@ class Garden extends Phaser.Scene {
 
     //music
     let click = 0;
+    let pauseClick = 0;
+    let isPaused = false;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
     var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
     var gardenMusic = this.sound.add("garden", { loop: true, volume: 0.1 });
@@ -102,6 +106,40 @@ class Garden extends Phaser.Scene {
       }
       return click;
     });
+    let pauseButton = this.add
+      .image(590, 31, "pauseBlack")
+      .setScale(0.5)
+      .setScrollFactor(0);
+
+    pauseButton.setInteractive();
+    pauseButton.on("pointerup", () => {
+      this.isPaused = !this.isPaused;
+      if (!this.isPaused) {
+        this.game.loop.sleep();
+      } else {
+        this.game.loop.wake();
+      }
+    });
+    // pauseButton.once(
+    //   "pointerup",
+    //   function () {
+    //     this.scene.pause();
+    //   },
+    //   this
+    // );
+    // pauseButton.once(
+    //   "pointerdown",
+    //   function () {
+    //     game.loop.wake();
+    //   },
+    //   this
+    // );
+    // this.resumeGame = function () {
+    //   this.pauseText = this.add.text(250, 200, "Continue", {
+    //     fontSize: "64px",
+    //     fill: "#fff",
+    //   });
+    // };
 
     //platforms and ground
     let pipe = this.add.image(1850, 420, "pipe");
