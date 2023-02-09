@@ -7,6 +7,7 @@ var cursors;
 var pipe;
 var cameras;
 var pipeSound;
+var singlePlatform;
 
 class Transition1 extends Phaser.Scene {
   constructor() {
@@ -18,6 +19,7 @@ class Transition1 extends Phaser.Scene {
     this.load.tilemapTiledJSON("beachmap", "../assets/json/beach-scene.json");
     this.load.image("water", "../assets/img/water.png");
     this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3");
+    this.load.image("singlePlatform", "../assets/img/singlePlatform.png");
     this.load.spritesheet("toad", "assets/img/toad.png", {
       frameWidth: 48,
       frameHeight: 44,
@@ -61,10 +63,16 @@ class Transition1 extends Phaser.Scene {
     terrain.setCollisionByExclusion(-1);
     terrain.setVisible(false);
     var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
+    singlePlatform = this.physics.add.staticGroup();
+    singlePlatform
+      .create(575, 415, "singlePlatform")
+      .setScale(1.2)
+      .refreshBody()
+      .setVisible(false);
 
     //add witch
     witch = this.physics.add
-      .sprite(400, 200, "witch")
+      .sprite(400, 400, "witch")
       .setFlipX(true)
       .setScale(2.5);
     witch.setCollideWorldBounds("true");
@@ -76,6 +84,7 @@ class Transition1 extends Phaser.Scene {
     player.setSize(40, 40);
     player.setOffset(4, 4);
     this.physics.add.collider(player, terrain);
+    this.physics.add.collider(player, singlePlatform);
 
     cursors = this.input.keyboard.createCursorKeys();
     //text
@@ -120,8 +129,9 @@ class Transition1 extends Phaser.Scene {
       player.setVelocityY(-250);
     }
     //pipe to next scene location
-    var xDifference = Math.abs(Math.floor(player.body.x) - 548);
-    var yDifference = Math.abs(Math.floor(player.body.y) - 336);
+
+    var xDifference = Math.abs(Math.floor(player.body.x) - 557);
+    var yDifference = Math.abs(Math.floor(player.body.y) - 366);
     var threshhold = 5;
     var xThreshhold = 30;
     if (xDifference <= xThreshhold && yDifference <= threshhold) {

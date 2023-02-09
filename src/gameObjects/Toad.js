@@ -7,7 +7,7 @@ export class Toad extends Phaser.GameObjects.Sprite {
     this.sprite.isDed = false;
 
     this.sprite.setCollideWorldBounds(true);
-    this.sprite.setBounce(0.2);
+    this.sprite.setBounce(0.1);
     this.sprite.setSize(40, 40);
     this.sprite.setOffset(4, 4);
     //camera follow and deadzones
