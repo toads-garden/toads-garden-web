@@ -241,8 +241,7 @@ class Garden extends Phaser.Scene {
       score >= 15
     ) {
       this.scene.start("Transition1");
-
-      this.score = 0;
+      score = 0;
       this.sound.play("pipeSound");
       this.sound.removeByKey("garden");
     }
