@@ -216,12 +216,8 @@ class Forest extends Phaser.Scene {
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 346);
     var threshhold = 5;
     var xThreshhold = 30;
-    if (
-      xDifference <= xThreshhold &&
-      yDifference <= threshhold &&
-      score >= 15
-    ) {
-      this.scene.start("Underwater");
+    if (xDifference <= xThreshhold && yDifference <= threshhold && score >= 1) {
+      this.scene.start("Transition2");
       this.sound.play("pipeSound");
       this.score = 0;
       this.sound.removeByKey("forest");
