@@ -82,7 +82,7 @@ class Garden extends Phaser.Scene {
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         collectSound.play({ volume: 0 });
-        gardenMusic.stop();
+        gardenMusic.pause();
         audioOn = this.add
           .image(620, 30, "audioOffBlack")
           .setScale(0.5)
@@ -90,7 +90,7 @@ class Garden extends Phaser.Scene {
         click++;
       } else {
         collectSound.play({ volume: 0.5 });
-        gardenMusic.play();
+        gardenMusic.resume();
         audioOn = this.add
           .image(620, 30, "audioOnBlack")
           .setScale(0.5)
@@ -164,7 +164,7 @@ class Garden extends Phaser.Scene {
 
     //score
     text = this.add
-      .text(20, 23, `Herbs Collected: ${score}`, {
+      .text(20, 23, `Herbs Collected: ${score} / 15`, {
         fontSize: "20px",
         fill: "#000000",
       })
@@ -175,7 +175,7 @@ class Garden extends Phaser.Scene {
       collectible.destroy(collectible.x, collectible.y);
       collectSound.play();
       score++;
-      text.setText(`Herbs Collected: ${score}`);
+      text.setText(`Herbs Collected: ${score} / 15`);
       return false;
     }
     //hit enemy

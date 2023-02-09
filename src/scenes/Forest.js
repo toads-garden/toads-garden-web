@@ -115,7 +115,7 @@ class Forest extends Phaser.Scene {
 
     //score and collect items
     text = this.add
-      .text(20, 23, `Wood Collected: ${score}`, {
+      .text(20, 23, `Wood Collected: ${score} / 15`, {
         fontSize: "20px",
         fill: "#ffffff",
       })
@@ -125,7 +125,7 @@ class Forest extends Phaser.Scene {
       collectibleWood.destroy(collectibleWood.x, collectibleWood.y);
       collectSound.play();
       score++;
-      text.setText(`Wood Collected: ${score}`);
+      text.setText(`Wood Collected: ${score} / 15`);
       return false;
     }
     //hit enemy
@@ -157,7 +157,7 @@ class Forest extends Phaser.Scene {
     audioOn.on("pointerup", () => {
       if (click % 2 || click === 0) {
         collectSound.play({ volume: 0 });
-        forestMusic.stop();
+        forestMusic.pause();
         audioOn = this.add
           .image(620, 30, "audioOff")
           .setScale(0.5)
@@ -165,7 +165,7 @@ class Forest extends Phaser.Scene {
         click++;
       } else {
         collectSound.play({ volume: 0.5 });
-        forestMusic.play();
+        forestMusic.resume();
         audioOn = this.add
           .image(620, 30, "audioOn")
           .setScale(0.5)
