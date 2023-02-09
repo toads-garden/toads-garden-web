@@ -115,7 +115,7 @@ class Forest extends Phaser.Scene {
 
     //score and collect items
     text = this.add
-      .text(20, 23, `Wood Collected: ${score}`, {
+      .text(20, 23, `Wood Collected: ${score} / 15`, {
         fontSize: "20px",
         fill: "#ffffff",
       })
@@ -125,7 +125,7 @@ class Forest extends Phaser.Scene {
       collectibleWood.destroy(collectibleWood.x, collectibleWood.y);
       collectSound.play();
       score++;
-      text.setText(`Wood Collected: ${score}`);
+      text.setText(`Wood Collected: ${score} / 15`);
       return false;
     }
     //hit enemy
