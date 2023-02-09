@@ -9,6 +9,7 @@ var pipe;
 var singlePlat;
 var introMusic;
 var collectSound;
+var pipeSound;
 var bubble;
 
 class Learn extends Phaser.Scene {
@@ -19,6 +20,7 @@ class Learn extends Phaser.Scene {
   preload() {
     this.load.audio("intro", "../assets/audio/intro.mp3");
     this.load.audio("collect", "../assets/audio/collect.mp3");
+    this.load.audio("pipeSound", "../assets/audio/pipeSound.mp3");
     this.load.image("audioOnBlack", "../assets/img/audioOnBlack.png");
     this.load.image("audioOffBlack", "../assets/img/audioOffBlack.png");
     this.load.image("background", "../assets/img/garden.png");
@@ -76,6 +78,7 @@ class Learn extends Phaser.Scene {
     //music
     let click = 0;
     var collectSound = this.sound.add("collect", { loop: false, volume: 0.5 });
+    var pipeSound = this.sound.add("pipeSound", { loop: false, volume: 0.5 });
     var introMusic = this.sound.add("intro", { loop: true, volume: 0.1 });
     introMusic.play();
     let audioOn = this.add
@@ -178,6 +181,7 @@ class Learn extends Phaser.Scene {
     var xThreshhold = 30;
     if (xDifference <= xThreshhold && yDifference <= threshhold) {
       this.scene.start("Garden");
+      this.sound.play("pipeSound");
       this.sound.removeByKey("intro");
     }
   }
