@@ -109,7 +109,7 @@ class Intro extends Scene {
     gameButton.setInteractive();
 
     gameButton.on("pointerup", () => {
-      this.scene.start("Transition1");
+      this.scene.start("Learn");
     });
   }
 

@@ -72,7 +72,7 @@ class Garden extends Phaser.Scene {
     const y = innerHeight / 2;
 
     this.add.image(960, 240, "background");
-    this.cameras.main.fadeIn(8000, 0, 0, 0);
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
     //music
     let click = 0;
     let isPaused = false;
@@ -240,14 +240,12 @@ class Garden extends Phaser.Scene {
       yDifference <= threshhold &&
       score >= 15
     ) {
-
       this.scene.start("Transition1");
 
       this.score = 0;
       this.sound.play("pipeSound");
       this.sound.removeByKey("garden");
     }
-    this.cameras.main.fadeOut(1000, 0, 0, 0);
   }
 }
 export default Garden;
