@@ -256,8 +256,12 @@ class Garden extends Phaser.Scene {
     var yDifference = Math.abs(Math.floor(player.sprite.y) - 362);
     var threshhold = 5;
     var xThreshhold = 30;
+    if (
+      xDifference <= xThreshhold &&
+      yDifference <= threshhold &&
+      score >= 15
+    ) {
 
-    if (xDifference <= xThreshhold && yDifference <= threshhold && score >= 1) {
       this.scene.start("Transition1");
 
       this.score = 0;
