@@ -119,6 +119,8 @@ class Learn extends Phaser.Scene {
     player = this.physics.add.sprite(100, 400, "toad");
     player.setCollideWorldBounds("true");
     player.setBounce(0.2);
+    player.setSize(40, 40);
+    player.setOffset(4, 4);
 
     cursors = this.input.keyboard.createCursorKeys();
 
@@ -145,7 +147,7 @@ class Learn extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.typewriteText(
-      "                \nToad uses the left, right, and up \nbuttons to move around.\n                 \nJumping into items collects them for the town.\nToad can jump onto platforms to help get around.\n                \nThe pipes at the end of the stage transport  \nyou to the next world once you've \ncollected 15 items. \n                \nThere aren't any enemies here but \nwatch out for wildlife on your journey!"
+      "                \nUse left, right, and up to move.\n                 \nYou must collect 15 items to move on.\n                \nThere aren't any enemies here but \nwatch out for wildlife on your journey!"
     );
   }
 
