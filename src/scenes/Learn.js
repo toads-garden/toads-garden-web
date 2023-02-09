@@ -11,7 +11,7 @@ var introMusic;
 var collectSound;
 var pipeSound;
 var bubble;
-
+var cameras;
 class Learn extends Phaser.Scene {
   constructor(data) {
     super("Learn");

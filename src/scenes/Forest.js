@@ -14,7 +14,7 @@ var gameOver = false;
 var forestMusic;
 var collectSound;
 var pipeSound;
-
+var cameras;
 class Forest extends Phaser.Scene {
   constructor() {
     super("Forest");
@@ -64,6 +64,7 @@ class Forest extends Phaser.Scene {
 
   create() {
     //cursors
+    this.cameras.main.fadeIn(300, 0, 0, 0);
     this.inputs = this.input.keyboard.createCursorKeys();
     cursors = this.input.keyboard.createCursorKeys();
     let isPaused = false;
