@@ -311,7 +311,7 @@ class Underwater extends Phaser.Scene {
       score >= 15
     ) {
       this.scene.start("Outro");
-      this.score = 0;
+      score = 0;
       this.sound.play("pipeSound");
       this.sound.removeByKey("water");
     }
