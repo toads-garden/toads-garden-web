@@ -67,6 +67,7 @@ class Underwater extends Phaser.Scene {
     );
   }
   create() {
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
     this.cameras.main.setBounds(0, 0, 1920, 480);
     this.physics.world.setBounds(0, 0, 1920, 480);
     let isPaused = false;
