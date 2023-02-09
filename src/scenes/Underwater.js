@@ -285,8 +285,10 @@ class Underwater extends Phaser.Scene {
     var xDifference = Math.abs(Math.floor(player.body.x) - 1825);
     var yDifference = Math.abs(Math.floor(player.body.y) - 340);
     var threshhold = 5;
-    if (xDifference <= threshhold && yDifference <= threshhold && score >= 3) {
+    var xThreshhold = 30;
+    if (xDifference <= xThreshhold && yDifference <= threshhold && score >= 3) {
       this.scene.start("Outro");
+      score = 0;
       this.sound.removeByKey("water");
     }
   }

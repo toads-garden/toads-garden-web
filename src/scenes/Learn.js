@@ -178,7 +178,8 @@ class Learn extends Phaser.Scene {
     var xDifference = Math.abs(Math.floor(player.body.x) - 548);
     var yDifference = Math.abs(Math.floor(player.body.y) - 336);
     var threshhold = 5;
-    if (xDifference <= threshhold && yDifference <= threshhold) {
+    var xThreshhold = 30;
+    if (xDifference <= xThreshhold && yDifference <= threshhold) {
       this.scene.start("Garden");
       this.sound.play("pipeSound");
       this.sound.removeByKey("intro");
