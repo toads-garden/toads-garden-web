@@ -164,7 +164,7 @@ class Garden extends Phaser.Scene {
 
     //score
     text = this.add
-      .text(20, 23, `Herbs Collected: ${score}`, {
+      .text(20, 23, `Herbs Collected: ${score} / 15`, {
         fontSize: "20px",
         fill: "#000000",
       })
@@ -175,7 +175,7 @@ class Garden extends Phaser.Scene {
       collectible.destroy(collectible.x, collectible.y);
       collectSound.play();
       score++;
-      text.setText(`Herbs Collected: ${score}`);
+      text.setText(`Herbs Collected: ${score} / 15`);
       return false;
     }
     //hit enemy

@@ -182,7 +182,7 @@ class Underwater extends Phaser.Scene {
 
     //score
     text = this.add
-      .text(20, 23, `Bubbles Collected: ${score}`, {
+      .text(20, 23, `Bubbles Collected: ${score} / 15`, {
         fontSize: "20px",
         fill: "#ffffff",
       })
@@ -193,7 +193,7 @@ class Underwater extends Phaser.Scene {
       collectibleBubble.destroy(collectibleBubble.x, collectibleBubble.y);
       collectSound.play();
       score++;
-      text.setText(`Bubbles Collected: ${score}`);
+      text.setText(`Bubbles Collected: ${score} / 15`);
       return false;
     }
 
