@@ -137,7 +137,6 @@ class Forest extends Phaser.Scene {
       gameIsOver();
     }
     function gameIsOver() {
-      gameOver = true;
       player.die();
       score = 0;
     }
