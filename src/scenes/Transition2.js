@@ -64,7 +64,7 @@ class Transition2 extends Phaser.Scene {
 
     //add witch
     witch = this.physics.add
-      .sprite(400, 200, "witch")
+      .sprite(400, 400, "witch")
       .setFlipX(true)
       .setScale(2.5);
     witch.setCollideWorldBounds("true");

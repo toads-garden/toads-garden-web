@@ -88,26 +88,21 @@ class Transition1 extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
     //text
-    this.add.text(150, 150, "Congrats on completing Level 1!", {
+    this.add.text(175, 90, "Congrats on completing Level 1!", {
       fontSize: "15px",
       fill: "#29465B",
       align: "center",
     });
-    this.add.text(150, 175, "I'll make medicine with the herbs!", {
+    this.add.text(170, 120, "I'll make medicine with the herbs!", {
       fontSize: "15px",
       fill: "#29465B",
       align: "center",
     });
-    this.add.text(
-      150,
-      200,
-      "Good luck on the next world, go through the pipe!",
-      {
-        fontSize: "15px",
-        fill: "#29465B",
-        align: "center",
-      }
-    );
+    this.add.text(135, 150, "To go to the next world, jump into the pipe!", {
+      fontSize: "15px",
+      fill: "#29465B",
+      align: "center",
+    });
   }
   update() {
     //toad movement
